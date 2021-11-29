@@ -1,6 +1,6 @@
 
 import React, {useState} from 'react';
-import { StyleSheet, ImageBackground } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 
 import {Button, Input} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -11,8 +11,10 @@ export default function HomeScreen(props) {
     const [pseudo, setPseudo] = useState('');
     
     return (
-    <ImageBackground style={styles.container}>
+    <View style={styles.container}>
         {/* EMAIL */}
+
+        <Text>Sign-in</Text>
         <Input
             containerStyle = {{marginBottom: 25, width: '70%'}}
             inputStyle={{marginLeft: 10}}
@@ -52,7 +54,7 @@ export default function HomeScreen(props) {
 
             title="CONNECTION"
             type="solid"
-            onPress={() => {props.navigation.navigate('HomeLog')}}
+            onPress={() => {props.navigation.navigate('PatientHome')}}
         />
         {/* inscription  */}
         <Button
@@ -81,9 +83,9 @@ export default function HomeScreen(props) {
 
             title="MP oublier"
             type="solid"
-            onPress={() => {props.navigation.navigate('HomeLog')}}
+            onPress={() => {props.navigation.navigate('Forgotpass')}}
         />
-    </ImageBackground>
+    </View>
   );
 }
 

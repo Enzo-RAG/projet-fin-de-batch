@@ -27,8 +27,8 @@ export default function HomeScreen(props) {
     const renderLabel = () => {
       if (value || isFocus) {
         return (
-          <Text style={[styles.label, isFocus && { color: 'blue' }]}>
-            Dropdown label
+          <Text style={[styles2.label, isFocus && { color: 'green' }]}>
+            Vous etes ?
           </Text>
         );
       }
@@ -112,7 +112,60 @@ export default function HomeScreen(props) {
   
     
     return (
+
+    <View>
+      <Text style={styles1.container}>Helppills</Text>
+
+
     <ImageBackground  style={styles2.container}>
+        
+          
+    
+        
+        
+        
+        {/* NOM */}
+        <Input
+            containerStyle = {{marginBottom: 50, width: '70%'}}
+            inputStyle={{marginLeft: 10}}
+            placeholder='Nom'
+            leftIcon={
+                <Icon
+                name='user'
+                size={24}
+                color="#eb4d4b"
+                />
+            }
+            onChangeText={(val) => setPseudo(val)}
+        />
+              {/* prenom */}
+            <Input
+            containerStyle = {{marginBottom: 50, width: '70%'}}
+            inputStyle={{marginLeft: 10}}
+            placeholder='prenom'
+            leftIcon={
+                <Icon
+                name='user'
+                size={24}
+                color="#eb4d4b"
+                />
+            }
+            onChangeText={(val) => setPseudo(val)}
+        />    
+         {/* Email */}
+         <Input
+            containerStyle = {{marginBottom: 50, width: '70%'}}
+            inputStyle={{marginLeft: 10}}
+            placeholder='Email'
+            leftIcon={
+                <Icon
+                name='user'
+                size={24}
+                color="#eb4d4b"
+                />
+            }
+            onChangeText={(val) => setPseudo(val)}
+        />   
         {/* Dropdown */}
         <View style={styles2.container}>
         {renderLabel()}
@@ -127,7 +180,7 @@ export default function HomeScreen(props) {
           maxHeight={300}
           labelField="label"
           valueField="value"
-          placeholder={!isFocus ? 'vous etes' : '...'}
+          placeholder={!isFocus ? 'vous etes ?' : '...'}
           searchPlaceholder="Search..."
           value={value}
           onFocus={() => setIsFocus(true)}
@@ -149,55 +202,7 @@ export default function HomeScreen(props) {
 
 
       </View>
-
-    
-        
-        
-        
-        {/* NOM */}
-        <Input
-            containerStyle = {{marginBottom: 25, width: '70%'}}
-            inputStyle={{marginLeft: 10}}
-            placeholder='Nom'
-            leftIcon={
-                <Icon
-                name='user'
-                size={24}
-                color="#eb4d4b"
-                />
-            }
-            onChangeText={(val) => setPseudo(val)}
-        />
-              {/* prenom */}
-            <Input
-            containerStyle = {{marginBottom: 25, width: '70%'}}
-            inputStyle={{marginLeft: 10}}
-            placeholder='prenom'
-            leftIcon={
-                <Icon
-                name='user'
-                size={24}
-                color="#eb4d4b"
-                />
-            }
-            onChangeText={(val) => setPseudo(val)}
-        />    
-         {/* Email */}
-         <Input
-            containerStyle = {{marginBottom: 25, width: '70%'}}
-            inputStyle={{marginLeft: 10}}
-            placeholder='Email'
-            leftIcon={
-                <Icon
-                name='user'
-                size={24}
-                color="#eb4d4b"
-                />
-            }
-            onChangeText={(val) => setPseudo(val)}
-        />   
-
-{infoplus()}
+        {infoplus()}
         <Button
             icon={
                 <Icon
@@ -213,20 +218,27 @@ export default function HomeScreen(props) {
         />
 
     </ImageBackground>
+
+
+    </View>
   );
 }
 
-const styles = StyleSheet.create({
+const styles1 = StyleSheet.create({
   container: {
-    flex: 1,
+    
+    marginTop: 20,
+    color: 'red',
+    backgroundColor: 'grey',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'green'
+    
   },
 });
 
 const styles2 = StyleSheet.create({
   container: {
+    
     backgroundColor: 'white',
     padding: 16,
   },

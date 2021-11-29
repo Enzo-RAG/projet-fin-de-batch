@@ -4,7 +4,8 @@ import React from 'react';
 
 import HomeScreen from './screens/HomeScreens';
 import HomLog from './screens/HomeLog';
-
+import PatientHome from './screens/PatientHome';
+import ForgotPass from './screens/Forgotpassword';
 
 
 
@@ -32,6 +33,8 @@ export default function App() {
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="HomeLog" component={HomLog} />
+          <Stack.Screen name="Forgotpass" component={ForgotPass} />
+          <Stack.Screen name="PatientHome" component={PatientHome} />
   
         </Stack.Navigator>
       </NavigationContainer>
