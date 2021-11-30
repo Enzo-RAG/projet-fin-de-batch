@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, ImageBackground, Text, View  } from 'react-native';
 
-import {Button, Input} from 'react-native-elements'
+import {Button, Input, Header} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import  {Dropdown}  from 'react-native-element-dropdown';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { ScrollView } from 'react-native-gesture-handler';
 // Dropdown
 const data = [
   { label: 'patient', value: '1' },
@@ -24,50 +25,42 @@ export default function HomeScreen(props) {
 
     console.log(value)
     // Dropdown
-    const renderLabel = () => {
-      if (value || isFocus) {
-        return (
-          <Text style={[styles2.label, isFocus && { color: 'green' }]}>
-            Vous etes ?
-          </Text>
-        );
-      }
-      return null;
-    };
+   
   
 
 
     
 
-    var infoplus = () =>  {      
+    var infoplus = () =>  {  
+
       if(value == 1){
         console.log(value)
         return(
         <Input
-        containerStyle = {{marginBottom: 25, width: '70%'}}
+        containerStyle = {{marginBottom: 5, width: '70%'}}
         inputStyle={{marginLeft: 10}}
         placeholder='antecedant medico'
         leftIcon={
-            <Icon
-            name='user'
-            size={24}
-            color="#eb4d4b"
-            />
+          <Icon
+          name='user'
+          size={24}
+          color="#727679"
+          />
         }
         onChangeText={(val) => setPseudo(val)}
     />
         )}else if(value == 2){
       return(
           <Input
-          containerStyle = {{marginBottom: 25, width: '70%'}}
+          containerStyle = {{marginBottom: 5, width: '70%'}}
           inputStyle={{marginLeft: 10}}
           placeholder='num de plac imatriculation'
           leftIcon={
-              <Icon
-              name='user'
-              size={24}
-              color="#eb4d4b"
-              />
+            <Icon
+            name='user'
+            size={24}
+            color="#727679"
+            />
           }
           onChangeText={(val) => setPseudo(val)}
       />
@@ -75,15 +68,15 @@ export default function HomeScreen(props) {
       }else if(value == 3){
         return(
             <Input
-            containerStyle = {{marginBottom: 25, width: '70%'}}
+            containerStyle = {{marginBottom: 5, width: '70%'}}
             inputStyle={{marginLeft: 10}}
             placeholder='num de pharmacien'
             leftIcon={
-                <Icon
-                name='user'
-                size={24}
-                color="#eb4d4b"
-                />
+              <Icon
+              name='user'
+              size={24}
+              color="#727679"
+              />
             }
             onChangeText={(val) => setPseudo(val)}
         />
@@ -91,15 +84,15 @@ export default function HomeScreen(props) {
         }else if(value == 4){
           return(
               <Input
-              containerStyle = {{marginBottom: 25, width: '70%'}}
+              containerStyle = {{marginBottom: 5, width: '70%'}}
               inputStyle={{marginLeft: 10}}
               placeholder='num de docteur'
               leftIcon={
-                  <Icon
-                  name='user'
-                  size={24}
-                  color="#eb4d4b"
-                  />
+                <Icon
+                name='user'
+                size={24}
+                color="#727679"
+                />
               }
               onChangeText={(val) => setPseudo(val)}
           />
@@ -113,62 +106,64 @@ export default function HomeScreen(props) {
     
     return (
 
-    <View>
-      <Text style={styles1.container}>Helppills</Text>
-
-
-    <ImageBackground  style={styles2.container}>
-        
-          
+    <View style={styles.container}>
+      <Header
+            placement="left"
+            backgroundColor="#727679"
+            
+            centerComponent={{ text: 'Helpills', style: { color: '#F0F0F0' } }}
+            
+        />
+         
     
         
         
-        
+         
         {/* NOM */}
         <Input
-            containerStyle = {{marginBottom: 50, width: '70%'}}
+            containerStyle = {{marginBottom: 5, width: '70%'}}
             inputStyle={{marginLeft: 10}}
             placeholder='Nom'
             leftIcon={
-                <Icon
-                name='user'
-                size={24}
-                color="#eb4d4b"
-                />
+              <Icon
+              name='user'
+              size={24}
+              color="#727679"
+              />
             }
             onChangeText={(val) => setPseudo(val)}
         />
               {/* prenom */}
             <Input
-            containerStyle = {{marginBottom: 50, width: '70%'}}
+            containerStyle = {{marginBottom: 5, width: '70%'}}
             inputStyle={{marginLeft: 10}}
             placeholder='prenom'
             leftIcon={
-                <Icon
-                name='user'
-                size={24}
-                color="#eb4d4b"
-                />
+              <Icon
+              name='user'
+              size={24}
+              color="#727679"
+              />
             }
             onChangeText={(val) => setPseudo(val)}
         />    
          {/* Email */}
          <Input
-            containerStyle = {{marginBottom: 50, width: '70%'}}
+            containerStyle = {{marginBottom: 5, width: '70%'}}
             inputStyle={{marginLeft: 10}}
             placeholder='Email'
             leftIcon={
-                <Icon
-                name='user'
-                size={24}
-                color="#eb4d4b"
-                />
+              <Icon
+              name='user'
+              size={24}
+              color="#727679"
+              />
             }
             onChangeText={(val) => setPseudo(val)}
         />   
         {/* Dropdown */}
-        <View style={styles2.container}>
-        {renderLabel()}
+        <View style={styles.container}>
+        
         <Dropdown
           style={[styles2.dropdown, isFocus && { borderColor: 'blue' }]}
           placeholderStyle={styles2.placeholderStyle}
@@ -199,50 +194,39 @@ export default function HomeScreen(props) {
           )}
         />
 
-
-
       </View>
         {infoplus()}
         <Button
-            icon={
-                <Icon
-                name="arrow-right"
-                size={20}
-                color="#eb4d4b"
-                />
-            }
-
-            title="Inscription"
-            type="solid"
-            onPress={() => {props.navigation.navigate('Home')}}
+           containerStyle = {{ width: '70%'}}
+           title="CONNECTION"
+           type="solid"
+           buttonStyle={{ backgroundColor: "#8AA78B" }}
+           onPress={() => {props.navigation.navigate('PatientHome')}}
         />
+        
 
-    </ImageBackground>
-
-
+        
     </View>
   );
 }
 
-const styles1 = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     
-    marginTop: 20,
-    color: 'red',
-    backgroundColor: 'grey',
     alignItems: 'center',
     justifyContent: 'center',
-    
+    backgroundColor: '#F0F0F0'
   },
 });
 
 const styles2 = StyleSheet.create({
   container: {
-    
+    width: 50 ,
     backgroundColor: 'white',
     padding: 16,
   },
   dropdown: {
+    width: 290,
     height: 50,
     borderColor: 'gray',
     borderWidth: 0.5,
@@ -253,6 +237,7 @@ const styles2 = StyleSheet.create({
     marginRight: 5,
   },
   label: {
+    
     position: 'absolute',
     backgroundColor: 'white',
     left: 22,
@@ -262,13 +247,15 @@ const styles2 = StyleSheet.create({
     fontSize: 14,
   },
   placeholderStyle: {
+    
     fontSize: 16,
   },
   selectedTextStyle: {
+    
     fontSize: 16,
   },
   iconStyle: {
-    width: 20,
+    
     height: 20,
   },
   inputSearchStyle: {

@@ -1,20 +1,32 @@
 
 import React, {useState} from 'react';
-import { Text, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import {Button, Input} from 'react-native-elements'
+import {Button, Input, Text, Header} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-
+// style={styles.container}
 
 export default function HomeScreen(props) {
     const [pseudo, setPseudo] = useState('');
     
     return (
-    <View style={styles.container}>
+    
+    
+    
+    
+    
+    <View style={styles.container}
+    >
         {/* EMAIL */}
-
-        <Text>Sign-in</Text>
+        <Header
+            placement="left"
+            backgroundColor="#727679"
+            
+            centerComponent={{ text: 'Helpills', style: { color: '#F0F0F0' } }}
+            
+        />
+        <Text h1>Sign-in</Text>
         <Input
             containerStyle = {{marginBottom: 25, width: '70%'}}
             inputStyle={{marginLeft: 10}}
@@ -23,7 +35,7 @@ export default function HomeScreen(props) {
                 <Icon
                 name='user'
                 size={24}
-                color="#eb4d4b"
+                color="#727679"
                 />
             }
             onChangeText={(val) => setPseudo(val)}
@@ -37,63 +49,49 @@ export default function HomeScreen(props) {
                 <Icon
                 name='user'
                 size={24}
-                color="#eb4d4b"
+                color="#727679"
                 />
             }
             onChangeText={(val) => setPseudo(val)}
         />
         {/* CONNECTION */}
         <Button
-            icon={
-                <Icon
-                name="arrow-right"
-                size={20}
-                color="#eb4d4b"
-                />
-            }
-
+           
+           containerStyle = {{marginBottom: 25, width: '70%'}}
             title="CONNECTION"
             type="solid"
+            buttonStyle={{ backgroundColor: "#8AA78B" }}
             onPress={() => {props.navigation.navigate('PatientHome')}}
         />
         {/* inscription  */}
         <Button
-            icon={
-                <Icon
-                name="arrow-right"
-                size={20}
-                color="#eb4d4b"
-                />
-            }
-
+           
+           containerStyle = {{marginBottom: 25, width: '70%'}}
             title="inscription"
             type="solid"
+            buttonStyle={{ backgroundColor: "#8AA78B" }}
             onPress={() => {props.navigation.navigate('HomeLog')}}
         />
 
         {/* MP oublier */}
-        <Button
-            icon={
-                <Icon
-                name="arrow-right"
-                size={20}
-                color="#eb4d4b"
-                />
-            }
-
+        <Button 
+          
+          containerStyle = {{marginBottom: 25, width: '70%'}}
             title="MP oublier"
             type="solid"
+            buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
             onPress={() => {props.navigation.navigate('Forgotpass')}}
         />
+        
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'grey'
+    backgroundColor: '#F0F0F0'
   },
 });

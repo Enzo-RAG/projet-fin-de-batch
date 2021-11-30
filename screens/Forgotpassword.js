@@ -11,71 +11,65 @@ export default function HomeScreen(props) {
     const [pseudo, setPseudo] = useState('');
     
     return (
-    <View >
+    <View style={styles.container}>
         <Header
             placement="left"
-            leftComponent={{ icon: 'menu', color: '#fff' }}
-            centerComponent={{ text: 'HelpIlls', style: { color: '#fff' } }}
-            rightComponent={{ icon: 'home', color: '#fff' }}
+            backgroundColor="#727679"
+            
+            centerComponent={{ text: 'Helpills', style: { color: '#F0F0F0' } }}
+            
         />
-        <View >
-      
+        
        
-        <View backgroundColor='red' width='100%' alignItems='center' justifyContent= 'center'>
+        
         <Text h1 > Forgotten password? </Text>
 
-        <Text> have a memore lapse?</Text>
-        <Text> No problem we are all like that</Text>
+        <Text style={{marginBottom: 20}}> have a memore lapse?</Text>
+        <Text style={{marginBottom: 20}}> No problem we are all like that</Text>
         
               
-        </View>
         
-        <View backgroundColor='grey' width='100%' alignItems='center' justifyContent= 'center'>
+        
+        
 
-            
+         <View style={styles.container} backgroundColor="#727679" >
         {/* MP oublier */}
-        <Text h3 > Please check your email to get started</Text>
+        <Text h4 style={{marginTop: 40 , marginBottom: 20}}>Please check your email </Text>
         
         <Input
-            containerStyle = {{marginBottom: 25, width: '70%'}}
+            containerStyle = {{marginBottom: 5, width: '70%'}}
             inputStyle={{marginLeft: 10}}
             placeholder='Email@xxx.com'
             leftIcon={
                 <Icon
                 name='user'
                 size={24}
-                color="#eb4d4b"
+                color="#F0F0F0"
                 />
             }
             onChangeText={(val) => setPseudo(val)}
         />
         
-        <Button
-            icon={
-                <Icon
-                name="arrow-right"
-                size={20}
-                color="#eb4d4b"
-                />
-            }
-
-            title="Confirme"
+        <Button 
+          
+          containerStyle = {{marginBottom: 10, width: '70%'}}
+            title="COnfirme"
             type="solid"
-            onPress={() => {props.navigation.navigate('HomeLog')}}
+            buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
+            onPress={() => {props.navigation.navigate('Home')}}
         />
-
+        </View>   
        
         </View>
-        </View>
-    </View>
+        
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-     
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white'
-  },
-});
+    container: {
+      width : '100%',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#F0F0F0'
+    },
+  });

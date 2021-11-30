@@ -6,6 +6,7 @@ import HomeScreen from './screens/HomeScreens';
 import HomLog from './screens/HomeLog';
 import PatientHome from './screens/PatientHome';
 import ForgotPass from './screens/Forgotpassword';
+import Searchtest from './screens/algolia';
 
 
 
@@ -35,6 +36,7 @@ export default function App() {
           <Stack.Screen name="HomeLog" component={HomLog} />
           <Stack.Screen name="Forgotpass" component={ForgotPass} />
           <Stack.Screen name="PatientHome" component={PatientHome} />
+          <Stack.Screen name="Algo254" component={Searchtest} />
   
         </Stack.Navigator>
       </NavigationContainer>

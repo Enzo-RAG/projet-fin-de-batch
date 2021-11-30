@@ -1,8 +1,8 @@
 
 import React, {useState} from 'react';
-import { Text, StyleSheet, View, ActivityIndicator  } from 'react-native';
+import { StyleSheet, View, ActivityIndicator  } from 'react-native';
 
-import {Button, Input, Header, Image } from 'react-native-elements'
+import {Button, Input, Header, Image, Text } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
@@ -11,92 +11,77 @@ export default function HomeScreen(props) {
     const [pseudo, setPseudo] = useState('');
     
     return (
-    <View >
+    <View style={styles.container}>
         <Header
             placement="left"
-            leftComponent={{ icon: 'menu', color: '#fff' }}
-            centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
-            rightComponent={{ icon: 'home', color: '#fff' }}
-        />
-        <View >
-        <View placement="left" color="green" backgroundColor='grey' width='100%' alignItems='center' justifyContent= 'center' >
-        <Text  >Helppills</Text>
-        </View>
-        <View alignItems= 'center'
-            justifyContent= 'center'
-            backgroundColor= 'white'>
-        <Image
+            backgroundColor="#727679"
             
+            centerComponent={{ text: 'Helpills', style: { color: '#F0F0F0' } }}
+            
+        />
+           
+         
+        
+        <Image
+            containerStyle = {{marginBottom: 10, marginTop: 10}}
             source={{ uri: 'https://picsum.photos/200' }}
-            style={{ width: 200, height: 200, borderRadius: 100 }}
+            style={{ width: 100, height: 100, borderRadius: 100 }}
             PlaceholderContent={<ActivityIndicator />}
             />
-            <Text>Prenom </Text>
-            </View>
-        <View backgroundColor='red' width='100%' alignItems='center' justifyContent= 'center'>
-        <Text > My Appointment Book</Text>
+            <Text h2 style={{color:"#727679"}}> prenom</Text>
+            
+        <View style={styles.container} backgroundColor="#727679">
+        <Text h3 style={{color:"#F0F0F0"}}> My Appointment Book</Text>
 
-        <Text> no appointment yet</Text>
+        <Text h3 style={{color:"#F0F0F0"}}> no appointment yet</Text>
         
-        <Button
-            icon={
-                <Icon
-                name="arrow-right"
-                size={20}
-                color="#eb4d4b"
-                />
-            }
-
+        <Button 
+          
+          containerStyle = {{marginBottom: 25, width: '70%', marginTop: 25}}
             title="Book ONE"
             type="solid"
-            onPress={() => {props.navigation.navigate('HomeLog')}}
+            buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
+            onPress={() => {props.navigation.navigate('Forgotpass')}}
         />
-       
         </View>
         
-        <View backgroundColor='grey' width='100%' alignItems='center' justifyContent= 'center'>
+
+       
+        
+        
         {/* EMAIL */}
        
             
         {/* MP oublier */}
-        <Button
-            icon={
-                <Icon
-                name="arrow-right"
-                size={20}
-                color="#eb4d4b"
-                />
-            }
-
+        <Button 
+          
+          containerStyle = {{marginBottom: 25, width: '70%', marginTop: 10}}
             title="Order medicine's drug"
             type="solid"
-            onPress={() => {props.navigation.navigate('HomeLog')}}
+            buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
+            onPress={() => {props.navigation.navigate('Forgotpass')}}
         />
 
-        <Button
-            icon={
-                <Icon
-                name="arrow-right"
-                size={20}
-                color="#eb4d4b"
-                />
-            }
-
+        <Button 
+          
+          containerStyle = {{marginBottom: 25, width: '70%'}}
             title="my presciption "
             type="solid"
-            onPress={() => {props.navigation.navigate('HomeLog')}}
+            buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
+            onPress={() => {props.navigation.navigate('Forgotpass')}}
         />
-        </View>
-        </View>
+        
+
+       
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-     
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white'
-  },
-});
+    container: {
+      width : '100%',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#F0F0F0'
+    },
+  });
