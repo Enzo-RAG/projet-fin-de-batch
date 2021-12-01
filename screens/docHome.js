@@ -18,7 +18,7 @@ export default function HomeScreen(props) {
           <Button 
           
           containerStyle = {{marginBottom: 25, width: '70%', marginTop: 25}}
-            title="Book ONE"
+            title="available"
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
             onPress={() => {props.navigation.navigate('agenda')}}
@@ -28,24 +28,15 @@ export default function HomeScreen(props) {
     const rdv1 = () => {
       if(rdv == true){
         return(
-        <Card containerStyle={{width: '70%'}}>
-        <Card.Title>nom doc</Card.Title>
-        <Card.Divider/>
-        <Card.Image source={{ uri: 'https://picsum.photos/200' }}></Card.Image>
-          <Text style={{marginBottom: 10}}>
-            date heure
-          </Text>
-         
-          <Button
-            icon={<Icon name='code' color='#ffffff' />}
-            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-            title='Modify' />
-            <Button
-            icon={<Icon name='code' color='#ffffff' />}
-            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-            title='cancel' />
+            <Button 
           
-      </Card>)
+            containerStyle = {{marginBottom: 25, width: '70%', marginTop: 10}}
+              title="Les RDV"
+              type="solid"
+              buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
+              onPress={() => {props.navigation.navigate('agenda')}}
+          />)
+          
       }else{
         return(<Text h3 style={{color:"#F0F0F0"}}> no appointment yet</Text>)
       }
@@ -91,7 +82,7 @@ export default function HomeScreen(props) {
         <Button 
           
           containerStyle = {{marginBottom: 25, width: '70%', marginTop: 10}}
-            title="Order medicine's drug"
+            title="check medicine's drug"
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
             onPress={() => {props.navigation.navigate('Forgotpass')}}
@@ -100,16 +91,16 @@ export default function HomeScreen(props) {
         <Button 
           
           containerStyle = {{marginBottom: 25, width: '70%'}}
-            title="my presciption "
+            title="presciption "
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-            onPress={() => {props.navigation.navigate('PatientPresciption')}}
+            onPress={() => {props.navigation.navigate('DocPrescriprion')}}
         />
 
         <Button 
           
           containerStyle = {{width: '70%'}}
-            title="my presciption "
+            title="test "
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
             onPress={() => {setRdv(true)}}

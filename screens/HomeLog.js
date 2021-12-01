@@ -203,6 +203,13 @@ export default function HomeScreen(props) {
            buttonStyle={{ backgroundColor: "#8AA78B" }}
            onPress={() => {props.navigation.navigate('PatientHome')}}
         />
+         <Button
+           containerStyle = {{ width: '70%'}}
+           title="doc home"
+           type="solid"
+           buttonStyle={{ backgroundColor: "#8AA78B" }}
+           onPress={() => {props.navigation.navigate('DocHome')}}
+        />
         
 
         

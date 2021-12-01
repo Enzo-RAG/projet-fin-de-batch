@@ -12,42 +12,29 @@ export default function HomeScreen(props) {
     const [rdv, setRdv] = useState(false)
 
 
-    const book = () => {
-      if(rdv == false){
-        return(
-          <Button 
-          
-          containerStyle = {{marginBottom: 25, width: '70%', marginTop: 25}}
-            title="Book ONE"
-            type="solid"
-            buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-            onPress={() => {props.navigation.navigate('agenda')}}
-        />)
-      }}
-
-    const rdv1 = () => {
+   
+    const Mypresciption = () => {
       if(rdv == true){
         return(
         <Card containerStyle={{width: '70%'}}>
-        <Card.Title>nom doc</Card.Title>
+        <Card.Title>prescriprion 1</Card.Title>
         <Card.Divider/>
-        <Card.Image source={{ uri: 'https://picsum.photos/200' }}></Card.Image>
           <Text style={{marginBottom: 10}}>
-            date heure
+            medoc 1
+          </Text>
+          <Text style={{marginBottom: 10}}>
+            medoc 2
           </Text>
          
           <Button
             icon={<Icon name='code' color='#ffffff' />}
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-            title='Modify' />
-            <Button
-            icon={<Icon name='code' color='#ffffff' />}
-            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-            title='cancel' />
+            title='order now' />
+          
           
       </Card>)
       }else{
-        return(<Text h3 style={{color:"#F0F0F0"}}> no appointment yet</Text>)
+        return(<Text h3 style={{color:"#F0F0F0"}}> no presciption</Text>)
       }
     }
 
@@ -73,43 +60,25 @@ export default function HomeScreen(props) {
             <Text h2 style={{color:"#727679"}}> prenom</Text>
             
         <View style={styles.container} backgroundColor="#727679">
-        <Text h3 style={{color:"#F0F0F0"}}> My Appointment Book</Text>
+        <Text h3 style={{color:"#F0F0F0"}}> My Presciption</Text>
 
-        {rdv1()}
-        {book()}
-        
+        {Mypresciption()}
+       
         </View>
-        
-
        
-        
-        
-        {/* EMAIL */}
-       
-            
-        {/* MP oublier */}
-        <Button 
-          
-          containerStyle = {{marginBottom: 25, width: '70%', marginTop: 10}}
-            title="Order medicine's drug"
-            type="solid"
-            buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-            onPress={() => {props.navigation.navigate('Forgotpass')}}
-        />
-
-        <Button 
-          
-          containerStyle = {{marginBottom: 25, width: '70%'}}
-            title="my presciption "
-            type="solid"
-            buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-            onPress={() => {props.navigation.navigate('PatientPresciption')}}
-        />
-
         <Button 
           
           containerStyle = {{width: '70%'}}
-            title="my presciption "
+            title="Search medicament "
+            type="solid"
+            buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
+            onPress={() => {setRdv(true)}}
+        />
+
+            <Button 
+                    
+          containerStyle = {{width: '70%'}}
+            title="test "
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
             onPress={() => {setRdv(true)}}

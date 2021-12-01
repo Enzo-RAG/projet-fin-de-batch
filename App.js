@@ -5,8 +5,12 @@ import React from 'react';
 import HomeScreen from './screens/HomeScreens';
 import HomLog from './screens/HomeLog';
 import PatientHome from './screens/PatientHome';
+import PatientPresciption from './screens/PatientPrescription';
 import ForgotPass from './screens/Forgotpassword';
 import Searchtest from './screens/algolia';
+import agenda from './screens/agendaScreen';
+import Dochome from './screens/docHome';
+import DocPrescriprion from './screens/DocPrescription';
 
 
 
@@ -36,7 +40,13 @@ export default function App() {
           <Stack.Screen name="HomeLog" component={HomLog} />
           <Stack.Screen name="Forgotpass" component={ForgotPass} />
           <Stack.Screen name="PatientHome" component={PatientHome} />
+          <Stack.Screen name="PatientPresciption" component={PatientPresciption} />
           <Stack.Screen name="Algo254" component={Searchtest} />
+          <Stack.Screen name="agenda" component={agenda} />
+          <Stack.Screen name="DocHome" component={Dochome} />
+          <Stack.Screen name="DocPrescriprion" component={DocPrescriprion} />
+          
+
   
         </Stack.Navigator>
       </NavigationContainer>
