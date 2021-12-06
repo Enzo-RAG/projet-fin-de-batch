@@ -11,6 +11,7 @@ import Searchtest from './screens/algolia';
 import agenda from './screens/agendaScreen';
 import Dochome from './screens/docHome';
 import DocPrescriprion from './screens/DocPrescription';
+import PatientRdv from './screens/PatientRdv';
 
 
 
@@ -45,6 +46,7 @@ export default function App() {
           <Stack.Screen name="agenda" component={agenda} />
           <Stack.Screen name="DocHome" component={Dochome} />
           <Stack.Screen name="DocPrescriprion" component={DocPrescriprion} />
+          <Stack.Screen name="PatientRdv" component={PatientRdv} />
           
 
   
