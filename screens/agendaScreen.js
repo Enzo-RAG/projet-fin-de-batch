@@ -1,14 +1,21 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 import {Header } from 'react-native-elements'
 import {Agenda} from 'react-native-calendars';
 import {Card, Avatar} from 'react-native-paper';
 
 
+
+
+
+
+
 const timeToString = (time) => {
-  const date = new Date(time);
+
+ const date = new Date(time);
   return date.toISOString().split('T')[0];
 };
+
 
 function Schedule(){
   const [items, setItems] = useState({
@@ -17,6 +24,17 @@ function Schedule(){
     '2012-05-24': [],
     '2012-05-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
   });
+
+  useEffect(() => {
+    const findArticlesWishList = async () => {
+      const dataWishlist = await fetch(`/recepRdv`)
+      const body = await dataWishlist.json()
+      console/log(body)
+      // props.saveArticles(body.articles)
+    }
+  
+    findArticlesWishList()
+  },[])
 
   const loadItems = (day) => {
     setTimeout(() => {

@@ -82,6 +82,7 @@ var dayrdv = day1.dateString
         }
         onChangeText={(symptome)=>setInfo(symptome)}
     />
+        
         {/* EMAIL */}
         <Button 
           
