@@ -12,14 +12,34 @@ export default function HomeScreen(props) {
     const [pseudo, setPseudo] = useState('');
     const [rdv, setRdv] = useState(false)
     const [day1, setDay1] = useState("")
-    const [info, setInfo] = useState("")
+    const [date, setDate] = useState("")
+    const [patientId , setPatienId] = useState("") 
+    const [medecinId, setMedecinId] = useState("")
+    const [photo, setPhoto] = useState("")
+    const [descritpion, setDesciption] = useState("")
+    const [validite , setValidite] = useState ("")
+    const [prescriptionnumber, setPrescriptionnumber] = useState ("")
+    const [prescriptionprise, setPrescriptionprise] = useState ("")
+    const [prescriptionduree, setPrescriptionduree] = useState ("")
+    const [prescriptionautre, setPrescriptionautre] = useState ("")
+    var dayrdv = day1.dateString
 
-var dayrdv = day1.dateString
-
-    console.log(dayrdv)
-    console.log(info)
+  
 
   console.log("test##############################################################")
+
+  async function addRDV(){
+  var rawresponse = await fetch('http://192.168.43.44:3001/addrdv',{
+  method : 'POST',
+  headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
+  body: `date=${date}`,
+  })}
+
+
+
+
+
+
 
     LocaleConfig.locales['fr'] = {
         monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
@@ -68,7 +88,19 @@ var dayrdv = day1.dateString
     '2021-06-19': {disabled: true, disableTouchEvent: true}
   }}
         />
-        <Text> MY RDV : le {day1.dateString}  </Text>
+        <Input
+        containerStyle = {{marginBottom: 5, width: '70%'}}
+        inputStyle={{marginLeft: 10}}
+        placeholder={day1.dateString}
+        leftIcon={
+          <Icon
+          name='user'
+          size={24}
+          color="#727679"
+          />
+        }
+        onChangeText={(date)=>setDate(date)}
+    />
         <Input
         containerStyle = {{marginBottom: 5, width: '70%'}}
         inputStyle={{marginLeft: 10}}
@@ -80,7 +112,7 @@ var dayrdv = day1.dateString
           color="#727679"
           />
         }
-        onChangeText={(symptome)=>setInfo(symptome)}
+        onChangeText={(symptome)=>setDesciption(symptome)}
     />
         
         {/* EMAIL */}
@@ -90,7 +122,7 @@ var dayrdv = day1.dateString
             title="valide prise RDV"
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-            onPress={() => {props.navigation.navigate('Forgotpass')}}
+            onPress={() => {props.navigation.navigate('Forgotpass'), addRDV()}}
         />
             
         {/* MP oublier */}

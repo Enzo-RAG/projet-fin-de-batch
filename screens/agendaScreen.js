@@ -27,9 +27,12 @@ function Schedule(){
 
   useEffect(() => {
     const findArticlesWishList = async () => {
-      const dataWishlist = await fetch(`/recepRdv`)
+      console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+      const dataWishlist = await fetch('http://172.20.10.11:3001/recepRdv')
+      console.log("#######################################################")
       const body = await dataWishlist.json()
-      console/log(body)
+      console.log("$$$",body)
+      console.log('##############################test##################################')
       // props.saveArticles(body.articles)
     }
   
