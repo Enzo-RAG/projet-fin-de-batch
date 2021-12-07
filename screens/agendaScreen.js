@@ -12,10 +12,10 @@ const timeToString = (time) => {
 
 function Schedule(){
   const [items, setItems] = useState({
-    '2012-05-22': [{name: 'item 1 - any js object'}],
-    '2012-05-23': [{name: 'item 2 - any js object', height: 80}],
-    '2012-05-24': [],
-    '2012-05-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
+    '2021-06-22': [{name: 'item 1 - any js object'}],
+    '2021-06-23': [{name: 'item 2 - any js object', height: 80}],
+    '2021-06-24': [],
+    '2021-06-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
   });
 
   const loadItems = (day) => {
