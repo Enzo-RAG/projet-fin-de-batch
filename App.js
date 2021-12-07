@@ -25,6 +25,10 @@ import Prescriptions from './screens/Prescription';
 import PatientRdv from './screens/PatientRdv';
 
 
+import agenda from './screens/agendaScreen';
+
+
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -191,6 +195,7 @@ export default function App() {
           <Stack.Screen name="HomeLog" component={HomLog} />
           <Stack.Screen name="Forgotpass" component={ForgotPass} />
           <Stack.Screen name="PatientRdv" component={PatientRdv} />
+          <Stack.Screen name="agenda" component={agenda} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
@@ -204,7 +209,7 @@ export default function App() {
           <Stack.Screen name="PatientHome" component={PatientHome} />
           <Stack.Screen name="PatientPresciption" component={PatientPresciption} />
           <Stack.Screen name="Algo254" component={Searchtest} />
-          <Stack.Screen name="agenda" component={agenda} />
+          
           <Stack.Screen name="DocHome" component={Dochome} />
           <Stack.Screen name="DocPrescriprion" component={DocPrescriprion} />
           

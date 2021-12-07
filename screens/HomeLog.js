@@ -357,7 +357,7 @@ export default function HomeScreen(props) {
            title="doc home"
            type="solid"
            buttonStyle={{ backgroundColor: "#8AA78B" }}
-           onPress={() => {props.navigation.navigate('DocHome')}}
+           onPress={() => {props.navigation.navigate('agenda')}}
         />
         
 

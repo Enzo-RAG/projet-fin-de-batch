@@ -19,18 +19,17 @@ const timeToString = (time) => {
 
 
 
-function Schedule(props){
-  const [info, setInfo] = useState()
+function Schedule(){
+  const [info, setInfo] = useState([])
 
-  console.log(info.articles)
+  // console.log(info.articles[0].date)
+  // console.log(info.articles[0].description)
   console.log('test2134####################################')
-  const [items, setItems] = useState({
-    
-    '2017-06-22': [{name: 'item 1 - any js object'}],
-    '2017-06-23': [{name: 'item 2 - any js object', height: 80}],
-    '2017-06-24': [],
-    '2017-06-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
-  });
+  const [items, setItems] = useState( info.map((number, i) => {number.articles.date 
+    // '2017-06-23': [{name: 'item 2 - any js object', height: 80}],
+    // '2017-06-24': [],
+    // '2017-06-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
+  }));
 
   useEffect(() => {
     const findArticlesWishList = async () => {
@@ -38,13 +37,25 @@ function Schedule(props){
       const dataWishlist = await fetch('https://frozen-scrubland-67920.herokuapp.com/recepRdv')
       console.log("#######################################################")
       const body = await dataWishlist.json()
-      console.log("$$$",setInfo(body))
+      setInfo(body)
       console.log('##############################test##################################')
       // props.saveArticles(body.articles)
     }
   
     findArticlesWishList()
   },[])
+
+  const numbers = [info];
+//  console.log(numbers)
+  // const doubled = numbers.map((number, i) => number.articles[2].Photo);
+  // console.log(doubled);
+  // console.log('mapre retour') 
+  
+    
+  
+
+
+
 
   // const loadItems = (day) => {
   //   setTimeout(() => {
