@@ -1,22 +1,43 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 import {Header } from 'react-native-elements'
 import {Agenda} from 'react-native-calendars';
 import {Card, Avatar} from 'react-native-paper';
 
 
+
+
+
+
+
 const timeToString = (time) => {
-  const date = new Date(time);
+
+ const date = new Date(time);
   return date.toISOString().split('T')[0];
 };
 
+
 function Schedule(){
   const [items, setItems] = useState({
-    '2012-05-22': [{name: 'item 1 - any js object'}],
-    '2012-05-23': [{name: 'item 2 - any js object', height: 80}],
-    '2012-05-24': [],
-    '2012-05-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
+    '2021-06-22': [{name: 'item 1 - any js object'}],
+    '2021-06-23': [{name: 'item 2 - any js object', height: 80}],
+    '2021-06-24': [],
+    '2021-06-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
   });
+
+  useEffect(() => {
+    const findArticlesWishList = async () => {
+      console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+      const dataWishlist = await fetch('http://172.20.10.11:3001/recepRdv')
+      console.log("#######################################################")
+      const body = await dataWishlist.json()
+      console.log("$$$",body)
+      console.log('##############################test##################################')
+      // props.saveArticles(body.articles)
+    }
+  
+    findArticlesWishList()
+  },[])
 
   const loadItems = (day) => {
     setTimeout(() => {

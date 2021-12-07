@@ -21,7 +21,7 @@ export default function HomeScreen(props) {
             title="Book ONE"
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-            onPress={() => {props.navigation.navigate('agenda')}}
+            onPress={() => {props.navigation.navigate('PatientRdv')}}
         />)
       }}
 
@@ -73,7 +73,7 @@ export default function HomeScreen(props) {
             <Text h2 style={{color:"#727679"}}> prenom</Text>
             
         <View style={styles.container} backgroundColor="#727679">
-        <Text h3 style={{color:"#F0F0F0"}}> My Appointment Book</Text>
+        <Text h3 style={{color:"#F0F0F0"}}> My Appointment Book patient</Text>
 
         {rdv1()}
         {book()}
