@@ -25,11 +25,6 @@ export default function HomeScreen(props) {
 
     console.log(value)
     // Dropdown
-   
-  
-
-
-    
 
     var infoplus = () =>  {  
 

@@ -29,7 +29,7 @@ export default function HomeScreen(props) {
   console.log("test##############################################################")
 
   async function addRDV(){
-  var rawresponse = await fetch('http://192.168.43.44:3001/addrdv',{
+  var rawresponse = await fetch('http://192.168.217.107:3001/addrdv',{
   method : 'POST',
   headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
   body: `date=${date}`,

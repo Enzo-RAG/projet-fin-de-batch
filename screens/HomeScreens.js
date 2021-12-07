@@ -12,10 +12,6 @@ export default function HomeScreen(props) {
     
     return (
     
-    
-    
-    
-    
     <View style={styles.container}
     >
         {/* EMAIL */}
@@ -61,13 +57,14 @@ export default function HomeScreen(props) {
             title="CONNECTION"
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" }}
-            onPress={() => {props.navigation.navigate('PatientHome')}}
+            onPress={() => {
+              props.navigation.navigate('BottomNavigator', { screen: 'GalleryScreen' });
+            }}
         />
         {/* inscription  */}
         <Button
-           
            containerStyle = {{marginBottom: 25, width: '70%'}}
-            title="inscription"
+            title="INSCRIPTION"
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" }}
             onPress={() => {props.navigation.navigate('HomeLog')}}
@@ -75,14 +72,12 @@ export default function HomeScreen(props) {
 
         {/* MP oublier */}
         <Button 
-          
           containerStyle = {{marginBottom: 25, width: '70%'}}
-            title="MP oublier"
+            title="Mot de passe oublié"
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
             onPress={() => {props.navigation.navigate('Forgotpass')}}
         />
-        
     </View>
   );
 }
