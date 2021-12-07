@@ -34,7 +34,7 @@ export default function HomeScreen(props) {
                 color="#727679"
                 />
             }
-            onChangeText={(val) => setPseudo(val)}
+            onChangeText={(val) => setEmail(val)}
         />
             {/* PASSWORD */}
             <Input
@@ -48,7 +48,7 @@ export default function HomeScreen(props) {
                 color="#727679"
                 />
             }
-            onChangeText={(val) => setPseudo(val)}
+            onChangeText={(val) => setPassword(val)}
         />
         {/* CONNECTION */}
         <Button
