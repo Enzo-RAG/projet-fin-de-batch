@@ -11,10 +11,9 @@ import {Calendar} from 'react-native-calendars';
 export default function HomeScreen(props) {
     const [pseudo, setPseudo] = useState('');
     const [rdv, setRdv] = useState(false)
-    const [day1, setDay1] = useState("")
     const [date, setDate] = useState("")
-    const [patientId , setPatienId] = useState("") 
-    const [medecinId, setMedecinId] = useState("")
+    const [patientId , setPatienId] = useState("maxime2@gmail.com") 
+    const [medecinId, setMedecinId] = useState("maxime@gmail.com")
     const [photo, setPhoto] = useState("")
     const [descritpion, setDesciption] = useState("")
     const [validite , setValidite] = useState ("")
@@ -22,22 +21,24 @@ export default function HomeScreen(props) {
     const [prescriptionprise, setPrescriptionprise] = useState ("")
     const [prescriptionduree, setPrescriptionduree] = useState ("")
     const [prescriptionautre, setPrescriptionautre] = useState ("")
-    var dayrdv = day1.dateString
+    
 
   
-
+  console.log(date)
   console.log("test##############################################################")
 
   async function addRDV(){
-  var rawresponse = await fetch('http://192.168.43.44:3001/addrdv',{
-  method : 'POST',
-  headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
-  body: `date=${date}`,
+  console.log("route add")
+  var rawresponse = await fetch('https://frozen-scrubland-67920.herokuapp.com/addrdv',{
+    method : 'POST',
+    headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
+    body: `date=${date}&descritpion=${descritpion}&Photo=${photo}&patientId=${patientId}&medecinId=${medecinId}`
+  
+
   })}
 
 
-
-
+  
 
 
 
@@ -79,7 +80,7 @@ export default function HomeScreen(props) {
         <Calendar
 
    
-   onDayPress={(day) => {setDay1(day)}}
+   onDayPress={(day) => {setDate(day.dateString)}}
    // Handler which gets executed on day long press. Default = undefined
    markedDates={{
     '{dayrdv}' : {selected: true, marked: true, selectedColor: 'blue'},
@@ -91,7 +92,7 @@ export default function HomeScreen(props) {
         <Input
         containerStyle = {{marginBottom: 5, width: '70%'}}
         inputStyle={{marginLeft: 10}}
-        placeholder={day1.dateString}
+        value={date}
         leftIcon={
           <Icon
           name='user'
@@ -99,7 +100,7 @@ export default function HomeScreen(props) {
           color="#727679"
           />
         }
-        onChangeText={(date)=>setDate(date)}
+        onChangeText={(date)=> setDate(date)}
     />
         <Input
         containerStyle = {{marginBottom: 5, width: '70%'}}
