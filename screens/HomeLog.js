@@ -9,10 +9,10 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { ScrollView } from 'react-native-gesture-handler';
 // Dropdown
 const data = [
-  { label: 'patient', value: '1' },
-  { label: 'livreur', value: '2' },
-  { label: 'pharmacien', value: '3' },
-  { label: 'docteur', value: '4' },
+  { label: 'patient', value: 1 },
+  { label: 'livreur', value: 2 },
+  { label: 'pharmacien', value: 3 },
+  { label: 'docteur', value: 4 },
   // { label: 'Item 5', value: '5' },
 
 ];
@@ -23,19 +23,61 @@ export default function HomeScreen(props) {
     const [value, setValue] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
 
-    console.log(value)
+    console.log("1",value)
     // Dropdown
    
-  
+        const [nom, setNom]= useState('')
+        const [email, setEmail]= useState('')
+        const [password, setPassword]= useState('')
+        const [prenom, setPrenom]= useState('')
+        const [documents, setDocuments]= useState([])
+        const [photo, setPhoto]= useState([])
+        const [adress, setAdress]= useState('')
+        const [ville, setVille]= useState('')
+        const [codePostal, setCodePostal]= useState('')
+        const [telephone, setTelephone]= useState('')
+        const [status, setStatus]= useState(0)
+        const [nSecu, setNSecu]= useState('')
+        const [mutuel, setMutuel]= useState('')
+        const [idBanque, setIdBanque]= useState({})
+        const [plaqueImmat, setPlaqueImmat]= useState('')
+        const [numPharma, setNumPharma]= useState('')
+        const [numDoc, setNumDoc]= useState('')
+        const [antecedent, setAntecedent]= useState('')
 
+        console.log(prenom,nom,password,email,)
+
+        async function signup(){ 
+          var rawresponse = await fetch('https://helpills.herokuapp.com/inscription', {
+          method: 'POST',
+          headers: {'Content-Type':'application/x-www-form-urlencoded'},
+          body: `nom=${nom}&email=${email}&password=${password}&prenom=${prenom}&documents=${documents}&photo=${photo}&adress=${adress}&ville=${ville}&codePostal=${codePostal}&telephone=${telephone}&status=${status}&nSecu=${nSecu}&mutuel=${mutuel}&idBanque=${idBanque}&plaqueImmat=${plaqueImmat}&numPharma=${numPharma}&numDoc=${numDoc}&antecedent=${antecedent}`
+           
+          
+           
+        })
+        console.log("je suis la")
+      }
+        
+
+      //   var reponse = await rawresponse.json();
+      //   if(reponse.isok == true){
+      //     setDirection(true)
+      //   }
+      //   console.log("a",reponse.isok)
+      // }
+      var handleClick = () =>{
+        signup();
+      }
 
     
 
     var infoplus = () =>  {  
 
       if(value == 1){
-        console.log(value)
+        console.log("b",value)
         return(
+        <View style={styles3.container}>
         <Input
         containerStyle = {{marginBottom: 5, width: '70%'}}
         inputStyle={{marginLeft: 10}}
@@ -47,10 +89,52 @@ export default function HomeScreen(props) {
           color="#727679"
           />
         }
-        onChangeText={(val) => setPseudo(val)}
-    />
+        onChangeText={(val) => setAntecedent(val)}
+         />
+          <Input
+              containerStyle = {{marginBottom: 5, width: '70%'}}
+              inputStyle={{marginLeft: 10}}
+              placeholder='Numéro de téléphone'
+              leftIcon={
+                <Icon
+                name='user'
+                size={24}
+                color="#727679"
+                />
+              }
+              onChangeText={(val) => setTelephone(val)}
+          />
+          <Input
+              containerStyle = {{marginBottom: 5, width: '70%'}}
+              inputStyle={{marginLeft: 10}}
+              placeholder='numéro de sécurité sociale'
+              leftIcon={
+                <Icon
+                name='user'
+                size={24}
+                color="#727679"
+                />
+              }
+              onChangeText={(val) => setNSecu(val)}
+          />
+          <Input
+                  containerStyle = {{marginBottom: 5, width: '70%'}}
+                  inputStyle={{marginLeft: 10}}
+                  placeholder='numéro de mutuelle'
+                  leftIcon={
+                    <Icon
+                    name='user'
+                    size={24}
+                    color="#727679"
+                    />
+                  }
+                  onChangeText={(val) => setMutuel(val)}
+              />
+              
+    </View>
         )}else if(value == 2){
       return(
+        <View style={styles3.container}>
           <Input
           containerStyle = {{marginBottom: 5, width: '70%'}}
           inputStyle={{marginLeft: 10}}
@@ -62,11 +146,14 @@ export default function HomeScreen(props) {
             color="#727679"
             />
           }
-          onChangeText={(val) => setPseudo(val)}
+          onChangeText={(val) => setPlaqueImmat(val)}
       />
+     
+      </View>
           )
       }else if(value == 3){
         return(
+          <View style={styles3.container}> 
             <Input
             containerStyle = {{marginBottom: 5, width: '70%'}}
             inputStyle={{marginLeft: 10}}
@@ -78,11 +165,16 @@ export default function HomeScreen(props) {
               color="#727679"
               />
             }
-            onChangeText={(val) => setPseudo(val)}
+            onChangeText={(val) => setNumPharma(val)}
         />
+        
+              
+          </View>
             )
         }else if(value == 4){
           return(
+              
+            <View style={styles3.container}>
               <Input
               containerStyle = {{marginBottom: 5, width: '70%'}}
               inputStyle={{marginLeft: 10}}
@@ -94,8 +186,10 @@ export default function HomeScreen(props) {
                 color="#727679"
                 />
               }
-              onChangeText={(val) => setPseudo(val)}
+              onChangeText={(val) => setNumDoc(val)}
           />
+          
+            </View>
               )
           }
           return null
@@ -105,7 +199,7 @@ export default function HomeScreen(props) {
   
     
     return (
-
+<ScrollView>
     <View style={styles.container}>
       <Header
             placement="left"
@@ -131,13 +225,13 @@ export default function HomeScreen(props) {
               color="#727679"
               />
             }
-            onChangeText={(val) => setPseudo(val)}
+            onChangeText={(val) => setNom(val)}
         />
               {/* prenom */}
             <Input
             containerStyle = {{marginBottom: 5, width: '70%'}}
             inputStyle={{marginLeft: 10}}
-            placeholder='prenom'
+            placeholder='Prenom'
             leftIcon={
               <Icon
               name='user'
@@ -145,7 +239,7 @@ export default function HomeScreen(props) {
               color="#727679"
               />
             }
-            onChangeText={(val) => setPseudo(val)}
+            onChangeText={(val) => setPrenom(val)}
         />    
          {/* Email */}
          <Input
@@ -159,8 +253,62 @@ export default function HomeScreen(props) {
               color="#727679"
               />
             }
-            onChangeText={(val) => setPseudo(val)}
+            onChangeText={(val) => setEmail(val)}
         />   
+            <Input
+            containerStyle = {{marginBottom: 5, width: '70%'}}
+            inputStyle={{marginLeft: 10}}
+            placeholder='Mot de passe'
+            leftIcon={
+              <Icon
+              name='user'
+              size={24}
+              color="#727679"
+              />
+            }
+            onChangeText={(val) => setPassword(val)}
+        />
+            
+            <Input
+                  containerStyle = {{marginBottom: 5, width: '70%'}}
+                  inputStyle={{marginLeft: 10}}
+                  placeholder='Adresse'
+                  leftIcon={
+                    <Icon
+                    name='user'
+                    size={24}
+                    color="#727679"
+                    />
+                  }
+                  onChangeText={(val) => setAdress(val)}
+              />
+              <Input
+                  containerStyle = {{marginBottom: 5, width: '70%'}}
+                  inputStyle={{marginLeft: 10}}
+                  placeholder='Ville'
+                  leftIcon={
+                    <Icon
+                    name='user'
+                    size={24}
+                    color="#727679"
+                    />
+                  }
+                  onChangeText={(val) => setVille(val)}
+              />
+              <Input
+                  containerStyle = {{marginBottom: 5, width: '70%'}}
+                  inputStyle={{marginLeft: 10}}
+                  placeholder='Code postale'
+                  leftIcon={
+                    <Icon
+                    name='user'
+                    size={24}
+                    color="#727679"
+                    />
+                  }
+                  onChangeText={(val) => setCodePostal(val)}
+              />
+
         {/* Dropdown */}
         <View style={styles.container}>
         
@@ -183,6 +331,7 @@ export default function HomeScreen(props) {
           onChange={item => {
             setValue(item.value);
             setIsFocus(false);
+            setStatus(item.value)
           }}
           renderLeftIcon={() => (
             <AntDesign
@@ -201,7 +350,7 @@ export default function HomeScreen(props) {
            title="CONNECTION"
            type="solid"
            buttonStyle={{ backgroundColor: "#8AA78B" }}
-           onPress={() => {props.navigation.navigate('PatientHome')}}
+           onPress={() => {handleClick();props.navigation.navigate('PatientHome')}}
         />
          <Button
            containerStyle = {{ width: '70%'}}
@@ -214,12 +363,21 @@ export default function HomeScreen(props) {
 
         
     </View>
+  </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#F0F0F0'
+  },
+});
+const styles3 = StyleSheet.create({
+  container: {
+    width: "100%",
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#F0F0F0'
