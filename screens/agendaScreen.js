@@ -20,7 +20,15 @@ function Schedule(){
     '2021-06-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
   });
 
+      console.log(info.articles[0])
+    var test =  info.articles[0]
+    var test2 =  { b : 3}
+    var test3 = Object.assign(test,test2)
 
+  
+
+    console.log('testttttttt',test3)
+      console.log('licornenennen', test)
   const miseEnFormeDate = ((event, i) => {
     var newdate = event.date.substr(0, 10)
     console.log('console.log I', i)
@@ -28,11 +36,11 @@ function Schedule(){
     var test = items.hasOwnProperty(newdate)
     if(test){
       var aCopy = items
-      aCopy[newdate].push({name: event.descritpion +" " + i, height: 80})
+      aCopy[newdate].push({name: event.description +" " + i, height: 80})
       setItems(aCopy)
       
     }else{
-      Object.assign(items,{[newdate] : [{name:event.descritpion +" " + i, height: 80}]})
+      Object.assign(items,{[newdate] : [{name:event.description +" " + i, height: 80}]})
     }
     
   
@@ -41,7 +49,7 @@ function Schedule(){
 
   useEffect(() => {
     const findArticlesWishList = async () => {
-      const dataWishlist = await fetch('https://frozen-scrubland-67920.herokuapp.com/recepRdv')
+      const dataWishlist = await fetch('https://arcane-sierra-33789.herokuapp.com/recepRdv')
       const body = await dataWishlist.json()
       console.log(body.articles[0].date)
       console.log(body.articles.length)

@@ -29,7 +29,7 @@ export default function HomeScreen(props) {
 
   async function addRDV(){
   console.log("route add")
-  var rawresponse = await fetch('https://frozen-scrubland-67920.herokuapp.com/addrdv',{
+  var rawresponse = await fetch('https://arcane-sierra-33789.herokuapp.com//addrdv',{
     method : 'POST',
     headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
     body: `date=${date}&descritpion=${descritpion}&Photo=${photo}&patientId=${patientId}&medecinId=${medecinId}`
