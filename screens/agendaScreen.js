@@ -4,12 +4,6 @@ import {Header } from 'react-native-elements'
 import {Agenda} from 'react-native-calendars';
 import {Card, Avatar} from 'react-native-paper';
 
-
-
-
-
-
-
 const timeToString = (time) => {
 
  const date = new Date(time);
@@ -17,39 +11,53 @@ const timeToString = (time) => {
 };
 
 
-
-
 function Schedule(){
-  const [info, setInfo] = useState([])
 
-  // console.log(info.articles[0].date)
-  // console.log(info.articles[0].description)
-  console.log('test2134####################################')
-  const [items, setItems] = useState( info.map((number, i) => {number.articles.date 
-    // '2017-06-23': [{name: 'item 2 - any js object', height: 80}],
-    // '2017-06-24': [],
-    // '2017-06-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
-  }));
+  const [info, setInfo] = useState([])  
+  const [items, setItems] = useState( { 
+    '2021-06-23': [{name: 'item 2 - any js object', height: 80}],
+    '2021-06-24': [],
+    '2021-06-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
+  });
+
+
+  const miseEnFormeDate = ((event, i) => {
+    var newdate = event.date.substr(0, 10)
+    console.log('console.log I', i)
+                                                                
+    var test = items.hasOwnProperty(newdate)
+    if(test){
+      var aCopy = items
+      aCopy[newdate].push({name: event.descritpion +" " + i, height: 80})
+      setItems(aCopy)
+      
+    }else{
+      Object.assign(items,{[newdate] : [{name:event.descritpion +" " + i, height: 80}]})
+    }
+    
+  
+  })
+
 
   useEffect(() => {
     const findArticlesWishList = async () => {
-      console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
       const dataWishlist = await fetch('https://frozen-scrubland-67920.herokuapp.com/recepRdv')
-      console.log("#######################################################")
       const body = await dataWishlist.json()
+      console.log(body.articles[0].date)
+      console.log(body.articles.length)
       setInfo(body)
-      console.log('##############################test##################################')
-      // props.saveArticles(body.articles)
+      var tab = body.articles.map((event, i) => (miseEnFormeDate(event, i)))
     }
   
     findArticlesWishList()
   },[])
 
+
   const numbers = [info];
-//  console.log(numbers)
+//  ////console.log(numbers)
   // const doubled = numbers.map((number, i) => number.articles[2].Photo);
-  // console.log(doubled);
-  // console.log('mapre retour') 
+  // ////console.log(doubled);
+  // ////console.log('mapre retour') 
   
     
   
@@ -113,7 +121,7 @@ function Schedule(){
       <Agenda
         items={items}
         // loadItemsForMonth={loadItems}
-        selected={'2017-05-16'}
+        selected={'2021-05-16'}
         renderItem={renderItem}
       />
     </View>
