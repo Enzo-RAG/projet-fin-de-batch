@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
-import {Header } from 'react-native-elements'
+import {Header, Button } from 'react-native-elements'
 import {Agenda} from 'react-native-calendars';
 import {Card, Avatar} from 'react-native-paper';
 
@@ -11,7 +11,7 @@ const timeToString = (time) => {
 };
 
 
-function Schedule(){
+function Schedule(props){
 
   const [info, setInfo] = useState([])  
   const [items, setItems] = useState( { 
@@ -20,27 +20,25 @@ function Schedule(){
     '2021-06-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
   });
 
-      console.log(info.articles[0])
-    var test =  info.articles[0]
-    var test2 =  { b : 3}
-    var test3 = Object.assign(test,test2)
+      // console.log('#############################infor#########################',info.tab[0])
 
   
 
-    console.log('testttttttt',test3)
-      console.log('licornenennen', test)
+
   const miseEnFormeDate = ((event, i) => {
-    var newdate = event.date.substr(0, 10)
+    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", event)
+    var newdate = event._doc.date.substr(0, 10)
     console.log('console.log I', i)
-                                                                
+            
+                                                              
     var test = items.hasOwnProperty(newdate)
     if(test){
       var aCopy = items
-      aCopy[newdate].push({name: event.description +" " + i, height: 80})
+      aCopy[newdate].push({name: event._doc.description +" "+ event.name+" "+ i, height: 80})
       setItems(aCopy)
       
     }else{
-      Object.assign(items,{[newdate] : [{name:event.description +" " + i, height: 80}]})
+      Object.assign(items,{[newdate] : [{name:event._doc.description +" "+ event.name+" " + i, height: 80}]})
     }
     
   
@@ -51,10 +49,10 @@ function Schedule(){
     const findArticlesWishList = async () => {
       const dataWishlist = await fetch('https://arcane-sierra-33789.herokuapp.com/recepRdv')
       const body = await dataWishlist.json()
-      console.log(body.articles[0].date)
-      console.log(body.articles.length)
+      console.log('testtttttttttttttttttttttttttttttttttttttt', body.tab, body.tab)
+      // console.log(body)
       setInfo(body)
-      var tab = body.articles.map((event, i) => (miseEnFormeDate(event, i)))
+      var tab = body.tab.map((event, i) => (miseEnFormeDate(event, i)))
     }
   
     findArticlesWishList()
@@ -99,7 +97,7 @@ function Schedule(){
 
   const renderItem = (item) => {
     return (
-      <TouchableOpacity style={{marginRight: 10, marginTop: 17}}>
+      <TouchableOpacity style={{marginRight: 10, marginTop: 17}} onPress={() => {props.navigation.navigate('Forgotpass')}}>
         <Card>
           <Card.Content>
             <View
@@ -109,6 +107,7 @@ function Schedule(){
                 alignItems: 'center',
               }}>
               <Text>{item.name}</Text>
+              
               <Avatar.Text label="J" />
             </View>
           </Card.Content>
