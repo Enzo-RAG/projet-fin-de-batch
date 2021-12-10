@@ -4,16 +4,18 @@ import {StyleSheet, View } from 'react-native';
 import {Button, Input, Text, Header} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import { connect } from 'react-redux';
+
 
 // style={styles.container}
 
-export default function HomeScreen(props) {
+function HomeScreen(props) {
    
     const[signinEmail, setSigninEmail] = useState('')
     const [signinPassword, setSigninPassword]= useState('')
     const [destination, setDestination]= useState('')
     const [test, setTest]= useState(true)
-
+    const [pseudo, setPseudo] = useState('')
     const[response, setResponse]= useState('')
    
    
@@ -54,7 +56,7 @@ export default function HomeScreen(props) {
                 color="#727679"
                 />
             }
-            onChangeText={(val) => setSigninEmail(val)}
+            onChangeText={(val) => {setSigninEmail(val);setPseudo(val)}}
         />
             {/* PASSWORD */}
             <Input secureTextEntry={true}
@@ -79,7 +81,7 @@ export default function HomeScreen(props) {
             buttonStyle={{ backgroundColor: "#8AA78B" }}
             onPress={() => {
                handleClickSignin();
-              {if(response.isok == true){ console.log("test");props.navigation.navigate('Home')}else{console.log("test2");props.navigation.navigate('HomeScreens')}} ;
+              {if(response.isok == true){ console.log("test");props.onSubmitPseudo(pseudo);props.navigation.navigate('Home')}else{console.log("test2");props.navigation.navigate('HomeScreens')}} ;
             }}
         />
         {/* inscription  */}
@@ -111,3 +113,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#F0F0F0'
   },
 });
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onSubmitPseudo: function (pseudo) {
+      dispatch({ type: 'savePseudo', pseudo: pseudo })
+    }
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(HomeScreen);
