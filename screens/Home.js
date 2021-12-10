@@ -24,6 +24,7 @@ export default function HomeScreen(props) {
       })
        var user = await rawresponse.json()
         console.log(user)
+        setPseudo(user)
           }
       findByName()
     },[])

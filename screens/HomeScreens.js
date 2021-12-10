@@ -28,8 +28,9 @@ function HomeScreen(props) {
     
     var response = await rawsignin.json();
     setResponse(response)
-    console.log('testdfsdfdsfdsfs$$$$$$df',response.isok)
-         
+    
+    
+    console.log('testdfsdfdsfdsfs$$$$$$df',response) 
    }
    
     return (
@@ -56,7 +57,7 @@ function HomeScreen(props) {
                 color="#727679"
                 />
             }
-            onChangeText={(val) => {setSigninEmail(val);setPseudo(val)}}
+            onChangeText={(val) => {setSigninEmail(val);}}
         />
             {/* PASSWORD */}
             <Input secureTextEntry={true}

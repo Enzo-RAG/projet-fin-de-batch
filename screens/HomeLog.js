@@ -49,6 +49,7 @@ function HomeScreen(props) {
         const [numDoc, setNumDoc]= useState('')
         const [antecedent, setAntecedent]= useState('')
 
+
         console.log(prenom,nom,password,email,)
      
       var handleClick = async () =>{
@@ -61,6 +62,7 @@ function HomeScreen(props) {
 
            var response = await rawresponse.json();
     setResponse(response)
+    setPseudo(response)
     console.log('testdfsdfdsfdsfs$$$$$$df',response.isok)
          
         
@@ -348,7 +350,7 @@ console.log("aaaaa",isAvailableAleatoire())
               color="#727679"
               />
             }
-            onChangeText={(val) => {setEmail(val);setPseudo(val)}}
+            onChangeText={(val) => {setEmail(val)}}
         />   
             <Input  secureTextEntry={true}
             containerStyle = {{marginBottom: 5, width: '70%'}}
