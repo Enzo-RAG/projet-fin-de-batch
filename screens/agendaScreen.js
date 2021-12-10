@@ -4,6 +4,8 @@ import {Header, Button } from 'react-native-elements'
 import {Agenda} from 'react-native-calendars';
 import {Card, Avatar} from 'react-native-paper';
 
+import {connect} from 'react-redux';
+
 const timeToString = (time) => {
 
  const date = new Date(time);
@@ -13,7 +15,8 @@ const timeToString = (time) => {
 
 function Schedule(props){
 
-  const [info, setInfo] = useState([])  
+  const [info, setInfo] = useState([])
+  const [email, setEmail] = useState('')  
   const [items, setItems] = useState( { 
     '2021-06-23': [{name: 'item 2 - any js object', height: 80}],
     '2021-06-24': [],
@@ -44,19 +47,29 @@ function Schedule(props){
   
   })
 
+    console.log('chercheemailllllllllll', email)
 
   useEffect(() => {
+    setEmail(props.pseudo)
+    console.log('suis la')
+
     const findArticlesWishList = async () => {
-      const dataWishlist = await fetch('https://arcane-sierra-33789.herokuapp.com/recepRdv')
+      const dataWishlist = await fetch('https://arcane-sierra-33789.herokuapp.com/recepRdv', {
+        method: 'POST',
+        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        body: `email=${email}`
+        
+      })
+      console.log("justeapreslefetchdedededededededededeede", dataWishlist )
       const body = await dataWishlist.json()
-      console.log('testtttttttttttttttttttttttttttttttttttttt', body.tab, body.tab)
+      console.log('testtttttttttttttttttttttttttttttttttttttt', body)
       // console.log(body)
       setInfo(body)
       var tab = body.tab.map((event, i) => (miseEnFormeDate(event, i)))
     }
   
     findArticlesWishList()
-  },[])
+  },[email])
 
 
   const numbers = [info];
@@ -135,4 +148,13 @@ function Schedule(props){
   );
 };
 
-export default Schedule;
+
+
+function mapStateToProps(state) {
+  return { pseudo : state.pseudo }
+}
+
+export default connect(
+  mapStateToProps, 
+  null
+)(Schedule);

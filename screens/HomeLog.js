@@ -7,6 +7,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import  {Dropdown}  from 'react-native-element-dropdown';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { ScrollView } from 'react-native-gesture-handler';
+
+import { connect } from 'react-redux';
+
 // Dropdown
 const data = [
   { label: 'patient', value: 1 },
@@ -17,7 +20,7 @@ const data = [
 
 ];
 
-export default function HomeScreen(props) {
+function HomeScreen(props) {
     const [pseudo, setPseudo] = useState('');
     // Dropdown
     const [value, setValue] = useState(null);
@@ -344,7 +347,7 @@ console.log("aaaaa",isAvailableAleatoire())
               color="#727679"
               />
             }
-            onChangeText={(val) => setEmail(val)}
+            onChangeText={(val) => {setEmail(val);setPseudo(val)}}
         />   
             <Input  secureTextEntry={true}
             containerStyle = {{marginBottom: 5, width: '70%'}}
@@ -441,7 +444,7 @@ console.log("aaaaa",isAvailableAleatoire())
            title="CONNECTION"
            type="solid"
            buttonStyle={{ backgroundColor: "#8AA78B" }}
-           onPress={() => {handleClick();if(response.isok == true){ console.log("test"),props.navigation.navigate('Home')}else{ console.log("test2"),props.navigation.navigate('HomeLog')}}}
+           onPress={() => {handleClick();if(response.isok == true){ console.log("test"),props.onSubmitPseudo(pseudo),props.navigation.navigate('Home')}else{ console.log("test2"),props.navigation.navigate('HomeLog')}}}
         />
          <Button
            containerStyle = {{ width: '70%'}}
@@ -522,3 +525,15 @@ const styles2 = StyleSheet.create({
 
 
 
+function mapDispatchToProps(dispatch) {
+  return {
+    onSubmitPseudo: function (pseudo) {
+      dispatch({ type: 'savePseudo', pseudo: pseudo })
+    }
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(HomeScreen);

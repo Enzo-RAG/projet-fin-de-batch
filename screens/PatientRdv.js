@@ -11,12 +11,14 @@ import { ScrollView } from 'react-native-gesture-handler';
 import  {Dropdown}  from 'react-native-element-dropdown';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
+import {connect} from 'react-redux';
 
-export default function HomeScreen(props) {
+
+function HomeScreen(props) {
     const [pseudo, setPseudo] = useState('');
     const [rdv, setRdv] = useState(false)
     const [date, setDate] = useState("")
-    const [patientId , setPatienId] = useState("patientemail1") 
+    const [patientId , setPatienId] = useState("") 
     const [medecinId, setMedecinId] = useState("")
     const [photo, setPhoto] = useState("")
     const [description, setDesciption] = useState("")
@@ -36,7 +38,7 @@ export default function HomeScreen(props) {
        const [value, setValue] = useState(null);
        const [isFocus, setIsFocus] = useState(false);
        const [status, setStatus]= useState("")
-       console.log("verifinfo retrou*************************************************************************", status)
+       
 
        useEffect(() => {
         const findArticlesWishList = async () => {
@@ -45,7 +47,7 @@ export default function HomeScreen(props) {
           
           for(var i=0 ; i < body.docteur.length ; i++){
               const test =  body.docteur[i]
-              const test2 = test
+              
               const test3 = {label : test.nom} 
               const test5 = { value : test.email };
               const test6 = Object.assign(test3, test5)
@@ -57,14 +59,20 @@ export default function HomeScreen(props) {
       },[isFocus])
 
 
+          console.log("******************************************************")
+          console.log(date)
+          console.log(description)
+          console.log(photo)
+          console.log(patientId)
+          console.log(medecinId)
 
 
   
   
 
   async function addRDV(){
-  console.log("route add")
-  var rawresponse = await fetch('https://arcane-sierra-33789.herokuapp.com/addrdv',{
+  
+    await fetch('https://arcane-sierra-33789.herokuapp.com/addrdv',{
     method : 'POST',
     headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
     body: `date=${date}&description=${description}&Photo=${photo}&patientId=${patientId}&medecinId=${medecinId}`
@@ -156,7 +164,7 @@ export default function HomeScreen(props) {
             setIsFocus(false);
             setMedecinId(item.value)
             setNamDoc(item.label)
-            console.log("**********************************************************************************",data.label)
+            
           }}
           renderLeftIcon={() => (
             <AntDesign
@@ -190,7 +198,7 @@ export default function HomeScreen(props) {
             title="valide prise RDV"
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-            onPress={() => {props.navigation.navigate('BottomNavigator', { screen: 'GalleryScreen' }), addRDV()}}
+            onPress={() => {props.navigation.navigate('BottomNavigator', { screen: 'GalleryScreen' }),setPatienId(props.pseudo), addRDV()}}
         />
         
         {/* MP oublier */}
@@ -258,3 +266,12 @@ const styles = StyleSheet.create({
       fontSize: 16,
     },
   });
+
+  function mapStateToProps(state) {
+    return { pseudo : state.pseudo }
+  }
+  
+  export default connect(
+    mapStateToProps, 
+    null
+  )(HomeScreen);
