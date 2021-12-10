@@ -190,12 +190,13 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="HomeScreens" component={HomeScreen} />
           <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
           <Stack.Screen name="HomeLog" component={HomLog} />
           <Stack.Screen name="Forgotpass" component={ForgotPass} />
           <Stack.Screen name="PatientRdv" component={PatientRdv} />
           <Stack.Screen name="agenda" component={agenda} />
+          <Stack.Screen name="Home" component={Home} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

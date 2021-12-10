@@ -1,15 +1,35 @@
 
 import React, {useState} from 'react';
-import { StyleSheet, View } from 'react-native';
-
+import {StyleSheet, View } from 'react-native';
 import {Button, Input, Text, Header} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 // style={styles.container}
 
 export default function HomeScreen(props) {
-    const [pseudo, setPseudo] = useState('');
+   
+    const[signinEmail, setSigninEmail] = useState('')
+    const [signinPassword, setSigninPassword]= useState('')
+    const [destination, setDestination]= useState('')
+    const [test, setTest]= useState(true)
+
+    const[response, setResponse]= useState('')
+   
+   
+   var handleClickSignin = async () =>{
+    var rawsignin = await fetch('https://helpills.herokuapp.com/connection', {
+      method: 'POST',
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      body: `email=${signinEmail}&password=${signinPassword}`
+     })
     
+    var response = await rawsignin.json();
+    setResponse(response)
+    console.log('testdfsdfdsfdsfs$$$$$$df',response.isok)
+         
+   }
+   
     return (
     
     <View style={styles.container}
@@ -34,10 +54,10 @@ export default function HomeScreen(props) {
                 color="#727679"
                 />
             }
-            onChangeText={(val) => setEmail(val)}
+            onChangeText={(val) => setSigninEmail(val)}
         />
             {/* PASSWORD */}
-            <Input
+            <Input secureTextEntry={true}
             containerStyle = {{marginBottom: 25, width: '70%'}}
             inputStyle={{marginLeft: 10}}
             placeholder='Password'
@@ -48,7 +68,7 @@ export default function HomeScreen(props) {
                 color="#727679"
                 />
             }
-            onChangeText={(val) => setPassword(val)}
+            onChangeText={(val) => setSigninPassword(val)}
         />
         {/* CONNECTION */}
         <Button
@@ -58,7 +78,8 @@ export default function HomeScreen(props) {
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" }}
             onPress={() => {
-              props.navigation.navigate('BottomNavigator', { screen: 'GalleryScreen' });
+               handleClickSignin();
+              {if(response.isok == true){ console.log("test");props.navigation.navigate('Home')}else{console.log("test2");props.navigation.navigate('HomeScreens')}} ;
             }}
         />
         {/* inscription  */}
