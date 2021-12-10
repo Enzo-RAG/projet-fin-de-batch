@@ -1,14 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
-import {Header } from 'react-native-elements'
+import {Header, Button } from 'react-native-elements'
 import {Agenda} from 'react-native-calendars';
 import {Card, Avatar} from 'react-native-paper';
-
-
-
-
-
-
 
 const timeToString = (time) => {
 
@@ -17,39 +11,59 @@ const timeToString = (time) => {
 };
 
 
+function Schedule(props){
+
+  const [info, setInfo] = useState([])  
+  const [items, setItems] = useState( { 
+    '2021-06-23': [{name: 'item 2 - any js object', height: 80}],
+    '2021-06-24': [],
+    '2021-06-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
+  });
+
+      // console.log('#############################infor#########################',info.tab[0])
+
+  
 
 
-function Schedule(){
-  const [info, setInfo] = useState([])
+  const miseEnFormeDate = ((event, i) => {
+    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", event)
+    var newdate = event._doc.date.substr(0, 10)
+    console.log('console.log I', i)
+            
+                                                              
+    var test = items.hasOwnProperty(newdate)
+    if(test){
+      var aCopy = items
+      aCopy[newdate].push({name: event._doc.description +" "+ event.name+" "+ i, height: 80})
+      setItems(aCopy)
+      
+    }else{
+      Object.assign(items,{[newdate] : [{name:event._doc.description +" "+ event.name+" " + i, height: 80}]})
+    }
+    
+  
+  })
 
-  // console.log(info.articles[0].date)
-  // console.log(info.articles[0].description)
-  console.log('test2134####################################')
-  const [items, setItems] = useState( info.map((number, i) => {number.articles.date 
-    // '2017-06-23': [{name: 'item 2 - any js object', height: 80}],
-    // '2017-06-24': [],
-    // '2017-06-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
-  }));
 
   useEffect(() => {
     const findArticlesWishList = async () => {
-      console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-      const dataWishlist = await fetch('https://frozen-scrubland-67920.herokuapp.com/recepRdv')
-      console.log("#######################################################")
+      const dataWishlist = await fetch('https://arcane-sierra-33789.herokuapp.com/recepRdv')
       const body = await dataWishlist.json()
+      console.log('testtttttttttttttttttttttttttttttttttttttt', body.tab, body.tab)
+      // console.log(body)
       setInfo(body)
-      console.log('##############################test##################################')
-      // props.saveArticles(body.articles)
+      var tab = body.tab.map((event, i) => (miseEnFormeDate(event, i)))
     }
   
     findArticlesWishList()
   },[])
 
+
   const numbers = [info];
-//  console.log(numbers)
+//  ////console.log(numbers)
   // const doubled = numbers.map((number, i) => number.articles[2].Photo);
-  // console.log(doubled);
-  // console.log('mapre retour') 
+  // ////console.log(doubled);
+  // ////console.log('mapre retour') 
   
     
   
@@ -83,7 +97,7 @@ function Schedule(){
 
   const renderItem = (item) => {
     return (
-      <TouchableOpacity style={{marginRight: 10, marginTop: 17}}>
+      <TouchableOpacity style={{marginRight: 10, marginTop: 17}} onPress={() => {props.navigation.navigate('Forgotpass')}}>
         <Card>
           <Card.Content>
             <View
@@ -93,6 +107,7 @@ function Schedule(){
                 alignItems: 'center',
               }}>
               <Text>{item.name}</Text>
+              
               <Avatar.Text label="J" />
             </View>
           </Card.Content>
@@ -113,7 +128,7 @@ function Schedule(){
       <Agenda
         items={items}
         // loadItemsForMonth={loadItems}
-        selected={'2017-05-16'}
+        selected={'2021-05-16'}
         renderItem={renderItem}
       />
     </View>

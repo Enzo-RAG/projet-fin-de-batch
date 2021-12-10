@@ -1,38 +1,73 @@
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, ActivityIndicator  } from 'react-native';
 
 import {Button, Input, Header, Image, Text, Card } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {LocaleConfig} from 'react-native-calendars';
 import {Calendar} from 'react-native-calendars';
+import { ScrollView } from 'react-native-gesture-handler';
+
+import  {Dropdown}  from 'react-native-element-dropdown';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 
 export default function HomeScreen(props) {
     const [pseudo, setPseudo] = useState('');
     const [rdv, setRdv] = useState(false)
     const [date, setDate] = useState("")
-    const [patientId , setPatienId] = useState("maxime2@gmail.com") 
-    const [medecinId, setMedecinId] = useState("maxime@gmail.com")
+    const [patientId , setPatienId] = useState("patientemail1") 
+    const [medecinId, setMedecinId] = useState("")
     const [photo, setPhoto] = useState("")
-    const [descritpion, setDesciption] = useState("")
+    const [description, setDesciption] = useState("")
     const [validite , setValidite] = useState ("")
     const [prescriptionnumber, setPrescriptionnumber] = useState ("")
     const [prescriptionprise, setPrescriptionprise] = useState ("")
     const [prescriptionduree, setPrescriptionduree] = useState ("")
     const [prescriptionautre, setPrescriptionautre] = useState ("")
-    
+    const [info, setInfo] = useState ([])
+    const [namdoc ,setNamDoc] = useState('.....')
+
+          
+          // Dropdown
+      const data = [];
+
+      // Dropdown
+       const [value, setValue] = useState(null);
+       const [isFocus, setIsFocus] = useState(false);
+       const [status, setStatus]= useState("")
+       console.log("verifinfo retrou*************************************************************************", status)
+
+       useEffect(() => {
+        const findArticlesWishList = async () => {
+          const dataWishlist = await fetch('https://arcane-sierra-33789.herokuapp.com/searchdoc')
+          const body = await dataWishlist.json()
+          
+          for(var i=0 ; i < body.docteur.length ; i++){
+              const test =  body.docteur[i]
+              const test2 = test
+              const test3 = {label : test.nom} 
+              const test5 = { value : test.email };
+              const test6 = Object.assign(test3, test5)
+              data.push(test6)
+            }
+              }
+      
+        findArticlesWishList()
+      },[isFocus])
+
+
+
 
   
-  console.log(date)
-  console.log("test##############################################################")
+  
 
   async function addRDV(){
   console.log("route add")
-  var rawresponse = await fetch('https://frozen-scrubland-67920.herokuapp.com/addrdv',{
+  var rawresponse = await fetch('https://arcane-sierra-33789.herokuapp.com/addrdv',{
     method : 'POST',
     headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
-    body: `date=${date}&descritpion=${descritpion}&Photo=${photo}&patientId=${patientId}&medecinId=${medecinId}`
+    body: `date=${date}&description=${description}&Photo=${photo}&patientId=${patientId}&medecinId=${medecinId}`
   
 
   })}
@@ -71,7 +106,7 @@ export default function HomeScreen(props) {
 
         </View>
         
-
+        <ScrollView>
         <Calendar
 
    
@@ -97,6 +132,43 @@ export default function HomeScreen(props) {
         }
         onChangeText={(date)=> setDate(date)}
     />
+
+<View style={styles.container}>
+        
+        <Dropdown
+          style={[styles2.dropdown, isFocus && { borderColor: 'blue' }]}
+          placeholderStyle={styles2.placeholderStyle}
+          selectedTextStyle={styles2.selectedTextStyle}
+          inputSearchStyle={styles2.inputSearchStyle}
+          iconStyle={styles2.iconStyle}
+          data={data}
+          search
+          maxHeight={300}
+          labelField="label"
+          valueField="value"
+          placeholder={!isFocus ? `votre medecin ${namdoc}` : `votre medecin ${namdoc}` }
+          searchPlaceholder="Search..."
+          value={value}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+          onChange={item => {
+            setValue(item.value);
+            setIsFocus(false);
+            setMedecinId(item.value)
+            setNamDoc(item.label)
+            console.log("**********************************************************************************",data.label)
+          }}
+          renderLeftIcon={() => (
+            <AntDesign
+              style={styles2.icon}
+              color={isFocus ? 'blue' : 'black'}
+              name="Safety"
+              size={20}
+            />
+          )}
+        />
+
+      </View>
         <Input
         containerStyle = {{marginBottom: 5, width: '70%'}}
         inputStyle={{marginLeft: 10}}
@@ -118,12 +190,17 @@ export default function HomeScreen(props) {
             title="valide prise RDV"
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-            onPress={() => {props.navigation.navigate('Forgotpass'), addRDV()}}
+            onPress={() => {props.navigation.navigate('BottomNavigator', { screen: 'GalleryScreen' }), addRDV()}}
         />
-            
+        
         {/* MP oublier */}
        
-       
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+        </ScrollView> 
     </View>
   );
 }
@@ -134,5 +211,50 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: '#F0F0F0'
+    },
+  });
+
+  const styles2 = StyleSheet.create({
+    container: {
+      width: 50 ,
+      backgroundColor: 'white',
+      padding: 16,
+    },
+    dropdown: {
+      width: 290,
+      height: 50,
+      borderColor: 'gray',
+      borderWidth: 0.5,
+      borderRadius: 8,
+      paddingHorizontal: 8,
+    },
+    icon: {
+      marginRight: 5,
+    },
+    label: {
+      
+      position: 'absolute',
+      backgroundColor: 'white',
+      left: 22,
+      top: 8,
+      zIndex: 999,
+      paddingHorizontal: 8,
+      fontSize: 14,
+    },
+    placeholderStyle: {
+      
+      fontSize: 16,
+    },
+    selectedTextStyle: {
+      
+      fontSize: 16,
+    },
+    iconStyle: {
+      
+      height: 20,
+    },
+    inputSearchStyle: {
+      height: 40,
+      fontSize: 16,
     },
   });

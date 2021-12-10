@@ -12,44 +12,44 @@ export default function HomeScreen(props) {
     const [pseudo, setPseudo] = useState('');
     const [rdv, setRdv] = useState(false)
 
-    const book = () => {
-      if(rdv == false){
-        return(
-          <Button 
+    // const book = () => {
+    //   if(rdv == false){
+    //     return(
+    //       <Button 
           
-          containerStyle = {{marginBottom: 25, width: '70%', marginTop: 25}}
-            title="Book ONE"
-            type="solid"
-            buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-            onPress={() => {props.navigation.navigate('PatientRdv')}}
-        />)
-      }}
+    //       containerStyle = {{marginBottom: 25, width: '70%', marginTop: 25}}
+    //         title="Book ONE"
+    //         type="solid"
+    //         buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
+    //         onPress={() => {props.navigation.navigate('PatientRdv')}}
+    //     />)
+    //   }}
 
-    const rdv1 = () => {
-      if(rdv == true){
-        return(
-        <Card containerStyle={{width: '70%'}}>
-        <Card.Title>nom doc</Card.Title>
-        <Card.Divider/>
-        <Card.Image source={{ uri: 'https://picsum.photos/200' }}></Card.Image>
-          <Text style={{marginBottom: 10}}>
-            date heure
-          </Text>
+    // const rdv1 = () => {
+    //   if(rdv == true){
+    //     return(
+    //     <Card containerStyle={{width: '70%'}}>
+    //     <Card.Title>nom doc</Card.Title>
+    //     <Card.Divider/>
+    //     <Card.Image source={{ uri: 'https://picsum.photos/200' }}></Card.Image>
+    //       <Text style={{marginBottom: 10}}>
+    //         date heure
+    //       </Text>
          
-          <Button
-            icon={<Icon name='code' color='#ffffff' />}
-            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-            title='Modify' />
-            <Button
-            icon={<Icon name='code' color='#ffffff' />}
-            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-            title='cancel' />
+    //       <Button
+    //         icon={<Icon name='code' color='#ffffff' />}
+    //         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+    //         title='Modify' />
+    //         <Button
+    //         icon={<Icon name='code' color='#ffffff' />}
+    //         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+    //         title='cancel' />
           
-      </Card>)
-      }else{
-        return(<Text h3 style={{color:"#F0F0F0"}}> No appointment yet</Text>)
-      }
-    }
+    //   </Card>)
+    //   }else{
+    //     return(<Text h3 style={{color:"#F0F0F0"}}> No appointment yet</Text>)
+    //   }
+    // }
 
 
     return (
@@ -75,20 +75,28 @@ export default function HomeScreen(props) {
         <View style={styles.container} backgroundColor="#727679">
         <Text h3 style={{color:"#F0F0F0"}}> My Appointment Book patient</Text>
 
-        {rdv1()}
-        {book()}
+        <Button
+           containerStyle = {{ width: '70%'}}
+           title="My rdv"
+           type="solid"
+           buttonStyle={{ backgroundColor: "#8AA78B" }}
+           onPress={() => {props.navigation.navigate('agenda')}}
+        />
+        
+        <Button 
+          
+          containerStyle = {{marginBottom: 25, width: '70%', marginTop: 25}}
+            title="Book ONE"
+            type="solid"
+            buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
+            onPress={() => {props.navigation.navigate('PatientRdv')}}
+        />
         
         </View>
       
        
 
-        <Button 
-          containerStyle = {{width: '70%'}}
-            title="TEST : afficher RDV "
-            type="solid"
-            buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-            onPress={() => {setRdv(true)}}
-        /> 
+        
         
     </View>
   );
