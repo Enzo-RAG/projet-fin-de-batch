@@ -6,12 +6,27 @@ import { StyleSheet, View, ActivityIndicator  } from 'react-native';
 import {Button, Input, Header, Image, Text, Card } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-
-
 export default function HomeScreen(props) {
     const [pseudo, setPseudo] = useState('');
-    const [rdv, setRdv] = useState(false)
+    const [rdv, setRdv] = useState(false);
 
+
+
+
+
+
+    useEffect(() => {
+      const findByName = async () => {
+        var rawresponse = await fetch('https://helpills.herokuapp.com/searchByMail', {
+          method: 'POST',
+          headers: {'Content-Type':'application/x-www-form-urlencoded'},
+          body: `email=${email}`
+      })
+       var user = await rawresponse.json()
+        console.log(user)
+          }
+      findByName()
+    },[])
     // const book = () => {
     //   if(rdv == false){
     //     return(
