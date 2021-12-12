@@ -59,13 +59,7 @@ function HomeScreen(props) {
       },[isFocus])
 
 
-          console.log("******************************************************")
-          console.log(date)
-          console.log(description)
-          console.log(photo)
-          console.log(patientId)
-          console.log(medecinId)
-
+         console.log('verifretourdinfo', props.pseudo.users.admin)
 
   
   
@@ -198,7 +192,7 @@ function HomeScreen(props) {
             title="valide prise RDV"
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-            onPress={() => {props.navigation.navigate('BottomNavigator', { screen: 'GalleryScreen' }),setPatienId(props.pseudo), addRDV()}}
+            onPress={() => {setPatienId(props.pseudo.users.email), addRDV(), props.navigation.navigate('BottomNavigator', { screen: 'GalleryScreen' })}}
         />
         
         {/* MP oublier */}

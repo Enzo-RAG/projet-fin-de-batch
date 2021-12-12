@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, View } from 'react-native';
 import {Button, Input, Text, Header} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -32,6 +32,20 @@ function HomeScreen(props) {
     
     console.log('testdfsdfdsfdsfs$$$$$$df',response) 
    }
+
+   useEffect(() => {
+    const findByName = async () => {
+      var rawresponse = await fetch('https://arcane-sierra-33789.herokuapp.com/searchuser', {
+        method: 'POST',
+        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        body: `email=${signinEmail}`
+    })
+     var user = await rawresponse.json()
+      
+      setPseudo(user)
+        }
+    findByName()
+  },[response])
    
     return (
     
@@ -57,7 +71,7 @@ function HomeScreen(props) {
                 color="#727679"
                 />
             }
-            onChangeText={(val) => {setSigninEmail(val);}}
+            onChangeText={(val) => {setSigninEmail(val), setPseudo(val);}}
         />
             {/* PASSWORD */}
             <Input secureTextEntry={true}

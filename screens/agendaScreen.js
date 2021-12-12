@@ -50,7 +50,7 @@ function Schedule(props){
     console.log('chercheemailllllllllll', email)
 
   useEffect(() => {
-    setEmail(props.pseudo)
+    setEmail(props.pseudo.users.email)
     console.log('suis la')
 
     const findArticlesWishList = async () => {
@@ -110,7 +110,7 @@ function Schedule(props){
 
   const renderItem = (item) => {
     return (
-      <TouchableOpacity style={{marginRight: 10, marginTop: 17}} onPress={() => {props.navigation.navigate('Forgotpass')}}>
+      <TouchableOpacity style={{marginRight: 10, marginTop: 17}} onPress={() => {props.navigation.navigate('BottomNavigator', { screen: 'Ordonnances' })}}>
         <Card>
           <Card.Content>
             <View

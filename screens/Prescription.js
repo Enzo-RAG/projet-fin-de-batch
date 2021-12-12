@@ -1,23 +1,57 @@
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, ActivityIndicator  } from 'react-native';
 
 import {Button, Input, Header, Image, Text, Card } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import {connect} from 'react-redux';
 
 
-export default function HomeScreen(props) {
+
+ function HomeScreen(props) {
     const [pseudo, setPseudo] = useState('');
     const [rdv, setRdv] = useState(false)
+    const [email, setEmail] = useState('')
+    const [info, setInfo] = useState([])
+
+
+    useEffect(() => {
+      setEmail(props.pseudo.users._id)
+      console.log('suis la', props.pseudo)
+  
+      const findArticlesWishList = async () => {
+        const dataWishlist = await fetch('https://arcane-sierra-33789.herokuapp.com/recepprescription', {
+          method: 'POST',
+          headers: {'Content-Type':'application/x-www-form-urlencoded'},
+          body: `id=${email}`
+          
+        })
+        console.log("justeapreslefetchdedededededededededeede", dataWishlist )
+        const body = await dataWishlist.json()
+        console.log('testtttttttttttttttttttttttttttttttttttttt', body)
+        // console.log(body)
+        setInfo(body)
+     
+      }
+    
+      findArticlesWishList()
+    },[email])
+
+
+console.log('testmap info', info.prescription[0].date)
+
+
 
 
    
     const Mypresciption = () => {
-      if(rdv == true){
+
+        if(rdv == true){
         return(
         <Card containerStyle={{width: '70%'}}>
-        <Card.Title>prescriprion 1</Card.Title>
+          
+        <Card.Title>{info.prescription.date}</Card.Title>
         <Card.Divider/>
           <Text style={{marginBottom: 10}}>
             medoc 1
@@ -98,3 +132,13 @@ const styles = StyleSheet.create({
       backgroundColor: '#F0F0F0'
     },
   });
+
+
+  function mapStateToProps(state) {
+    return { pseudo : state.pseudo }
+  }
+  
+  export default connect(
+    mapStateToProps, 
+    null
+  )(HomeScreen);
