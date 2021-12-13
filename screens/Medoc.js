@@ -11,10 +11,12 @@ const Medoc = (props) => {
     const allaitement ="https://res.cloudinary.com/dz0ooeuqq/image/upload/v1638831902/allaitement_pmhleh.jpg"
     const enceinte ="https://res.cloudinary.com/dz0ooeuqq/image/upload/v1638831901/posters-femme-enceinte-symbole-vecteur-stylise.jpg_ogehcp.jpg"
     const allergies = "https://res.cloudinary.com/dz0ooeuqq/image/upload/v1638831902/allergies_xsfk2a.jpg"
+
     useEffect(() => {
         console.log("***************************************************************************")
+
         const findMedoc = async() => {
-          var rawResponse = await fetch('http://192.168.217.107:3001/medocs/getDrugsByActive', {
+          var rawResponse = await fetch('https://helpillsprojectlacapsule.herokuapp.com/medocs/getDrugsByActive', {
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
             body: "name=paracetamol"
@@ -32,8 +34,8 @@ const Medoc = (props) => {
         findMedoc()    
       },[])
 
-    const [medocTab, setMedocTab] = useState([
-        ])
+    const [medocTab, setMedocTab] = useState([])
+
     return (
         <View style={{backgroundColor:"#F0F0F0"}}>
             <StatusBar hidden={false} StatusBarStyle="light-content"/>

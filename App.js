@@ -38,7 +38,7 @@ import basket from './reducers/basket.reducer';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-var users =3
+var users =1
 const store = createStore(combineReducers({pseudo,basket}));
 
 const BottomNavigator = () => {
