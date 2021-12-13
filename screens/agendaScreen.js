@@ -1,14 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
-import {Header } from 'react-native-elements'
+import {Header, Button } from 'react-native-elements'
 import {Agenda} from 'react-native-calendars';
 import {Card, Avatar} from 'react-native-paper';
 
-
-
-
-
-
+import {connect} from 'react-redux';
 
 const timeToString = (time) => {
 
@@ -17,34 +13,76 @@ const timeToString = (time) => {
 };
 
 
-
-
 function Schedule(props){
-  const [info, setInfo] = useState()
 
-  console.log(info.articles)
-  console.log('test2134####################################')
-  const [items, setItems] = useState({
-    
-    '2017-06-22': [{name: 'item 1 - any js object'}],
-    '2017-06-23': [{name: 'item 2 - any js object', height: 80}],
-    '2017-06-24': [],
-    '2017-06-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
+  const [info, setInfo] = useState([])
+  const [email, setEmail] = useState('')  
+  const [items, setItems] = useState( { 
+    '2021-06-23': [{name: 'item 2 - any js object', height: 80}],
+    '2021-06-24': [],
+    '2021-06-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
   });
 
+      // console.log('#############################infor#########################',info.tab[0])
+
+  
+
+
+  const miseEnFormeDate = ((event, i) => {
+    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", event)
+    var newdate = event._doc.date.substr(0, 10)
+    console.log('console.log I', i)
+            
+                                                              
+    var test = items.hasOwnProperty(newdate)
+    if(test){
+      var aCopy = items
+      aCopy[newdate].push({name: event._doc.description +" "+ event.name+" "+ i, height: 80})
+      setItems(aCopy)
+      
+    }else{
+      Object.assign(items,{[newdate] : [{name:event._doc.description +" "+ event.name+" " + i, height: 80}]})
+    }
+    
+  
+  })
+
+    console.log('chercheemailllllllllll', email)
+
   useEffect(() => {
+    setEmail(props.pseudo.users.email)
+    console.log('suis la')
+
     const findArticlesWishList = async () => {
-      console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-      const dataWishlist = await fetch('https://frozen-scrubland-67920.herokuapp.com/recepRdv')
-      console.log("#######################################################")
+      const dataWishlist = await fetch('https://arcane-sierra-33789.herokuapp.com/recepRdv', {
+        method: 'POST',
+        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        body: `email=${email}`
+        
+      })
+      console.log("justeapreslefetchdedededededededededeede", dataWishlist )
       const body = await dataWishlist.json()
-      console.log("$$$",setInfo(body))
-      console.log('##############################test##################################')
-      // props.saveArticles(body.articles)
+      console.log('testtttttttttttttttttttttttttttttttttttttt', body)
+      // console.log(body)
+      setInfo(body)
+      var tab = body.tab.map((event, i) => (miseEnFormeDate(event, i)))
     }
   
     findArticlesWishList()
-  },[])
+  },[email])
+
+
+  const numbers = [info];
+//  ////console.log(numbers)
+  // const doubled = numbers.map((number, i) => number.articles[2].Photo);
+  // ////console.log(doubled);
+  // ////console.log('mapre retour') 
+  
+    
+  
+
+
+
 
   // const loadItems = (day) => {
   //   setTimeout(() => {
@@ -72,7 +110,7 @@ function Schedule(props){
 
   const renderItem = (item) => {
     return (
-      <TouchableOpacity style={{marginRight: 10, marginTop: 17}}>
+      <TouchableOpacity style={{marginRight: 10, marginTop: 17}} onPress={() => {props.navigation.navigate('BottomNavigator', { screen: 'Ordonnances' })}}>
         <Card>
           <Card.Content>
             <View
@@ -82,6 +120,7 @@ function Schedule(props){
                 alignItems: 'center',
               }}>
               <Text>{item.name}</Text>
+              
               <Avatar.Text label="J" />
             </View>
           </Card.Content>
@@ -102,11 +141,20 @@ function Schedule(props){
       <Agenda
         items={items}
         // loadItemsForMonth={loadItems}
-        selected={'2017-05-16'}
+        selected={'2021-05-16'}
         renderItem={renderItem}
       />
     </View>
   );
 };
 
-export default Schedule;
+
+
+function mapStateToProps(state) {
+  return { pseudo : state.pseudo }
+}
+
+export default connect(
+  mapStateToProps, 
+  null
+)(Schedule);

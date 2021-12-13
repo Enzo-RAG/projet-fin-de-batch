@@ -1,15 +1,52 @@
 
-import React, {useState} from 'react';
-import { StyleSheet, View } from 'react-native';
-
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, View } from 'react-native';
 import {Button, Input, Text, Header} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import { connect } from 'react-redux';
+
+
 // style={styles.container}
 
-export default function HomeScreen(props) {
-    const [pseudo, setPseudo] = useState('');
+function HomeScreen(props) {
+   
+    const[signinEmail, setSigninEmail] = useState('')
+    const [signinPassword, setSigninPassword]= useState('')
+    const [destination, setDestination]= useState('')
+    const [test, setTest]= useState(true)
+    const [pseudo, setPseudo] = useState('')
+    const[response, setResponse]= useState('')
+   
+   
+   var handleClickSignin = async () =>{
+    var rawsignin = await fetch('https://helpills.herokuapp.com/connection', {
+      method: 'POST',
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      body: `email=${signinEmail}&password=${signinPassword}`
+     })
     
+    var response = await rawsignin.json();
+    setResponse(response)
+    
+    
+    console.log('testdfsdfdsfdsfs$$$$$$df',response) 
+   }
+
+   useEffect(() => {
+    const findByName = async () => {
+      var rawresponse = await fetch('https://arcane-sierra-33789.herokuapp.com/searchuser', {
+        method: 'POST',
+        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        body: `email=${signinEmail}`
+    })
+     var user = await rawresponse.json()
+      
+      setPseudo(user)
+        }
+    findByName()
+  },[response])
+   
     return (
     
     <View style={styles.container}
@@ -34,10 +71,10 @@ export default function HomeScreen(props) {
                 color="#727679"
                 />
             }
-            onChangeText={(val) => setEmail(val)}
+            onChangeText={(val) => {setSigninEmail(val), setPseudo(val);}}
         />
             {/* PASSWORD */}
-            <Input
+            <Input secureTextEntry={true}
             containerStyle = {{marginBottom: 25, width: '70%'}}
             inputStyle={{marginLeft: 10}}
             placeholder='Password'
@@ -48,7 +85,7 @@ export default function HomeScreen(props) {
                 color="#727679"
                 />
             }
-            onChangeText={(val) => setPassword(val)}
+            onChangeText={(val) => setSigninPassword(val)}
         />
         {/* CONNECTION */}
         <Button
@@ -58,7 +95,8 @@ export default function HomeScreen(props) {
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" }}
             onPress={() => {
-              props.navigation.navigate('BottomNavigator', { screen: 'GalleryScreen' });
+               handleClickSignin();
+              {if(response.isok == true){ console.log("test");props.onSubmitPseudo(pseudo);props.navigation.navigate('Home')}else{console.log("test2");props.navigation.navigate('HomeScreens')}} ;
             }}
         />
         {/* inscription  */}
@@ -90,3 +128,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#F0F0F0'
   },
 });
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onSubmitPseudo: function (pseudo) {
+      dispatch({ type: 'savePseudo', pseudo: pseudo })
+    }
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(HomeScreen);

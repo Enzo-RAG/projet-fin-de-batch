@@ -7,6 +7,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import  {Dropdown}  from 'react-native-element-dropdown';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { ScrollView } from 'react-native-gesture-handler';
+
+import { connect } from 'react-redux';
+
 // Dropdown
 const data = [
   { label: 'patient', value: 1 },
@@ -17,15 +20,16 @@ const data = [
 
 ];
 
-export default function HomeScreen(props) {
+function HomeScreen(props) {
     const [pseudo, setPseudo] = useState('');
     // Dropdown
     const [value, setValue] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
 
-    console.log("1",value)
     // Dropdown
    
+        const [response, setResponse]=useState('')
+
         const [nom, setNom]= useState('')
         const [email, setEmail]= useState('')
         const [password, setPassword]= useState('')
@@ -45,33 +49,126 @@ export default function HomeScreen(props) {
         const [numDoc, setNumDoc]= useState('')
         const [antecedent, setAntecedent]= useState('')
 
-        console.log(prenom,nom,password,email,)
 
-        async function signup(){ 
-          var rawresponse = await fetch('https://helpills.herokuapp.com/inscription', {
+        console.log(prenom,nom,password,email,)
+     
+      var handleClick = async () =>{
+        //  signup();
+        var rawresponse = await fetch('https://helpills.herokuapp.com/inscription', {
           method: 'POST',
           headers: {'Content-Type':'application/x-www-form-urlencoded'},
           body: `nom=${nom}&email=${email}&password=${password}&prenom=${prenom}&documents=${documents}&photo=${photo}&adress=${adress}&ville=${ville}&codePostal=${codePostal}&telephone=${telephone}&status=${status}&nSecu=${nSecu}&mutuel=${mutuel}&idBanque=${idBanque}&plaqueImmat=${plaqueImmat}&numPharma=${numPharma}&numDoc=${numDoc}&antecedent=${antecedent}`
-           
-          
-           
-        })
-        console.log("je suis la")
-      }
+           })
+
+           var response = await rawresponse.json();
+    setResponse(response)
+    setPseudo(response)
+    console.log('testdfsdfdsfdsfs$$$$$$df',response.isok)
+         
         
+      }
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+const nbreAleatoire = (min,max)=>{
+  return Math.floor(Math.random() * (max+1 - min) + min);
+}
 
-      //   var reponse = await rawresponse.json();
-      //   if(reponse.isok == true){
-      //     setDirection(true)
-      //   }
-      //   console.log("a",reponse.isok)
-      // }
-      var handleClick = () =>{
-        signup();
+
+
+const creerCreneaux = ()=>{
+  var heure = ''
+  var heureNumber = 0
+  var minutes = ''
+  var minNumber = 0
+
+  if(nbreAleatoire(0,1) == 0){
+    minutes='00'
+  }else{
+    minutes='30'
+    minNumber = 0.5
+  }
+  var a = nbreAleatoire(0,1)
+  var b = ''
+  
+  if(a==0){
+  b=nbreAleatoire(0,9)
+  heureNumber = b
+  }else{
+    b=nbreAleatoire(0,5)
+    heureNumber = 10+b
+  }
+  heure += ""+a+b+':'+minutes
+  heureNumber += minNumber
+  return {string:heure, number:heureNumber}
+}
+
+const conversionDate=(number)=>{
+  var string = ""
+  if(Math.floor(number)!=number){
+    if(number<10){
+      string="0"+Math.floor(number) +":30"
+    }else{
+      string=Math.floor(number)+":30"
+    }
+  }else{
+    if(number<10){
+      string="0"+Math.floor(number) +":00"
+    }else{
+      string=Math.floor(number)+":00"
+    }
+  }
+  return string
+}
+
+
+const creneaux = (heureDebut) =>{
+  console.log("heureDebut", heureDebut)
+  var heureDeFin = nbreAleatoire(Math.floor(heureDebut+1),23)
+  const heure =[]
+  if(Math.floor(heureDebut)!=heureDebut){
+    for(var i=0;i<((heureDeFin-Math.floor(heureDebut))*2);i++){
+      heure.push(conversionDate(heureDebut+(i/2)))
+    }
+  }else{
+    for(var i=0;i<((heureDeFin+0.5-Math.floor(heureDebut))*2);i++){
+     heure.push(conversionDate(heureDebut+(i/2)))
+    }}
+  return heure
+}
+
+
+
+
+
+
+const isAvailableAleatoire= () =>{
+    const jour = ["lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche"]
+    var objectDispo = []
+    var dispo = []
+    var nombre = nbreAleatoire(0,5)
+    for (var i=0; i<nombre-1; i++){
+        var jourAleatoire = jour[nbreAleatoire(0,jour.length-1)]
+        if(!dispo.includes(jourAleatoire)){
+        dispo.push(jourAleatoire)}              
+    }
+    for(var i2=0; i2<dispo.length;i2++){
+      objectDispo.push({date:dispo[i2],creneaux:creneaux(creerCreneaux().number)})
+    }
+    return objectDispo
+  }
+
+console.log("aaaaa",isAvailableAleatoire())
+
+      const chainenNmbreAleatoire =(nbre)=>{
+        var chaine = ""
+        for (var i=0;i<nbre;i++){
+         chaine += nbreAleatoire(0,9)
+        }
+        return chaine
       }
 
-    
 
+
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     var infoplus = () =>  {  
 
       if(value == 1){
@@ -253,9 +350,9 @@ export default function HomeScreen(props) {
               color="#727679"
               />
             }
-            onChangeText={(val) => setEmail(val)}
+            onChangeText={(val) => {setEmail(val)}}
         />   
-            <Input
+            <Input  secureTextEntry={true}
             containerStyle = {{marginBottom: 5, width: '70%'}}
             inputStyle={{marginLeft: 10}}
             placeholder='Mot de passe'
@@ -350,14 +447,14 @@ export default function HomeScreen(props) {
            title="CONNECTION"
            type="solid"
            buttonStyle={{ backgroundColor: "#8AA78B" }}
-           onPress={() => {handleClick();props.navigation.navigate('PatientHome')}}
+           onPress={() => {handleClick();if(response.isok == true){ console.log("test"),props.onSubmitPseudo(pseudo),props.navigation.navigate('Home')}else{ console.log("test2"),props.navigation.navigate('HomeLog')}}}
         />
          <Button
            containerStyle = {{ width: '70%'}}
            title="doc home"
            type="solid"
            buttonStyle={{ backgroundColor: "#8AA78B" }}
-           onPress={() => {props.navigation.navigate('DocHome')}}
+           onPress={() => {props.navigation.navigate('agenda')}}
         />
         
 
@@ -430,3 +527,16 @@ const styles2 = StyleSheet.create({
 });
 
 
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onSubmitPseudo: function (pseudo) {
+      dispatch({ type: 'savePseudo', pseudo: pseudo })
+    }
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(HomeScreen);
