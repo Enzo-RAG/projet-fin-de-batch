@@ -15,6 +15,7 @@ const timeToString = (time) => {
 
 function Schedule(props){
 
+  const [id, setID] = useState([])
   const [info, setInfo] = useState([])
   const [email, setEmail] = useState('')  
   const [items, setItems] = useState( { 
@@ -29,9 +30,9 @@ function Schedule(props){
 
 
   const miseEnFormeDate = ((event, i) => {
-    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", event)
+    
     var newdate = event._doc.date.substr(0, 10)
-    console.log('console.log I', i)
+    
             
                                                               
     var test = items.hasOwnProperty(newdate)
@@ -41,17 +42,17 @@ function Schedule(props){
       setItems(aCopy)
       
     }else{
-      Object.assign(items,{[newdate] : [{name:event._doc.description +" "+ event.name+" " + i, height: 80}]})
+      Object.assign(items,{[newdate] : [{name:event._doc.description +" "+ event.name+" " + i, id:event._doc._id ,height: 80}]})
     }
     
   
   })
 
-    console.log('chercheemailllllllllll', email)
+    
 
   useEffect(() => {
     setEmail(props.pseudo.users.email)
-    console.log('suis la')
+    
 
     const findArticlesWishList = async () => {
       const dataWishlist = await fetch('https://arcane-sierra-33789.herokuapp.com/recepRdv', {
@@ -60,12 +61,12 @@ function Schedule(props){
         body: `email=${email}`
         
       })
-      console.log("justeapreslefetchdedededededededededeede", dataWishlist )
+      
       const body = await dataWishlist.json()
-      console.log('testtttttttttttttttttttttttttttttttttttttt', body)
+      
       // console.log(body)
       setInfo(body)
-      var tab = body.tab.map((event, i) => (miseEnFormeDate(event, i)))
+            var tab = body.tab.map((event, i) => (miseEnFormeDate(event, i)))
     }
   
     findArticlesWishList()
@@ -109,8 +110,9 @@ function Schedule(props){
   // };
 
   const renderItem = (item) => {
+    console.log("testtttetetete de l'infor p piour voire", item)
     return (
-      <TouchableOpacity style={{marginRight: 10, marginTop: 17}} onPress={() => {props.navigation.navigate('BottomNavigator', { screen: 'Ordonnances' })}}>
+      <TouchableOpacity style={{marginRight: 10, marginTop: 17}} onPress={() => {setID(item.id),props.onSubmitPseudo(id),props.navigation.navigate('BottomNavigator', { screen: 'Ordonnances' })}}>
         <Card>
           <Card.Content>
             <View
@@ -154,7 +156,15 @@ function mapStateToProps(state) {
   return { pseudo : state.pseudo }
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    onSubmitPseudo: function (id) {
+      dispatch({ type: 'saveId', id: id })
+    }
+  }
+}
+
 export default connect(
   mapStateToProps, 
-  null
+  mapDispatchToProps
 )(Schedule);

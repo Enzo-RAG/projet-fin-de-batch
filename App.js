@@ -37,6 +37,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import pseudo from './reducers/pseudo';
+import id from './reducers/id';
 import basket from './reducers/basket.reducer';
 
 const Stack = createStackNavigator();
