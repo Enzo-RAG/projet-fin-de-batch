@@ -11,10 +11,6 @@ export default function HomeScreen(props) {
     const [rdv, setRdv] = useState(false);
 
 
-
-
-
-
     useEffect(() => {
       const findByName = async () => {
         var rawresponse = await fetch('https://helpills.herokuapp.com/searchByMail', {
