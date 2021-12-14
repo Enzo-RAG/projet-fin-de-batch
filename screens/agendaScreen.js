@@ -15,7 +15,7 @@ const timeToString = (time) => {
 
 function Schedule(props){
 
-  const [id, setID] = useState([])
+  const [id, setID] = useState('')
   const [info, setInfo] = useState([])
   const [email, setEmail] = useState('')  
   const [items, setItems] = useState( { 
@@ -110,9 +110,9 @@ function Schedule(props){
   // };
 
   const renderItem = (item) => {
-    console.log("testtttetetete de l'infor p piour voire", item)
+    console.log("testtttetetete de l'infor p piour voire", id)
     return (
-      <TouchableOpacity style={{marginRight: 10, marginTop: 17}} onPress={() => {setID(item.id),props.onSubmitPseudo(id),props.navigation.navigate('BottomNavigator', { screen: 'Ordonnances' })}}>
+      <TouchableOpacity style={{marginRight: 10, marginTop: 17}} onPress={async () => {props.onSubmitId(id),props.navigation.navigate('MyPrescription')}}>
         <Card>
           <Card.Content>
             <View
@@ -122,6 +122,13 @@ function Schedule(props){
                 alignItems: 'center',
               }}>
               <Text>{item.name}</Text>
+              <Button 
+          containerStyle = {{marginBottom: 25, width: '70%'}}
+            title="Mot de passe oublié"
+            type="solid"
+            buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
+            onPress={() => setID(item.id) }
+        />
               
               <Avatar.Text label="J" />
             </View>
@@ -130,6 +137,8 @@ function Schedule(props){
       </TouchableOpacity>
     );
   };
+
+  
 
   return (
     <View style={{flex: 1}}>
@@ -158,8 +167,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onSubmitPseudo: function (id) {
-      dispatch({ type: 'saveId', id: id })
+    onSubmitId: function (id) {
+      dispatch({ type: 'saveId', id : id })
     }
   }
 }

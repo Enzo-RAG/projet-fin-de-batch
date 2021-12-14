@@ -20,6 +20,8 @@ import Home from './screens/Home';
 
 // page => prescription :
 import Prescriptions from './screens/Prescription';
+import MyPrescriptions from './screens/MyPrescription';
+
 
 // pages rdv
 import PatientRdv from './screens/PatientRdv';
@@ -44,7 +46,7 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 var users =1
-const store = createStore(combineReducers({pseudo,basket}));
+const store = createStore(combineReducers({pseudo,basket,id}));
 
 const BottomNavigator = () => {
   console.log("Passé par le bottom Nav")
@@ -198,6 +200,7 @@ export default function App() {
           <Stack.Screen name="PatientRdv" component={PatientRdv} />
           <Stack.Screen name="agenda" component={agenda} />
           <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="MyPrescription" component={MyPrescriptions} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
