@@ -101,7 +101,7 @@ function HomeScreen(props) {
             style={{ width: 100, height: 100, borderRadius: 100 }}
             PlaceholderContent={<ActivityIndicator />}
             />
-            <Text h2 style={{color:"#727679"}}> prenom</Text>
+            <Text h2 style={{color:"#727679"}}> {props.pseudo.users.nom}</Text>
             
         <View style={styles.container} backgroundColor="#727679">
         <Text h3 style={{color:"#F0F0F0"}}> My Appointment Book patient</Text>

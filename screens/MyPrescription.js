@@ -1,8 +1,8 @@
-
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, ActivityIndicator  } from 'react-native';
+import { StyleSheet, View, ActivityIndicator, Text  } from 'react-native';
+import { SelectCountry } from 'react-native-element-dropdown';
 
-import {Button, Input, Header, Image, Text, Card } from 'react-native-elements'
+import {Button, Input, Header, Image, Card } from 'react-native-elements'
 import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -17,24 +17,30 @@ import {connect} from 'react-redux';
     const [info, setInfo] = useState([])
     const [test, setTest] = useState([])
     const [info2, setinfo2] = useState([])
+    const [doc, setDoc] = useState('')
+    const [count, setCount] = useState([])
+    const [count2, setCount2] = useState("2")
 
-
+        console.log('testdela novel info    dsdfsd' , count)
+        console.log('testdela novel info    dsdfsd' , info)
     useEffect(() => {
       setEmail(props.pseudo.users._id)
-      console.log('suis la', props.pseudo)
+      
   
       const findArticlesWishList = async () => {
-        const dataWishlist = await fetch('https://arcane-sierra-33789.herokuapp.com/recepprescription', {
+        const dataWishlist = await fetch('https://arcane-sierra-33789.herokuapp.com/recepMyprescription', {
           method: 'POST',
           headers: {'Content-Type':'application/x-www-form-urlencoded'},
-          body: `id=${email}`
+          body: `id=${props.id}`
           
         })
-        console.log("justeapreslefetchdedededededededededeede", dataWishlist )
+        
         const body = await dataWishlist.json()
-        console.log('testtttttttttttttttttttttttttttttttttttttt', body)
+        
         // console.log(body)
-        setInfo(body.prescription)
+        await setInfo(body.prescription)
+        await setCount(body.prescription.prescription)
+        await setCount2(count.length)
         if(info != null){
           setRdv(true) 
         }
@@ -42,60 +48,109 @@ import {connect} from 'react-redux';
       }
     
       findArticlesWishList()
-    },[email])
+    },[])
 
+    useEffect(() => {
+        const findByName = async () => {
+          var rawresponse = await fetch('https://arcane-sierra-33789.herokuapp.com/searchuser', {
+            method: 'POST',
+            headers: {'Content-Type':'application/x-www-form-urlencoded'},
+            body: `email=${info.medecinId}`
+        })
+         var user = await rawresponse.json()
+          
+          setDoc(user)
+            }
+        findByName()
+      },[])
 
 // console.log('testmap info', info)
 
 
-useEffect(() => {
+useEffect(async () => {
+            var count1 = await count.length
 
-  var test = info.map((info1 , i ) => {
-  setinfo2(info1)
-  console.log("retour info", info1)
+            console.log("***********************robobrole", count1)
+  var test = (() => {
+  
+  
   // console.log("retourinfo", info1)
-    if(info1.prescription !== null){
+    if(count2 <= 1){
+        console.log('jesuis passer pour je veux ')    
     return(
     <Card containerStyle={{width: '70%'}}>
       
-    <Card.Title>{info1.date}</Card.Title>
+    <Card.Title>{info.date}</Card.Title>
     <Card.Divider/>
     
-    {info1.prescription.map((info3, i) => {
-      console.log("testdeinforlicorne",info3)
-      return (
+        
+     
       <View>
       <Text style={{marginBottom: 10}}>
-      {info3.number} 
+      {info.prescription[0].number} 
+    
     
       </Text>
       <Text style={{marginBottom: 10}}>
-      {info3.prise} 
+      {info.prescription.prise} 
     
       </Text>
       <Text style={{marginBottom: 10}}>
-      {info3.duree} 
+      {info.prescription.duree} 
     
       </Text>
       <Text style={{marginBottom: 10}}>
-      {info3.autre} 
+      {info.prescription.autre} 
     
       </Text>
       
       </View>  
-      )
-    })}
+      
+    
          
   </Card>)
   }else{
-    return(<Text h3 style={{color:"#F0F0F0"}}> no presciption</Text>)
+
+    console.log('jesuis passer par le map ')
+    return(
+        <Card containerStyle={{width: '70%'}}>
+          
+        <Card.Title>{info.date}</Card.Title>
+        <Card.Divider/>
+        
+        {count.map((info3, i) => {
+          
+          return (
+          <View>
+          <Text style={{marginBottom: 10}}>
+          {info3.number} 
+        
+          </Text>
+          <Text style={{marginBottom: 10}}>
+          {info3.prise} 
+        
+          </Text>
+          <Text style={{marginBottom: 10}}>
+          {info3.duree} 
+        
+          </Text>
+          <Text style={{marginBottom: 10}}>
+          {info3.autre} 
+        
+          </Text>
+          
+          </View>  
+          )
+        })}
+             
+      </Card>)
   }
 })
  
   setTest(test)
 
   
-},[info])
+},[count])
 
 
    
@@ -123,29 +178,10 @@ useEffect(() => {
             <Text h2 style={{color:"#727679"}}> {props.pseudo.users.nom}</Text>
             
         <View style={styles.container} backgroundColor="#727679">
-        <Text h3 style={{color:"#F0F0F0"}}> Historical Presciption</Text>
+        <Text h3 style={{color:"#F0F0F0"}}> Presciption du rdv le {info.date} du Docteur  </Text>
         <ScrollView>
         {test}
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-
+      
 
         </ScrollView>
         </View>                  
