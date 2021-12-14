@@ -189,6 +189,8 @@ const BottomNavigator = () => {
 }
 
 export default function App() {
+
+  
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -220,3 +222,4 @@ export default function App() {
           
 
 */
+
