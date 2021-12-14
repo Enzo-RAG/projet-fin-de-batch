@@ -51,6 +51,26 @@ function HomeScreen(props) {
 
 
         console.log(prenom,nom,password,email,)
+
+        useEffect(() => {
+          const findByName = async () => {
+            var rawresponse = await fetch('https://arcane-sierra-33789.herokuapp.com/searchuser', {
+              method: 'POST',
+              headers: {'Content-Type':'application/x-www-form-urlencoded'},
+              body: `email=${email}`
+          })
+           var user = await rawresponse.json()
+            
+            setPseudo(user)
+              }
+          findByName()
+        },[response])
+         
+
+
+
+
+
      
       var handleClick = async () =>{
         //  signup();
