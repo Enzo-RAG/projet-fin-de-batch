@@ -96,7 +96,7 @@ function HomeScreen(props) {
             buttonStyle={{ backgroundColor: "#8AA78B" }}
             onPress={() => {
                handleClickSignin();
-              {if(response.isok == true){ console.log("test");props.onSubmitPseudo(pseudo);props.navigation.navigate('Home')}else{console.log("test2");props.navigation.navigate('HomeScreens')}} ;
+              {if(response.isok == true){ console.log("test");props.onSubmitPseudo(pseudo);props.navigation.navigate('BottomNavigator', { screen: 'Home' })}else{console.log("test2");props.navigation.navigate('HomeScreens')}} ;
             }}
         />
         {/* inscription  */}
