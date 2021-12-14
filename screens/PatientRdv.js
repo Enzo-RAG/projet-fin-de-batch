@@ -59,13 +59,7 @@ function HomeScreen(props) {
       },[isFocus])
 
 
-          console.log("******************************************************")
-          console.log(date)
-          console.log(description)
-          console.log(photo)
-          console.log(patientId)
-          console.log(medecinId)
-
+         console.log('verifretourdinfo', props.pseudo.users.admin)
 
   
   
@@ -107,7 +101,7 @@ function HomeScreen(props) {
             style={{ width: 100, height: 100, borderRadius: 100 }}
             PlaceholderContent={<ActivityIndicator />}
             />
-            <Text h2 style={{color:"#727679"}}> prenom</Text>
+            <Text h2 style={{color:"#727679"}}> {props.pseudo.users.nom}</Text>
             
         <View style={styles.container} backgroundColor="#727679">
         <Text h3 style={{color:"#F0F0F0"}}> My Appointment Book patient</Text>
@@ -198,7 +192,7 @@ function HomeScreen(props) {
             title="valide prise RDV"
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-            onPress={() => {props.navigation.navigate('BottomNavigator', { screen: 'GalleryScreen' }),setPatienId(props.pseudo), addRDV()}}
+            onPress={() => {setPatienId(props.pseudo.users.email), addRDV(), props.navigation.navigate('BottomNavigator', { screen: 'GalleryScreen' })}}
         />
         
         {/* MP oublier */}

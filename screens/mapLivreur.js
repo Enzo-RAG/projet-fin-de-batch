@@ -8,7 +8,6 @@ import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import { socket } from 'socket.io-client';
 
-
 export default function MapScreen() {
 
   const [currentLatitude, setCurrentLatitude] = useState(0);

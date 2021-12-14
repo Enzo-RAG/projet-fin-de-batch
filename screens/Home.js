@@ -1,29 +1,21 @@
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Warning: ...']);
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, ActivityIndicator  } from 'react-native';
 
 import {Button, Input, Header, Image, Text, Card } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {connect} from 'react-redux';
 
-export default function HomeScreen(props) {
+function HomeScreen(props) {
     const [pseudo, setPseudo] = useState('');
     const [rdv, setRdv] = useState(false);
 
 
-    useEffect(() => {
-      const findByName = async () => {
-        var rawresponse = await fetch('https://helpills.herokuapp.com/searchByMail', {
-          method: 'POST',
-          headers: {'Content-Type':'application/x-www-form-urlencoded'},
-          body: `email=${email}`
-      })
-       var user = await rawresponse.json()
-        console.log(user)
-        setPseudo(user)
-          }
-      findByName()
-    },[])
+
+
+
+
     // const book = () => {
     //   if(rdv == false){
     //     return(
@@ -82,10 +74,10 @@ export default function HomeScreen(props) {
             style={{ width: 100, height: 100, borderRadius: 100 }}
             PlaceholderContent={<ActivityIndicator />}
             />
-            <Text h2 style={{color:"#727679"}}> Prenom</Text>
+            <Text h2 style={{color:"#727679"}}> {props.pseudo.users.nom}</Text>
             
         <View style={styles.container} backgroundColor="#727679">
-        <Text h3 style={{color:"#F0F0F0"}}> My Appointment Book patient</Text>
+        <Text h3 style={{color:"#F0F0F0"}}> My Appointment Book</Text>
 
         <Button
            containerStyle = {{ width: '70%'}}
@@ -122,6 +114,33 @@ const styles = StyleSheet.create({
       backgroundColor: '#F0F0F0'
     },
   });
+
+  function mapStateToProps(state) {
+    return { pseudo : state.pseudo }
+  }
+  
+  export default connect(
+    mapStateToProps, 
+    null
+  )(HomeScreen);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
    <Button 
