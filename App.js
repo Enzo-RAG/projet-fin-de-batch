@@ -1,7 +1,9 @@
+import React, {useState} from 'react';
 import { LogBox } from 'react-native';
+
 LogBox.ignoreLogs(['Warning: ...']);
 
-import React from 'react';
+
 import { Ionicons } from '@expo/vector-icons';
 
 
@@ -26,15 +28,11 @@ import MyPrescriptions from './screens/MyPrescription';
 // pages rdv
 import PatientRdv from './screens/PatientRdv';
 
-
 import agenda from './screens/agendaScreen';
-
-
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
@@ -189,6 +187,7 @@ const BottomNavigator = () => {
 }
 
 export default function App() {
+  
   return (
     <Provider store={store}>
       <NavigationContainer>

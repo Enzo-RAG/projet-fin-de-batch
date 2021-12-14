@@ -40,9 +40,7 @@ const Basket = (props) => {
     }, []);
 
    
- 
-
-    if(props.basket.basket.length>0){
+     if(props.basket.basket.length>0){
 
         return (
                 
@@ -115,7 +113,7 @@ const Basket = (props) => {
                         titleStyle={{color:"rgba(255,255,255,1)", fontSize:27}} 
                         onPress={()=> {
                             console.log("********************* Commander **********************")
-                            console.log("********************* Commander **********************",id,ville)
+                            console.log("********************* Commander **********************",id,ville,props.basket.basket)
                             socket.emit("CommandeFromClient", {panier: props.basket.basket, id:id,ville:ville});
                         }}
                     />
@@ -145,6 +143,7 @@ const Basket = (props) => {
 };
 
 function mapStateToProps(state) {
+    console.log(state)
     return { basket : state }
   }
 
