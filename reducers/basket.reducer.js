@@ -30,6 +30,9 @@ export default function(basket = [], action) {
         }
         console.log(copyBasket)
         return copyBasket
+    }else if(action.type=='deleteAll'){
+        var copyBasket2 = [] 
+        return copyBasket2
     }else {
         return basket;
     }

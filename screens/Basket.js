@@ -6,24 +6,34 @@ import { View, ScrollView, StatusBar} from 'react-native';
 import { Button, Card, Text, Header,Image  } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
 import socketIOClient from "socket.io-client";
+import commandesReducer from '../reducers/commandes.reducer';
 
 var socket = socketIOClient("https://helpillsprojectlacapsule.herokuapp.com/");
 
-var id = "61adea19e4bce5d88972f938"
-var ville = "marseille"
 
 const Basket = (props) => {
-
     const [message, setMessage] = useState();
     const [response, setResponse] = useState("");
     const [coucoy, setCoucoy] = useState("");
+
+
+    const numeroCommande = (id) =>{
+        var numCommande = ""
+        var X =  Date.now();
+        console.log(id)
+        console.log(X)
+       numCommande= id.substr(0, 9) + X + id.substr(19, 5)
+       return numCommande
+    }
+
+
 
     useEffect(() => { 
         socket.on("FromAPI", data => {
             setResponse(data);
           });
 
-        socket.emit("Connected", {ville:ville, status:"patient"});
+        socket.emit("Connected", { ville:props.basket.pseudo.users.adress.ville, status:"patient"});
 
         socket.on('Validation', (newMessage)=> {
             setMessage(newMessage);
@@ -35,7 +45,6 @@ const Basket = (props) => {
                 setCoucoy("")
             }
         }
-
       ) 
     }, []);
 
@@ -112,9 +121,20 @@ const Basket = (props) => {
                         title=' Commander'
                         titleStyle={{color:"rgba(255,255,255,1)", fontSize:27}} 
                         onPress={()=> {
-                            console.log("********************* Commander **********************")
-                            console.log("********************* Commander **********************",id,ville,props.basket.basket)
-                            socket.emit("CommandeFromClient", {panier: props.basket.basket, id:id,ville:ville});
+                            var numCommde=  numeroCommande(props.basket.pseudo.users._id)
+                            socket.emit("CommandeFromClient", 
+                            {
+                                panier: props.basket.basket, 
+                                numeroCommande:numCommde,
+                                nom:props.basket.pseudo.users.nom, 
+                                prenom:props.basket.pseudo.users.prenom, 
+                                telephone: props.basket.pseudo.users.telephone, 
+                                id:props.basket.pseudo.users._id, 
+                                ville:props.basket.pseudo.users.adress.ville
+                            });
+                            props.deleteBasket();
+                            props.addToCommandes(numCommde);
+                            props.navigation.navigate('Home');
                         }}
                     />
                     </View>
@@ -130,27 +150,30 @@ const Basket = (props) => {
                         centerComponent={{ text: 'Panier', style: { color: '#fff', fontWeight:"bold" } }}
                         rightComponent={{ icon: 'home', color: '#fff' }}
                     />     
-                <Text style={{marginTop:10,marginBottom: 10, backgroundColor:"red", width:"90%",fontWeight:"bold"}}>
+                <Text style={{marginTop:10,marginBottom: 10, backgroundColor:"lightcyan", width:"90%",fontWeight:"bold"}}>
                     Votre panier est vide pour le moment.
                 </Text>
                 <Text style={{marginTop:10,marginBottom: 10, backgroundColor:"red", width:"90%",fontWeight:"bold"}}>
-                    
                     {response}
                 </Text>
                
-            </View>)
+            </View>
+        )
     }
 };
 
 function mapStateToProps(state) {
-    console.log(state)
+    console.log("adresse from : ", state.pseudo.users.adress.ville)
+    console.log("id from : ", state.pseudo.users._id)
     return { basket : state }
   }
 
 function mapDispatchToProps(dispatch) {
     return {
       addToBasket: function (medoc) {dispatch({ type: 'addToBasket', objMedoc: medoc})},
-      deleteOne : function (medoc) {dispatch({ type: 'deleteOne', objMedoc: medoc})}
+      deleteOne : function (medoc) {dispatch({ type: 'deleteOne', objMedoc: medoc})},
+      deleteBasket:function () {dispatch({ type: 'deleteAll'})},
+      addToCommandes:function (commande) {dispatch({ type: 'addToCommandes',commande:commande})},
     }
   }
   

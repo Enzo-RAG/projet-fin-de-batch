@@ -39,12 +39,13 @@ import {Provider} from 'react-redux';
 import pseudo from './reducers/pseudo';
 import id from './reducers/id';
 import basket from './reducers/basket.reducer';
+import commandes from './reducers/commandes.reducer'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 var users =1
-const store = createStore(combineReducers({pseudo,basket,id}));
+const store = createStore(combineReducers({pseudo,basket,id,commandes}));
 
 const BottomNavigator = () => {
   console.log("Passé par le bottom Nav")
@@ -219,3 +220,4 @@ export default function App() {
           
 
 */
+
