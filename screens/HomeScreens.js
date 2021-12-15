@@ -35,7 +35,7 @@ function HomeScreen(props) {
 
    useEffect(() => {
     const findByName = async () => {
-      var rawresponse = await fetch('https://arcane-sierra-33789.herokuapp.com/searchuser', {
+      var rawresponse = await fetch('https://helpills.herokuapp.com/searchuser', {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         body: `email=${signinEmail}`
@@ -46,8 +46,8 @@ function HomeScreen(props) {
         }
     findByName()
   },[response])
-   
-    return (
+
+   return (
     
     <View style={styles.container}
     >

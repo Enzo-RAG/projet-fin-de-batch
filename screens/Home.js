@@ -2,20 +2,15 @@ import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Warning: ...']);
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, ActivityIndicator  } from 'react-native';
-
-import {Button, Input, Header, Image, Text, Card } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {Button, Input, Header, Image, Text, Overlay } from 'react-native-elements'
 import {connect} from 'react-redux';
+import { FileUploader } from "react-drag-drop-files";
 
 function HomeScreen(props) {
     const [pseudo, setPseudo] = useState('');
     const [rdv, setRdv] = useState(false);
-
-
-
-
-
-
+    const [isVisible, setIsVisible] = useState(false);
     // const book = () => {
     //   if(rdv == false){
     //     return(
@@ -56,6 +51,10 @@ function HomeScreen(props) {
     // }
 
 
+  
+
+
+
     return (
     <View style={styles.container}>
         <Header
@@ -67,13 +66,37 @@ function HomeScreen(props) {
         />
            
          
-        
+        <View  >
         <Image
             containerStyle = {{marginBottom: 10, marginTop: 10}}
             source={{ uri: 'https://picsum.photos/200' }}
             style={{ width: 100, height: 100, borderRadius: 100 }}
             PlaceholderContent={<ActivityIndicator />}
             />
+
+        <Button  
+           containerStyle = {{ width: '70%'}}
+           icon={
+            <Icon
+            name="document"
+            size={20}
+            color="#white"
+            />
+        }
+           type="solid"
+           buttonStyle={{ backgroundColor: "#8AA78B" }}
+           onPress={() => {setIsVisible(true)}}
+        />
+        <Overlay 
+        isVisible={isVisible}
+        onBackdropPress={() => { setIsVisible(false) }}>
+
+        <Text>Hello from Overlay!</Text>
+        <Input type="files" name="name" />
+        <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
+        </Overlay>
+
+            </View>
             <Text h2 style={{color:"#727679"}}> {props.pseudo.users.nom}</Text>
             
         <View style={styles.container} backgroundColor="#727679">

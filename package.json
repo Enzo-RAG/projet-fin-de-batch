@@ -15,12 +15,15 @@
     "@react-navigation/bottom-tabs": "^6.0.9",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/stack": "^6.0.11",
+    "bcrypt": "^5.0.1",
     "expo": "~43.0.2",
     "expo-location": "~13.0.4",
     "expo-permissions": "~13.0.3",
     "expo-status-bar": "~1.1.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-drag-drop-files": "^2.2.2",
+    "react-dropzone": "^11.4.2",
     "react-instantsearch-native": "^6.16.0",
     "react-native": "0.64.3",
     "react-native-calendars": "^1.1270.0",
@@ -37,7 +40,8 @@
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
     "socket.io": "^4.4.0",
-    "socket.io-client": "^4.4.0"
+    "socket.io-client": "^4.4.0",
+    "uid2": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
