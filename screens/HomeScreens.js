@@ -30,6 +30,7 @@ function HomeScreen(props) {
     setResponse(response)
 
     if(body.result == true){
+
       setUserExists(true)
     }
 
@@ -117,7 +118,7 @@ function HomeScreen(props) {
             title="Mot de passe oublié"
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-            onPress={() => {props.navigation.navigate('map')}}
+            onPress={() => {props.navigation.navigate('Forgotpass')}}
         />
     </View>
   );

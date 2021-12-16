@@ -10,50 +10,6 @@ import {connect} from 'react-redux';
 function HomeScreen(props) {
     const [pseudo, setPseudo] = useState('');
     const [rdv, setRdv] = useState(false);
-    const [isVisible, setIsVisible] = useState(false);
-    // const book = () => {
-    //   if(rdv == false){
-    //     return(
-    //       <Button 
-          
-    //       containerStyle = {{marginBottom: 25, width: '70%', marginTop: 25}}
-    //         title="Book ONE"
-    //         type="solid"
-    //         buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-    //         onPress={() => {props.navigation.navigate('PatientRdv')}}
-    //     />)
-    //   }}
-
-    // const rdv1 = () => {
-    //   if(rdv == true){
-    //     return(
-    //     <Card containerStyle={{width: '70%'}}>
-    //     <Card.Title>nom doc</Card.Title>
-    //     <Card.Divider/>
-    //     <Card.Image source={{ uri: 'https://picsum.photos/200' }}></Card.Image>
-    //       <Text style={{marginBottom: 10}}>
-    //         date heure
-    //       </Text>
-         
-    //       <Button
-    //         icon={<Icon name='code' color='#ffffff' />}
-    //         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-    //         title='Modify' />
-    //         <Button
-    //         icon={<Icon name='code' color='#ffffff' />}
-    //         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-    //         title='cancel' />
-          
-    //   </Card>)
-    //   }else{
-    //     return(<Text h3 style={{color:"#F0F0F0"}}> No appointment yet</Text>)
-    //   }
-    // }
-
-
-  
-
-
 
     return (
     <View style={styles.container}>
@@ -72,55 +28,37 @@ function HomeScreen(props) {
             source={{ uri: 'https://picsum.photos/200' }}
             style={{ width: 100, height: 100, borderRadius: 100 }}
             PlaceholderContent={<ActivityIndicator />}
-            />
-
-        <Button  
-           containerStyle = {{ width: '70%'}}
-           icon={
-            <Icon
-            name="document"
-            size={20}
-            color="#white"
-            />
-        }
-           type="solid"
-           buttonStyle={{ backgroundColor: "#8AA78B" }}
-           onPress={() => {setIsVisible(true)}}
         />
-        <Overlay 
-        isVisible={isVisible}
-        onBackdropPress={() => { setIsVisible(false) }}>
-
-        <Text>Hello from Overlay!</Text>
-        <Input type="files" name="name" />
-        
-        </Overlay>
-
-            </View>
-            <Text h2 style={{color:"#727679"}}> {props.pseudo.users.nom}</Text>
+        <Text h2 style={{color:"#727679"}}> {props.pseudo.users.nom}</Text>
             
         <View style={styles.container} backgroundColor="#727679">
-        <Text h3 style={{color:"#F0F0F0"}}> My Appointment Book</Text>
+          <Text h3 style={{color:"#F0F0F0"}}> My Appointment Book</Text>
 
-        <Button
+          <Button
            containerStyle = {{ width: '70%'}}
            title="My rdv"
            type="solid"
            buttonStyle={{ backgroundColor: "#8AA78B" }}
            onPress={() => {props.navigation.navigate('agenda')}}
-        />
+          />
         
-        <Button 
+          <Button 
           
           containerStyle = {{marginBottom: 25, width: '70%', marginTop: 25}}
             title="Book ONE"
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
             onPress={() => {props.navigation.navigate('PatientRdv')}}
-        />
+          />
         
         </View>
       
+        <View style={{width:350, marginTop:50, backgroundColor:"#8AA78B", height:300}}>
+          <View> 
+
+          </View>
+        </View>
+        </View>
        
 
         
@@ -182,4 +120,44 @@ const styles = StyleSheet.create({
             buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
             onPress={() => {props.navigation.navigate('PatientPresciption')}}
         /> 
+
+
+        // const book = () => {
+    //   if(rdv == false){
+    //     return(
+    //       <Button 
+          
+    //       containerStyle = {{marginBottom: 25, width: '70%', marginTop: 25}}
+    //         title="Book ONE"
+    //         type="solid"
+    //         buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
+    //         onPress={() => {props.navigation.navigate('PatientRdv')}}
+    //     />)
+    //   }}
+
+    // const rdv1 = () => {
+    //   if(rdv == true){
+    //     return(
+    //     <Card containerStyle={{width: '70%'}}>
+    //     <Card.Title>nom doc</Card.Title>
+    //     <Card.Divider/>
+    //     <Card.Image source={{ uri: 'https://picsum.photos/200' }}></Card.Image>
+    //       <Text style={{marginBottom: 10}}>
+    //         date heure
+    //       </Text>
+         
+    //       <Button
+    //         icon={<Icon name='code' color='#ffffff' />}
+    //         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+    //         title='Modify' />
+    //         <Button
+    //         icon={<Icon name='code' color='#ffffff' />}
+    //         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+    //         title='cancel' />
+          
+    //   </Card>)
+    //   }else{
+    //     return(<Text h3 style={{color:"#F0F0F0"}}> No appointment yet</Text>)
+    //   }
+    // }
 */

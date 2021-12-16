@@ -51,7 +51,7 @@ import {connect} from 'react-redux';
 useEffect(() => {
 
   var test = info.map((info1 , i ) => {
-  setinfo2(info1)
+  if(info1.prescription.length >= 1){
   console.log("retour info", info1)
   // console.log("retourinfo", info1)
     if(info1.prescription !== null){
@@ -90,7 +90,7 @@ useEffect(() => {
   }else{
     return(<Text h3 style={{color:"#F0F0F0"}}> no presciption</Text>)
   }
-})
+  }})
  
   setTest(test)
 
