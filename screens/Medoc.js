@@ -165,7 +165,7 @@ const Medoc = (props) => {
                                 props.addToBasket({name:profile.drugName,img:profile.urlToImg})
                                }
                               }
-                        />                 
+                        />   {console.log("derner testtttt",profile.drugName, profile.urlToImg  )}              
                     </Card>
                 )})}  
             </ScrollView>

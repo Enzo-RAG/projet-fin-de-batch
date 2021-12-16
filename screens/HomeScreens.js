@@ -11,15 +11,13 @@ import { connect } from 'react-redux';
 
 function HomeScreen(props) {
    
-    const[signinEmail, setSigninEmail] = useState('')
+    const [signinEmail, setSigninEmail] = useState('')
     const [signinPassword, setSigninPassword]= useState('')
-    const [destination, setDestination]= useState('')
-    const [test, setTest]= useState(true)
     const [pseudo, setPseudo] = useState('')
-    const[response, setResponse]= useState('')
+    const [response, setResponse]= useState('')
    
    
-   var handleClickSignin = async () =>{
+   var connection = async () =>{
     var rawsignin = await fetch('https://helpills.herokuapp.com/connection', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
@@ -30,7 +28,7 @@ function HomeScreen(props) {
     setResponse(response)
     
     
-    console.log('testdfsdfdsfdsfs$$$$$$df',response) 
+    
    }
 
    useEffect(() => {
@@ -43,6 +41,7 @@ function HomeScreen(props) {
      var user = await rawresponse.json()
       
       setPseudo(user)
+      
         }
     findByName()
   },[response])
@@ -71,7 +70,7 @@ function HomeScreen(props) {
                 color="#727679"
                 />
             }
-            onChangeText={(val) => {setSigninEmail(val), setPseudo(val);}}
+            onChangeText={(val) => {setSigninEmail(val);}}
         />
             {/* PASSWORD */}
             <Input secureTextEntry={true}
@@ -95,8 +94,8 @@ function HomeScreen(props) {
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" }}
             onPress={() => {
-               handleClickSignin();
-              {if(response.isok == true){ console.log("test");props.onSubmitPseudo(pseudo);props.navigation.navigate('BottomNavigator', { screen: 'Home' })}else{console.log("test2");props.navigation.navigate('HomeScreens')}} ;
+               connection();
+              {if(response.isok == true){ console.log("test");props.onSubmitPseudo(pseudo),props.navigation.navigate(`BottomNavigator${pseudo.users.status}`, { screen: 'Home' })}else{console.log("test2");props.navigation.navigate('HomeScreens')}} ;
             }}
         />
         {/* inscription  */}
@@ -138,7 +137,11 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
+function mapStateToProps(state) {
+  return { pseudo : state.pseudo }
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(HomeScreen);

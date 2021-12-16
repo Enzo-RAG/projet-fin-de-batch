@@ -467,7 +467,7 @@ console.log("aaaaa",isAvailableAleatoire())
            title="CONNECTION"
            type="solid"
            buttonStyle={{ backgroundColor: "#8AA78B" }}
-           onPress={() => {handleClick();if(response.isok == true){ console.log("test"),props.onSubmitPseudo(pseudo),props.navigation.navigate('Home')}else{ console.log("test2"),props.navigation.navigate('HomeLog')}}}
+           onPress={() => {handleClick();if(response.isok == true){ console.log("test"),props.onSubmitPseudo(pseudo),props.navigation.navigate(`BottomNavigator${pseudo.users.status}`, { screen: 'Home' })}else{ console.log("test2"),props.navigation.navigate('HomeLog')}}}
         />
          <Button
            containerStyle = {{ width: '70%'}}

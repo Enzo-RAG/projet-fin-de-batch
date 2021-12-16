@@ -93,7 +93,7 @@ function HomeScreen(props) {
             title="Book ONE"
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-            onPress={() => {props.navigation.navigate('PatientRdv')}}
+            onPress={() => {props.navigation.navigate('PatientRdv' )}}
         />
         
         </View>

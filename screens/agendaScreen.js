@@ -19,14 +19,14 @@ function Schedule(props){
   const [info, setInfo] = useState([])
   const [email, setEmail] = useState('')  
   const [items, setItems] = useState( { 
-    '2021-06-23': [{name: 'item 2 - any js object', height: 80}],
-    '2021-06-24': [],
-    '2021-06-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
+    
   });
 
-      // console.log('#############################infor#########################',info.tab[0])
+      
 
-  
+
+
+    
 
 
   const miseEnFormeDate = ((event, i) => {
@@ -38,11 +38,11 @@ function Schedule(props){
     var test = items.hasOwnProperty(newdate)
     if(test){
       var aCopy = items
-      aCopy[newdate].push({name: event._doc.description +" "+ event.name+" "+ i, height: 80})
+      aCopy[newdate].push({name: event._doc.description +" / "+ event.name ,id:event._doc._id})
       setItems(aCopy)
       
     }else{
-      Object.assign(items,{[newdate] : [{name:event._doc.description +" "+ event.name+" " + i, id:event._doc._id ,height: 80}]})
+      Object.assign(items,{[newdate] : [{name:event._doc.description +" / "+ event.name , id:event._doc._id}]})
     }
     
   
@@ -52,13 +52,14 @@ function Schedule(props){
 
   useEffect(() => {
     setEmail(props.pseudo.users.email)
+    console.log('test pour docteir ' , email)
     
 
     const findArticlesWishList = async () => {
       const dataWishlist = await fetch('https://arcane-sierra-33789.herokuapp.com/recepRdv', {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body: `email=${email}`
+        body: `email=${email}&status=${props.pseudo.users.status}`
         
       })
       
@@ -73,46 +74,20 @@ function Schedule(props){
   },[email])
 
 
-  const numbers = [info];
-//  ////console.log(numbers)
-  // const doubled = numbers.map((number, i) => number.articles[2].Photo);
-  // ////console.log(doubled);
-  // ////console.log('mapre retour') 
-  
+  // var handleClickinfo = async (item) =>{
+  //   console.log("test de retour de l'info ", item)
+  //   setID(item)
+  //   props.onSubmitId(id)
+  //    }
     
-  
-
-
-
-
-  // const loadItems = (day) => {
-  //   setTimeout(() => {
-  //     for (let i = 0; i < 1; i++) {
-  //       const time = day.timestamp + i * 24 * 60 * 60 * 1000;
-  //       const strTime = timeToString(time);
-  //       if (!items[strTime]) {
-  //         items[strTime] = [];
-  //         const numItems = Math.floor(Math.random() * 3 + 1);
-  //         for (let j = 0; j < numItems; j++) {
-  //           items[strTime].push({
-  //             name: 'Item for ' + strTime + ' #' + j,
-  //             height: Math.max(50, Math.floor(Math.random() * 1)),
-  //           });
-  //         }
-  //       }
-  //     }
-  //     const newItems = {};
-  //     Object.keys(items).forEach((key) => {
-  //       newItems[key] = items[key];
-  //     });
-  //     setItems(newItems);
-  //   }, 1);
-  // };
 
   const renderItem = (item) => {
-    console.log("testtttetetete de l'infor p piour voire", id)
+    
+    console.log("console de  id",item)       
+      
+    
     return (
-      <TouchableOpacity style={{marginRight: 10, marginTop: 17}} onPress={async () => {props.onSubmitId(id),props.navigation.navigate('MyPrescription')}}>
+      <TouchableOpacity style={{marginRight: 10, marginTop: 17}} onPress={async () => {await props.onSubmitId(item.id),props.navigation.navigate('MyPrescription')}}>
         <Card>
           <Card.Content>
             <View
@@ -122,15 +97,9 @@ function Schedule(props){
                 alignItems: 'center',
               }}>
               <Text>{item.name}</Text>
-              <Button 
-          containerStyle = {{marginBottom: 25, width: '70%'}}
-            title="Mot de passe oublié"
-            type="solid"
-            buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-            onPress={() => setID(item.id) }
-        />
               
-              <Avatar.Text label="J" />
+              
+              
             </View>
           </Card.Content>
         </Card>
@@ -152,7 +121,7 @@ function Schedule(props){
       <Agenda
         items={items}
         // loadItemsForMonth={loadItems}
-        selected={'2021-05-16'}
+        selected={new Date()}
         renderItem={renderItem}
       />
     </View>

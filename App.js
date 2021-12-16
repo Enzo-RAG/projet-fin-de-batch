@@ -45,12 +45,12 @@ import basket from './reducers/basket.reducer';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-var users =1
+// var users =1
 const store = createStore(combineReducers({pseudo,basket,id}));
 
-const BottomNavigator = () => {
+const BottomNavigator1 = () => {
   console.log("Passé par le bottom Nav")
-  if (users==1 || users==4){return (                     // Si médecin ou patient
+  return (                     // Si médecin ou patient
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
@@ -84,7 +84,11 @@ const BottomNavigator = () => {
 
     </Tab.Navigator>
   );
-  }else if(users ==2){return (                // Si Pharmacien
+  
+}
+
+const BottomNavigator2 = () => {
+  return (                // Si Pharmacien
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
@@ -118,7 +122,9 @@ const BottomNavigator = () => {
     </Tab.Navigator>
   );
 
-  }else if(users ==3) {                       // si livreur
+  }
+  
+  const BottomNavigator3 = () => {                       // si livreur
     return (
       <Tab.Navigator
         screenOptions={({ route }) => ({
@@ -149,7 +155,9 @@ const BottomNavigator = () => {
         <Tab.Screen name="contact" component={Home} />
       </Tab.Navigator>
     );
-  }else {                                     // Sinon
+  }
+  
+  const BottomNavigator4 = () => {                                     // Sinon
     return (
       <Tab.Navigator
         screenOptions={({ route }) => ({
@@ -186,7 +194,7 @@ const BottomNavigator = () => {
     );
   }
   
-}
+
 
 export default function App() {
 
@@ -196,7 +204,10 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="HomeScreens" component={HomeScreen} />
-          <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
+          <Stack.Screen name="BottomNavigator1" component={BottomNavigator1} />
+          <Stack.Screen name="BottomNavigator2" component={BottomNavigator2} />
+          <Stack.Screen name="BottomNavigator3" component={BottomNavigator3} />
+          <Stack.Screen name="BottomNavigator4" component={BottomNavigator4} />
           <Stack.Screen name="HomeLog" component={HomLog} />
           <Stack.Screen name="Forgotpass" component={ForgotPass} />
           <Stack.Screen name="PatientRdv" component={PatientRdv} />
