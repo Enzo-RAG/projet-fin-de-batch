@@ -25,7 +25,7 @@ export default function HomeScreen(props) {
         <Text h1 > Forgotten password? </Text>
 
         <Text style={{marginBottom: 20}}> have a memore lapse?</Text>
-        <Text style={{marginBottom: 20}}> No problem we are all like that</Text>
+        <Text style={{marginBottom: 20}}> No problem, we are all like that</Text>
         
               
         

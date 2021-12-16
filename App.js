@@ -1,7 +1,9 @@
+import React, {useState} from 'react';
 import { LogBox } from 'react-native';
+
 LogBox.ignoreLogs(['Warning: ...']);
 
-import React from 'react';
+
 import { Ionicons } from '@expo/vector-icons';
 
 
@@ -26,27 +28,29 @@ import MyPrescriptions from './screens/MyPrescription';
 // pages rdv
 import PatientRdv from './screens/PatientRdv';
 
-
 import agenda from './screens/agendaScreen';
-
-
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import pseudo from './reducers/pseudo';
 import id from './reducers/id';
 import basket from './reducers/basket.reducer';
+import commandes from './reducers/commandes.reducer'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+<<<<<<< HEAD
 // var users =1
 const store = createStore(combineReducers({pseudo,basket,id}));
+=======
+var users =1
+const store = createStore(combineReducers({pseudo,basket,id,commandes}));
+>>>>>>> 92245b4873da86d4a5005b34018b13f8a200e6f7
 
 const BottomNavigator1 = () => {
   console.log("Passé par le bottom Nav")
@@ -197,7 +201,6 @@ const BottomNavigator2 = () => {
 
 
 export default function App() {
-
   
   return (
     <Provider store={store}>

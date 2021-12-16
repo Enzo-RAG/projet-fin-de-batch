@@ -24,10 +24,6 @@ const Medoc = (props) => {
             console.log("***************************************************************************")
             
           const response = await rawResponse.json() 
-          console.log(response.saveNewDrug[0].drugName) // ok
-          console.log(response.saveNewDrug[0].notRecommended)
-          console.log(response.saveNewDrug[0].urlToImg) // ok
-          console.log(response.saveNewDrug[0].prescription)
           setMedocTab(response.saveNewDrug)
           
         }
@@ -187,16 +183,3 @@ function mapDispatchToProps(dispatch) {
     mapDispatchToProps
   )(Medoc);
 
-
-  /*
-          console.log(response.saveNewDrug[0].rating) // ok
-          console.log(response.saveNewDrug[0].drugsDetail[0])
-          console.log(response.saveNewDrug[0].drugsDetail[0].form)
-          console.log(response.saveNewDrug[0].drugsDetail[0].madeWith[0])
-          console.log(response.saveNewDrug[0].drugsDetail[0].madeWith[0].dosage)
-          console.log(response.saveNewDrug[0].drugsDetail[0].madeWith[0].unit)
-          console.log(response.saveNewDrug[0].drugsDetail[0].madeWith[0].name)
-          console.log(medocTab)
-          console.log("************",response.saveNewDrug)
-
-  */
