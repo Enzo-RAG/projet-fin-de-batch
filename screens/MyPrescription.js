@@ -14,7 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 
 
- function HomeScreen(props) {
+ function MyPrescription(props) {
    
     const [info, setInfo] = useState([])
  
@@ -35,15 +35,15 @@ import { Ionicons } from '@expo/vector-icons';
       
       
   
-      const findArticlesWishList = async () => {
-        const dataWishlist = await fetch('https://arcane-sierra-33789.herokuapp.com/recepMyprescription', {
+      const findRecepMyPrescription = async () => {
+        const dataRecepMyPrescription = await fetch('https://arcane-sierra-33789.herokuapp.com/recepMyprescription', {
           method: 'POST',
           headers: {'Content-Type':'application/x-www-form-urlencoded'},
           body: `id=${props.id}`
           
         })
         
-        const body = await dataWishlist.json()
+        const body = await dataRecepMyPrescription.json()
         
        
          setInfo(body.prescription)
@@ -51,34 +51,28 @@ import { Ionicons } from '@expo/vector-icons';
          setCount2(body.prescription.prescription.length)
          addmed10()
          setDate(body.prescription.date.substr(0, 10))
-         setDescription(body.prescription.description)
-        
-        console.log("recupe prescirption", count2)
-     
+         setDescription(body.prescription.description)  
       }
-    
-console.log("test retour de info", info)
-
-      findArticlesWishList()
+          findRecepMyPrescription()
     },[response])
 
     useEffect(() => {
 
       if(props.pseudo.users.status == 1 ){
-        const findByName = async () => {
+        const findSearchUser = async () => {
           var rawresponse = await fetch('https://arcane-sierra-33789.herokuapp.com/searchuser', {
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
             body: `email=${info.medecinId}`
         })
          var user = await rawresponse.json()
-         setDoc(`docteur.${user.users.nom}`)
+         setDoc(`Docteur.${user.users.nom}`)
          setAnt(user.users.antecedent)
           
           
             }
-        findByName()
-      }else{const findByName = async () => {
+            findSearchUser()
+      }else{const findSearchUser = async () => {
         var rawresponse = await fetch('https://arcane-sierra-33789.herokuapp.com/searchuser', {
           method: 'POST',
           headers: {'Content-Type':'application/x-www-form-urlencoded'},
@@ -86,46 +80,33 @@ console.log("test retour de info", info)
       })
        var user = await rawresponse.json()
         
-        setDoc(`patient.${user.users.nom}`)
+        setDoc(`Patient.${user.users.nom}`)
         setAnt(user.users.antecedent)
-        console.log("test retour de user", user)
         setTel(user.users.telephone)
         
           }
-      findByName()}
+          findSearchUser()}
       
     },[count])
 
 
-    console.log("test retour de user", doc)
 
-     
-
-
-
-
-
-
-console.log('*****************testede count *********', count2)
             
-  var test10 = () => {
-  
-   
-  
+  var ordonance = () => {
+    
     if(count2 != 0){
           
-      
     return(
         <Card containerStyle={{width: '90%', alignItems: 'center',justifyContent: 'center'}}>
           
-        <Card.Title> ordonance du  {date}</Card.Title>
+        <Card.Title> Ordonance du  {date}</Card.Title>
         <Card.Divider/>
         
         {count.map((info3, i) => {
           
           return (
           <View>
-          <Text h4> medicament {i+1}</Text>
+          <Text h4> Medicament {i+1}</Text>
           <Text style={{marginBottom: 10}}>
           {info3.number} 
         
@@ -162,10 +143,7 @@ console.log('*****************testede count *********', count2)
 return(
 <Card containerStyle={{width: '90%' ,alignItems: 'center',justifyContent: 'center'}}>
   
-<Card.Title> aucun ordonance </Card.Title>
-
-
-     
+<Card.Title> Aucun Ordonnance </Card.Title>   
 </Card>)
 
 }}
@@ -175,7 +153,7 @@ return(
 
   
 
-var addmed10 = () => {
+var addMedicament = () => {
 if(props.pseudo.users.status == 4 ){
   
   return(
@@ -183,7 +161,7 @@ if(props.pseudo.users.status == 4 ){
   <Input
   containerStyle = {{marginBottom: 5, width: '70%'}}
   inputStyle={{marginLeft: 10}}
-  placeholder='number'
+  placeholder='Nombre'
   leftIcon={
     <Icon
     name='user'
@@ -196,7 +174,7 @@ if(props.pseudo.users.status == 4 ){
 <Input
   containerStyle = {{marginBottom: 5, width: '70%'}}
   inputStyle={{marginLeft: 10}}
-  placeholder='prise'
+  placeholder='Prise'
   leftIcon={
     <Icon
     name='user'
@@ -209,7 +187,7 @@ if(props.pseudo.users.status == 4 ){
 <Input
   containerStyle = {{marginBottom: 5, width: '70%'}}
   inputStyle={{marginLeft: 10}}
-  placeholder='duree'
+  placeholder='Duree'
   leftIcon={
     <Icon
     name='user'
@@ -222,7 +200,7 @@ if(props.pseudo.users.status == 4 ){
 <Input
   containerStyle = {{marginBottom: 5, width: '70%', }}
   inputStyle={{marginLeft: 10}}
-  placeholder='autre'
+  placeholder='Autre'
   leftIcon={
     <Icon
     name='user'
@@ -234,7 +212,7 @@ if(props.pseudo.users.status == 4 ){
 />
 <Button
 containerStyle = {{ width: '70%'}}
-title="add doc"
+title="Ajouter Le Medicament"
 type="solid"
 buttonStyle={{ backgroundColor: "#8AA78B" }}
 onPress={() => {addprescription()}}
@@ -244,34 +222,34 @@ onPress={() => {addprescription()}}
    
    
 var addprescription = async () =>{
-    const dataWishlist = await fetch('https://arcane-sierra-33789.herokuapp.com/addprescription', {
+    const dataAddPrescription = await fetch('https://arcane-sierra-33789.herokuapp.com/addprescription', {
     method: 'POST',
     headers: {'Content-Type':'application/x-www-form-urlencoded'},
     body: `id=${props.id}&number=${number}&prise=${prise}&duree=${duree}&autre=${autre}`
     
   })
-    const body = await dataWishlist.json()
+    const body = await dataAddPrescription.json()
     setResponse(body)
     
  }
  
- var appel = function(){
+ var numTelephone = function(){
   Linking.openURL(`tel:${tel}`)
 }
-var appel1 = () => {
+var appelPatient = () => {
   if(props.pseudo.users.status == 4 ){
   return(
     <View style={styles2.container}>
        <Text>
-        antecedent : {ant}
+       Antécédent : {ant}
 
     </Text>
     <Button 
     containerStyle = {{marginBottom: 25, width: '70%'}}
-      title="appel RDV"
+      title="Appel RDV"
       type="solid"
       buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-      onPress={() => {appel()} }
+      onPress={() => {numTelephone()} }
   />
 
  
@@ -304,24 +282,14 @@ var appel1 = () => {
         <Text h3 style={{color:"#F0F0F0",alignItems: 'center',justifyContent: 'center'}}> RDV du {date}  </Text>
         <Text h3 style={{color:"#F0F0F0",alignItems: 'center',justifyContent: 'center'}}>  {doc}  </Text>
         <View style={styles.container}>
-        <Text h4 > Description Des Symptome : {description} </Text>
+        <Text h4 > Description Des Symptomes : {description} </Text>
         <Text> </Text>
         </View>
-        {appel1()}
-       
-       
-       
-       
-       
-        
+        {appelPatient()}         
         <ScrollView style={styles3.container}>
-        {addmed10()}
-        
-        {test10()}
+        {addMedicament()}
+        {ordonance()}
         <Text></Text>
-        
-
-      
         <Button 
           containerStyle = {{marginBottom: 25, width: '100%', alignItems: 'center',justifyContent: 'center',}}
             title="Go home page"
@@ -382,8 +350,6 @@ const styles = StyleSheet.create({
   const styles3 = StyleSheet.create({
     container: {
       width : '100%',
-      
-     
       backgroundColor: '#727679'
     },
   });
@@ -402,5 +368,5 @@ const styles = StyleSheet.create({
   export default connect(
     mapStateToProps, 
     mapDispatchToProps
-  )(HomeScreen);
+  )(MyPrescription);
 
