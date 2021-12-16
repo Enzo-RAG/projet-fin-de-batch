@@ -5,32 +5,70 @@ import { connect } from 'react-redux';
 import { StyleSheet, View, ScrollView, StatusBar} from 'react-native';
 import { Button, Card, Text, Rating,Header,Badge,Image,Icon } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
+import { Input } from 'react-native-elements/dist/input/Input';
 
 const Medoc = (props) => {
 
     const allaitement ="https://res.cloudinary.com/dz0ooeuqq/image/upload/v1638831902/allaitement_pmhleh.jpg"
     const enceinte ="https://res.cloudinary.com/dz0ooeuqq/image/upload/v1638831901/posters-femme-enceinte-symbole-vecteur-stylise.jpg_ogehcp.jpg"
     const allergies = "https://res.cloudinary.com/dz0ooeuqq/image/upload/v1638831902/allergies_xsfk2a.jpg"
-
-    useEffect(() => {
-        console.log("***************************************************************************")
-
-        const findMedoc = async() => {
-          var rawResponse = await fetch('https://helpillsprojectlacapsule.herokuapp.com/medocs/getDrugsByActive', {
-            method: 'POST',
-            headers: {'Content-Type':'application/x-www-form-urlencoded'},
-            body: "name=paracetamol"
-            });
-            console.log("***************************************************************************")
-            
-          const response = await rawResponse.json() 
-          setMedocTab(response.saveNewDrug)
-          
-        }
-        findMedoc()    
-      },[])
-
     const [medocTab, setMedocTab] = useState([])
+    const [input1,setInput1]=useState("")
+
+ 
+      const findMedoc = async(name) => {
+        var rawResponse = await fetch('https://helpillsprojectlacapsule.herokuapp.com/medocs/getDrugsByActive', {
+          method: 'POST',
+          headers: {'Content-Type':'application/x-www-form-urlencoded'},
+          body: `name=${name}`
+          });
+          console.log("***************************************************************************")
+          
+        const response = await rawResponse.json() 
+        setMedocTab(response.saveNewDrug)
+        
+      }
+
+   if (medocTab.length<1){
+    return(
+        <View style={{backgroundColor:"#F0F0F0"}}>
+            <StatusBar hidden={false} StatusBarStyle="light-content"/>
+            <Header
+                leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
+                centerComponent={{ text: "Médicaments", style: { color: '#fff', fontWeight:"bold" } }}
+                rightComponent={{ icon: 'home', color: '#fff' }}
+            />
+            <ScrollView style={{ marginBottom: 85 }}>
+            </ScrollView>
+            <View style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
+                <Text style={{marginTop:30,marginBottom: 30, fontSize:18}}>
+                    Rechercher des médicaments par molécule. 
+                </Text>
+                <Input
+                    containerStyle = {{marginBottom: 20, width: '90%'}}
+                    inputStyle={{marginLeft: 3}}
+                    placeholder="Nom de molécule, ex : paracétamol"
+                    onChangeText={(val) => {setInput1(val)}}
+                    value={input1}
+                >
+                </Input>
+                
+                <Button
+                    icon={<Ionicons name="hourglass-outline" size={30} color="rgba(255,255,255,1)" />}
+                    type="outline"
+                    buttonStyle={{width:350, backgroundColor:"rgba(138, 167, 139,0.75)", borderRadius: 10, borderWidth:5 ,borderColor:"#8AA78B", marginTop:10, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                    title=' Rechercher'
+                    titleStyle={{color:"rgba(255,255,255,1)", fontSize:27}} 
+                    onPress={()=> {
+                        findMedoc(input1)
+                    }}
+                />
+            </View>
+            
+        </View> 
+    )
+
+   }else if(medocTab.length>1){
 
     return (
         <View style={{backgroundColor:"#F0F0F0"}}>
@@ -87,7 +125,8 @@ const Medoc = (props) => {
                         recommended3Color ="red"
                     }               
                 
-                ;return(       
+                ;return( 
+                    <View>   
                     <Card key={i} >
                         <Card.Title 
                             style={{fontWeight: 'bold',fontSize: 16, backgroundColor:"#F0F0F0",paddingBottom:5 ,paddingTop:5,marginTop:0,marginBottom:0,borderColor:"black",borderRadius:10, borderStyle:"solid",borderWidth: 1}}>
@@ -150,23 +189,41 @@ const Medoc = (props) => {
                                 <Badge status='warning' value={text} badgeStyle={{backgroundColor: color}} textStyle={{color:textColor, lineHeight:15}}/>
                         </View>
                         <Text style={{marginTop:10,marginBottom: 10}}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel varius felis. Nam sed lectus ut nulla molestie eleifend. Duis quis massa enim. Fusce quis ultrices justo. Suspendisse nec nunc ipsum. Suspendisse sodales tellus quis orci ornare consectetur. 
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel varius felis. Nam sed lectus ut nulla molestie eleifend. Duis quis massa enim. Fusce quis ultrices justo. Suspendisse nec nunc ipsum. Suspendisse sodales tellus quis orci ornare consectetur. 
                         </Text>
                         <Button
                             icon={<Ionicons name="cart-outline" size={25} color="#FFF" />}
                             buttonStyle={{backgroundColor:"#8AA78B", borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                            title=' Add to basket' 
+                            title=' Ajouter au panier' 
                             onPress={()=> {
                                 console.log("********************* add to basket")
                                 props.addToBasket({name:profile.drugName,img:profile.urlToImg})
                                }
                               }
-                        />   {console.log("derner testtttt",profile.drugName, profile.urlToImg  )}              
+                        />              
                     </Card>
+                    
+                </View>    
                 )})}  
+                <View style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
+                    <Text style={{marginTop:10,marginBottom: 10, fontSize:18}}>
+                        Nouvelle recherche 
+                    </Text>    
+                    <Button
+                        icon={<Ionicons name="arrow-undo-outline" size={30} color="rgba(255,255,255,1)" />}
+                        type="outline"
+                        buttonStyle={{width:350, backgroundColor:"rgba(138, 167, 139,0.75)", borderRadius: 10, borderWidth:5 ,borderColor:"#8AA78B", marginTop:10, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                        title=' Reset'
+                        titleStyle={{color:"rgba(255,255,255,1)", fontSize:27}} 
+                        onPress={()=> {
+                            setMedocTab([])
+                            setInput1("")
+                        }}
+                    />
+            </View>
             </ScrollView>
-        </View>  
-    );
+        </View> 
+    );}
 };
 
 
