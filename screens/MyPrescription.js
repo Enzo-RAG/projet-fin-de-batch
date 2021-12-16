@@ -49,9 +49,10 @@ import { Ionicons } from '@expo/vector-icons';
          setInfo(body.prescription)
          setCount(body.prescription.prescription)
          setCount2(body.prescription.prescription.length)
-         addmed10()
+         addMedicament()
          setDate(body.prescription.date.substr(0, 10))
          setDescription(body.prescription.description)  
+         console.log("tet", body.prescription.description)
       }
           findRecepMyPrescription()
     },[response])
@@ -108,19 +109,19 @@ import { Ionicons } from '@expo/vector-icons';
           <View>
           <Text h4> Medicament {i+1}</Text>
           <Text style={{marginBottom: 10}}>
-          {info3.number} 
+          Medicament :{info3.autre} 
         
           </Text>
           <Text style={{marginBottom: 10}}>
-          {info3.prise} 
+          Quantité : {info3.number} 
         
           </Text>
           <Text style={{marginBottom: 10}}>
-          {info3.duree} 
+          Prise : {info3.prise} 
         
           </Text>
           <Text style={{marginBottom: 10}}>
-          {info3.autre} 
+          durée: {info3.duree} /jour
         
           </Text>
           <Button
@@ -158,6 +159,7 @@ if(props.pseudo.users.status == 4 ){
   
   return(
 <View style={styles.container}>
+  <View style={styles2.container}>
   <Input
   containerStyle = {{marginBottom: 5, width: '70%'}}
   inputStyle={{marginLeft: 10}}
@@ -217,6 +219,7 @@ type="solid"
 buttonStyle={{ backgroundColor: "#8AA78B" }}
 onPress={() => {addprescription()}}
 />
+</View>
 </View>)
 }}
    
@@ -240,10 +243,8 @@ var appelPatient = () => {
   if(props.pseudo.users.status == 4 ){
   return(
     <View style={styles2.container}>
-       <Text>
-       Antécédent : {ant}
-
-    </Text>
+       <Text h4> Antécédent :</Text>
+       <Text h4>{ant}</Text>
     <Button 
     containerStyle = {{marginBottom: 25, width: '70%'}}
       title="Appel RDV"
@@ -282,8 +283,8 @@ var appelPatient = () => {
         <Text h3 style={{color:"#F0F0F0",alignItems: 'center',justifyContent: 'center'}}> RDV du {date}  </Text>
         <Text h3 style={{color:"#F0F0F0",alignItems: 'center',justifyContent: 'center'}}>  {doc}  </Text>
         <View style={styles.container}>
-        <Text h4 > Description Des Symptomes : {description} </Text>
-        <Text> </Text>
+        <Text h4 > Description Des Symptomes :</Text>
+        <Text h4> {description}</Text>
         </View>
         {appelPatient()}         
         <ScrollView style={styles3.container}>
@@ -341,7 +342,7 @@ const styles = StyleSheet.create({
 
   const styles2 = StyleSheet.create({
     container: {
-      width : '80%',
+      width : '100%',
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: '#F0F0F0'

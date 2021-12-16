@@ -16,7 +16,7 @@ import {connect} from 'react-redux';
 
 function PatientRdv(props) {
 
-    const [date, setDate] = useState("")
+    const [date, setDate] = useState("Date du RDV")
     const [patientId , setPatienId] = useState("") 
     const [medecinId, setMedecinId] = useState("")
     const [photo, setPhoto] = useState("")
@@ -98,7 +98,7 @@ function PatientRdv(props) {
             <Text h2 style={{color:"#727679"}}> {props.pseudo.users.nom}</Text>
             
         <View style={styles.container} backgroundColor="#727679">
-        <Text h3 style={{color:"#F0F0F0"}}> Mes Rendez-Vous</Text>
+        <Text h3 style={{color:"#F0F0F0"}}>Prendre Rendez-Vous</Text>
 
         </View>
         
@@ -116,7 +116,7 @@ function PatientRdv(props) {
   }}
         />
         <Input
-        containerStyle = {{marginBottom: 5, width: '70%'}}
+        containerStyle = {{marginBottom: 5, width: '100%'}}
         inputStyle={{marginLeft: 10}}
         value={date}
         leftIcon={
@@ -165,9 +165,9 @@ function PatientRdv(props) {
           )}
         />
 
-      </View>
+      </View >
         <Input
-        containerStyle = {{marginBottom: 5, width: '70%'}}
+        containerStyle = {{marginBottom: 5, width: '100%'}}
         inputStyle={{marginLeft: 10}}
         placeholder='descrition des symptome'
         leftIcon={
@@ -183,7 +183,7 @@ function PatientRdv(props) {
         {/* EMAIL */}
         <Button 
           
-          containerStyle = {{marginBottom: 25, width: '70%', marginTop: 10}}
+          containerStyle = {{marginBottom: 25, width: '100%', marginTop: 10, alignItems: 'center',justifyContent: 'center'}}
             title="valide prise RDV"
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}

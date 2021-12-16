@@ -55,31 +55,33 @@ useEffect(() => {
   
     if(info1.prescription !== null){
     return(
-    <Card containerStyle={{width: '70%'}}>
+      <Card containerStyle={{width: '90%', alignItems: 'center',justifyContent: 'center'}}>
       
-    <Card.Title>{info1.date}</Card.Title>
+    <Card.Title>{info1.date.substr(0, 10)}</Card.Title>
     <Card.Divider/>
     
     {info1.prescription.map((info3, i) => {
       
       return (
       <View>
+      <Text h4> Medicament {i+1}</Text>
       <Text style={{marginBottom: 10}}>
-      {info3.number} 
+      Medicament :{info3.autre} 
     
       </Text>
       <Text style={{marginBottom: 10}}>
-      {info3.prise} 
+      Quantité : {info3.number} 
     
       </Text>
       <Text style={{marginBottom: 10}}>
-      {info3.duree} 
+      Prise : {info3.prise} 
     
       </Text>
       <Text style={{marginBottom: 10}}>
-      {info3.autre} 
+      durée: {info3.duree} / jour
     
       </Text>
+     
       
       </View>  
       )
@@ -123,7 +125,7 @@ useEffect(() => {
             
         <View style={styles.container} backgroundColor="#727679">
         <Text h3 style={{color:"#F0F0F0"}}> Historique Des Ordonnances</Text>
-        <ScrollView>
+        <ScrollView style={styles3.container}>
         {test}
         <Text></Text>
         <Text></Text>
@@ -158,6 +160,13 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: '#F0F0F0'
+    },
+  });
+
+  const styles3 = StyleSheet.create({
+    container: {
+      width : '100%',
+      backgroundColor: '#727679'
     },
   });
 

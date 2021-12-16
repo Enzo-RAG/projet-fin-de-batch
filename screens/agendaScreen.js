@@ -24,11 +24,11 @@ function AgendaScreen(props){
     var test = items.hasOwnProperty(newdate)
     if(test){
       var aCopy = items
-      aCopy[newdate].push({name: event._doc.description +" / "+ event.name ,id:event._doc._id})
+      aCopy[newdate].push({name: event.name  +" / symptomes "+event._doc.description  ,id:event._doc._id})
       setItems(aCopy)
       
     }else{
-      Object.assign(items,{[newdate] : [{name:event._doc.description +" / "+ event.name , id:event._doc._id}]})
+      Object.assign(items,{[newdate] : [{name:event.name +" / symptomes "+ event._doc.description  , id:event._doc._id}]})
     }
     
   
@@ -57,8 +57,7 @@ function AgendaScreen(props){
   },[email])
 
  
-
-  const renderItem = (item) => { 
+var renderItem = (item) => {if(props.pseudo.users.status == 1 ){
     return (
       <TouchableOpacity style={{marginRight: 10, marginTop: 17}} onPress={async () => {await props.onSubmitId(item.id),props.navigation.navigate('MyPrescription')}}>
         <Card>
@@ -69,13 +68,30 @@ function AgendaScreen(props){
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}>
-              <Text>{item.name}</Text>
+              <Text>RDV avec Doc.{item.name}</Text>
             </View>
           </Card.Content>
         </Card>
       </TouchableOpacity>
     );
-  };
+  }else{
+    return (
+      <TouchableOpacity style={{marginRight: 10, marginTop: 17}} onPress={async () => {await props.onSubmitId(item.id),props.navigation.navigate('MyPrescription')}}>
+        <Card>
+          <Card.Content>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}>
+              <Text>RDV avec Patient {item.name}</Text>
+            </View>
+          </Card.Content>
+        </Card>
+      </TouchableOpacity>
+    );
+  }}
 
   
 

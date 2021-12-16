@@ -13,6 +13,8 @@ function HomeScreen(props) {
    
     const[signinEmail, setSigninEmail] = useState('')
     const [signinPassword, setSigninPassword]= useState('')
+    const [destination, setDestination]= useState('')
+    const [test, setTest]= useState(true)
     const [pseudo, setPseudo] = useState('')
     const[response, setResponse]= useState('')
    
@@ -26,17 +28,14 @@ function HomeScreen(props) {
     
     var response = await rawsignin.json();
     setResponse(response)
-
-    if(body.result == true){
-
-      setUserExists(true)
-    }
-
+    
+    
+    console.log('testdfsdfdsfdsfs$$$$$$df',pseudo.users.status) 
    }
 
    useEffect(() => {
     const findByName = async () => {
-      var rawresponse = await fetch('https://helpills.herokuapp.com/searchuser', {
+      var rawresponse = await fetch('https://arcane-sierra-33789.herokuapp.com/searchuser', {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         body: `email=${signinEmail}`
@@ -44,11 +43,12 @@ function HomeScreen(props) {
      var user = await rawresponse.json()
       
       setPseudo(user)
+      
         }
     findByName()
   },[response])
-
-   return (
+   
+    return (
     
     <View style={styles.container}
     >
@@ -60,11 +60,11 @@ function HomeScreen(props) {
             centerComponent={{ text: 'Helpills', style: { color: '#F0F0F0' } }}
             
         />
-        <Text h1>Connexion</Text>
+        <Text h1>Sign-in</Text>
         <Input
             containerStyle = {{marginBottom: 25, width: '70%'}}
             inputStyle={{marginLeft: 10}}
-            placeholder='Email'
+            placeholder='email'
             leftIcon={
                 <Icon
                 name='user'
@@ -72,13 +72,13 @@ function HomeScreen(props) {
                 color="#727679"
                 />
             }
-            onChangeText={(val) => {setSigninEmail(val), setPseudo(val);}}
+            onChangeText={(val) => {setSigninEmail(val);}}
         />
             {/* PASSWORD */}
             <Input secureTextEntry={true}
             containerStyle = {{marginBottom: 25, width: '70%'}}
             inputStyle={{marginLeft: 10}}
-            placeholder='Mots de passe'
+            placeholder='Password'
             leftIcon={
                 <Icon
                 name='user'
@@ -92,12 +92,12 @@ function HomeScreen(props) {
         <Button
            
            containerStyle = {{marginBottom: 25, width: '70%'}}
-            title="CONNEXION"
+            title="CONNECTION"
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" }}
             onPress={() => {
                handleClickSignin();
-              {if(response.isok == true){ console.log("true");props.onSubmitPseudo(pseudo);props.navigation.navigate('BottomNavigator', { screen: 'Home' })}else{console.log("false");props.navigation.navigate('HomeScreens')}} ;
+              {if(response.isok == true){ console.log("test");props.onSubmitPseudo(pseudo),props.navigation.navigate(`BottomNavigator${pseudo.users.status}`, { screen: 'Home' })}else{console.log("test2");props.navigation.navigate('HomeScreens')}} ;
             }}
         />
         {/* inscription  */}
@@ -139,7 +139,11 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
+function mapStateToProps(state) {
+  return { pseudo : state.pseudo }
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(HomeScreen);
