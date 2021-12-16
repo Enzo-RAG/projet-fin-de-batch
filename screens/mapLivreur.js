@@ -6,7 +6,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
-import { socket } from 'socket.io-client';
 
 export default function MapScreen() {
 
@@ -41,10 +40,6 @@ export default function MapScreen() {
     });
   }, []);
 
-// useEffect(() =>{
-//   socket.emit("sendPosition", { latitude: currentLatitude, longitude: currentLongitude } );
-// })
-
   var selectPOI = (e) => {
     if (addPOI) {
       setAddPOI(false);
@@ -62,44 +57,16 @@ export default function MapScreen() {
     setTitrePOI();
   }
 
-  var muPinLocation = () =>{
-    if (props.status == 2){
-      <Marker
-            pinColor="black"
-            title="livreur"
-            description="I'am comming !"
-            icon={<i class="fas fa-biking"></i>}
-            coordinate={{latitude: 43.116669, longitude: 5.93333}}
-          />
-    }else if(props.status == 3){
-      <Marker
-            pinColor="green"
-            title="pharmasisilafamille"
-            description="j'ai un max d'opioide !"
-            icon={<i class="fas fa-biking"></i>}
-            coordinate={{latitude: 43.116669, longitude: 5.93333}}
-          />
-    }else if(props.status == 4){
-      <Marker
-            pinColor="white"
-            title="what's up doc ?"
-            description="j'ai une ordonnance pour ton rhume !"
-            icon={<i class="fas fa-biking"></i>}
-            coordinate={{latitude: 43.116669, longitude: 5.93333}}
-          />
-    }
-  }
-
-  var markerPOI = listPOI.map((POI, i) => {
-    return <Marker key={i} pinColor="blue" coordinate={{ latitude: POI.latitude, longitude: POI.longitude }}
-      title={POI.titre}
-      description={POI.description}
-    />
-  });
-  var isDisabled = false;
-  if (addPOI) {
-    isDisabled = true;
-  }
+  // var markerPOI = listPOI.map((POI, i) => {
+  //   return <Marker key={i} pinColor="blue" coordinate={{ latitude: POI.latitude, longitude: POI.longitude }}
+  //     title={POI.titre}
+  //     description={POI.description}
+  //   />
+  // });
+  // var isDisabled = false;
+  // if (addPOI) {
+  //   isDisabled = true;
+  // }
 
 
 
@@ -108,34 +75,7 @@ export default function MapScreen() {
 
   return (
     <View style={{ flex: 1 }} >
-      <Overlay
-        isVisible={isVisible}
-        onBackdropPress={() => { setIsVisible(false) }}
-      >
-        <View>
-          <Input
-            containerStyle={{ marginBottom: 25 }}
-            placeholder='titre'
-            onChangeText={(val) => setTitrePOI(val)}
-
-          />
-
-          <Input
-            containerStyle={{ marginBottom: 25 }}
-            placeholder='description'
-            onChangeText={(val) => setDescPOI(val)}
-
-          />
-
-          <Button
-            title="Ajouter POI"
-            buttonStyle={{ backgroundColor: "#eb4d4b" }}
-            onPress={() => handleSubmit()}
-            type="solid"
-          />
-        </View>
-      </Overlay>
-
+      
       <MapView
         onPress={(e) => { selectPOI(e) }}
         style={{ flex: 1 }}
@@ -148,8 +88,8 @@ export default function MapScreen() {
       >
         <Marker key={"currentPos"}
           pinColor="red"
-          title="Hello"
-          description="I'am here"
+          title="Bonjour"
+          description="Je suis la"
           coordinate= {{ latitude: currentLatitude, longitude: currentLongitude }}
         />
         {markerPOI}
@@ -157,17 +97,15 @@ export default function MapScreen() {
 
         <Marker
             pinColor="black"
-            title="Hello"
-            description="I'am comming !"
-            icon={<i class="fas fa-biking"></i>}
+            title="Client"
+            description=" Sonnez quand vous êtes en bas !"
             coordinate={{latitude: 43.116669, longitude: 5.93333}}
           />
 
           <Marker
             pinColor="green"
-            title="dr Henry Thierry"
-            description="I'am here to heal you !"
-            icon={<i class="fas fa-biking"></i>}
+            title="Pharmacie Idéale"
+            description="La Commande est prête !"
             coordinate={{latitude: 43.604652, longitude: 1.444209}}
           />
 

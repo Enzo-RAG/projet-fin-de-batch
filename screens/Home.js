@@ -1,16 +1,13 @@
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Warning: ...']);
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { StyleSheet, View, ActivityIndicator  } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import {Button, Input, Header, Image, Text, Overlay } from 'react-native-elements'
+import {Button, Header, Image, Text} from 'react-native-elements'
 import {connect} from 'react-redux';
 
 
-function HomeScreen(props) {
-    const [pseudo, setPseudo] = useState('');
-    const [rdv, setRdv] = useState(false);
-
+function Home(props) {
+   
     return (
     <View style={styles.container}>
         <Header
@@ -32,23 +29,22 @@ function HomeScreen(props) {
         <Text h2 style={{color:"#727679"}}> {props.pseudo.users.nom}</Text>
             
         <View style={styles.container} backgroundColor="#727679">
-          <Text h3 style={{color:"#F0F0F0"}}> My Appointment Book</Text>
+          <Text h3 style={{color:"#F0F0F0"}}> Mes Rendez-Vous :</Text>
 
           <Button
            containerStyle = {{ width: '70%'}}
-           title="My rdv"
+           title="Mes Renz-Vous"
            type="solid"
            buttonStyle={{ backgroundColor: "#8AA78B" }}
            onPress={() => {props.navigation.navigate('agenda')}}
           />
         
-          <Button 
-          
-          containerStyle = {{marginBottom: 25, width: '70%', marginTop: 25}}
-            title="Book ONE"
-            type="solid"
-            buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-            onPress={() => {props.navigation.navigate('PatientRdv')}}
+          <Button          
+            containerStyle = {{marginBottom: 25, width: '70%', marginTop: 25}}
+              title="Réserver"
+              type="solid"
+              buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
+              onPress={() => {props.navigation.navigate('PatientRdv')}}
           />
         
         </View>
@@ -83,81 +79,4 @@ const styles = StyleSheet.create({
   export default connect(
     mapStateToProps, 
     null
-  )(HomeScreen);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-   <Button 
-      containerStyle = {{marginBottom: 25, width: '70%', marginTop: 10}}
-      title="Order medicine's drug"
-      type="solid"
-      buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-      onPress={() => {props.navigation.navigate('Forgotpass')}}
-        />
-
-        <Button 
-          
-          containerStyle = {{marginBottom: 25, width: '70%'}}
-            title="my presciption "
-            type="solid"
-            buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-            onPress={() => {props.navigation.navigate('PatientPresciption')}}
-        /> 
-
-
-        // const book = () => {
-    //   if(rdv == false){
-    //     return(
-    //       <Button 
-          
-    //       containerStyle = {{marginBottom: 25, width: '70%', marginTop: 25}}
-    //         title="Book ONE"
-    //         type="solid"
-    //         buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-    //         onPress={() => {props.navigation.navigate('PatientRdv')}}
-    //     />)
-    //   }}
-
-    // const rdv1 = () => {
-    //   if(rdv == true){
-    //     return(
-    //     <Card containerStyle={{width: '70%'}}>
-    //     <Card.Title>nom doc</Card.Title>
-    //     <Card.Divider/>
-    //     <Card.Image source={{ uri: 'https://picsum.photos/200' }}></Card.Image>
-    //       <Text style={{marginBottom: 10}}>
-    //         date heure
-    //       </Text>
-         
-    //       <Button
-    //         icon={<Icon name='code' color='#ffffff' />}
-    //         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-    //         title='Modify' />
-    //         <Button
-    //         icon={<Icon name='code' color='#ffffff' />}
-    //         buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-    //         title='cancel' />
-          
-    //   </Card>)
-    //   }else{
-    //     return(<Text h3 style={{color:"#F0F0F0"}}> No appointment yet</Text>)
-    //   }
-    // }
-*/
+  )(Home);

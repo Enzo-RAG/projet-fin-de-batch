@@ -17,7 +17,6 @@ import { Ionicons } from '@expo/vector-icons';
  function HomeScreen(props) {
    
     const [info, setInfo] = useState([])
-    const [test, setTest] = useState([])
  
     const [doc, setDoc] = useState([])
     const [count, setCount] = useState([])
@@ -26,13 +25,11 @@ import { Ionicons } from '@expo/vector-icons';
     const [prise, setPrise] = useState('')
     const [duree, setDuree] = useState('')
     const [autre, setAutre] = useState('')
-    const [addmed, setAddmed] = useState([])
     const [response, setResponse] = useState([])
     const [date, setDate] = useState('')
     const [description, setDescription] = useState('')
     const [ant, setAnt] = useState('')
     const [tel, setTel] = useState('')
-        console.log("console.log",info)
         
     useEffect(() => {
       

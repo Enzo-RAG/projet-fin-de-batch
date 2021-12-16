@@ -12,15 +12,13 @@ import { connect } from 'react-redux';
 
 // Dropdown
 const data = [
-  { label: 'patient', value: 1 },
-  { label: 'livreur', value: 2 },
-  { label: 'pharmacien', value: 3 },
-  { label: 'docteur', value: 4 },
-  // { label: 'Item 5', value: '5' },
-
+  { label: 'Patient', value: 1 },
+  { label: 'Livreur', value: 2 },
+  { label: 'Pharmacien', value: 3 },
+  { label: 'Docteur', value: 4 },
 ];
 
-function HomeScreen(props) {
+function HomeLog(props) {
     const [pseudo, setPseudo] = useState('');
     
     // Dropdown
@@ -51,7 +49,6 @@ function HomeScreen(props) {
         const [antecedent, setAntecedent]= useState('')
 
 
-        console.log(prenom,nom,password,email,)
 
         useEffect(() => {
           const findByName = async () => {
@@ -61,7 +58,6 @@ function HomeScreen(props) {
               body: `email=${email}`
           })
            var user = await rawresponse.json()
-            console.log("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",user,"HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
             setPseudo(user)
               }
           findByName()
@@ -88,25 +84,22 @@ function HomeScreen(props) {
            
 
            var response = await rawresponse.json();
-    setResponse(response)
-    setPseudo(response)
-    console.log('testdfsdfdsfdsfs$$$$$$df',response.isok)
+              setResponse(response)
+              setPseudo(response)
          
         
       }
 
     var infoplus = () =>  {  
 
-      if(value == 1){
-        console.log("b",value,"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-        
+      if(value == 1){        
         
         return(
         <View style={styles3.container}>
         <Input
         containerStyle = {{marginBottom: 5, width: '70%'}}
         inputStyle={{marginLeft: 10}}
-        placeholder='antecedant medico'
+        placeholder='Antécédents médicaux'
         leftIcon={
           <Icon
           name='user'
@@ -132,7 +125,7 @@ function HomeScreen(props) {
           <Input
               containerStyle = {{marginBottom: 5, width: '70%'}}
               inputStyle={{marginLeft: 10}}
-              placeholder='numéro de sécurité sociale'
+              placeholder='Numéro de sécurité sociale'
               leftIcon={
                 <Icon
                 name='user'
@@ -145,7 +138,7 @@ function HomeScreen(props) {
           <Input
                   containerStyle = {{marginBottom: 5, width: '70%'}}
                   inputStyle={{marginLeft: 10}}
-                  placeholder='numéro de mutuelle'
+                  placeholder='Numéro de mutuelle'
                   leftIcon={
                     <Icon
                     name='user'
@@ -163,7 +156,7 @@ function HomeScreen(props) {
           <Input
           containerStyle = {{marginBottom: 5, width: '70%'}}
           inputStyle={{marginLeft: 10}}
-          placeholder='num de plac imatriculation'
+          placeholder="Numéro de plaque d'immatriculation"
           leftIcon={
             <Icon
             name='user'
@@ -182,7 +175,7 @@ function HomeScreen(props) {
             <Input
             containerStyle = {{marginBottom: 5, width: '70%'}}
             inputStyle={{marginLeft: 10}}
-            placeholder='num de pharmacien'
+            placeholder='Numéro professionnel'
             leftIcon={
               <Icon
               name='user'
@@ -203,7 +196,7 @@ function HomeScreen(props) {
               <Input
               containerStyle = {{marginBottom: 5, width: '70%'}}
               inputStyle={{marginLeft: 10}}
-              placeholder='num de docteur'
+              placeholder='Numéro professionnel'
               leftIcon={
                 <Icon
                 name='user'
@@ -256,7 +249,7 @@ function HomeScreen(props) {
             <Input
             containerStyle = {{marginBottom: 5, width: '70%'}}
             inputStyle={{marginLeft: 10}}
-            placeholder='Prenom'
+            placeholder='Prénom'
             leftIcon={
               <Icon
               name='user'
@@ -297,7 +290,7 @@ function HomeScreen(props) {
             <Input
                   containerStyle = {{marginBottom: 5, width: '70%'}}
                   inputStyle={{marginLeft: 10}}
-                  placeholder='Adresse'
+                  placeholder='Adresse Postal'
                   leftIcon={
                     <Icon
                     name='user'
@@ -323,7 +316,7 @@ function HomeScreen(props) {
               <Input
                   containerStyle = {{marginBottom: 5, width: '70%'}}
                   inputStyle={{marginLeft: 10}}
-                  placeholder='Code postale'
+                  placeholder='Code postal'
                   leftIcon={
                     <Icon
                     name='user'
@@ -348,8 +341,8 @@ function HomeScreen(props) {
           maxHeight={300}
           labelField="label"
           valueField="value"
-          placeholder={!isFocus ? 'vous etes ?' : '...'}
-          searchPlaceholder="Search..."
+          placeholder={!isFocus ? 'Vous êtes ?' : '...'}
+          searchPlaceholder="Rechercher..."
           value={value}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
@@ -372,19 +365,12 @@ function HomeScreen(props) {
         {infoplus()}
         <Button
            containerStyle = {{ width: '70%'}}
-           title="CONNECTION"
+           title="CONNEXION"
            type="solid"
            buttonStyle={{ backgroundColor: "#8AA78B" }}
-           onPress={() => {handleClick();if(response.isok == true){ console.log("test"),props.onSubmitPseudo(pseudo),props.navigation.navigate(`BottomNavigator${pseudo.users.status}`, { screen: 'Home' })}else{ console.log("test2"),props.navigation.navigate('HomeLog')}}}
+           onPress={() => {handleClick();if(response.isok == true){ console.log("true"),props.onSubmitPseudo(pseudo),props.navigation.navigate(`BottomNavigator${pseudo.users.status}`, { screen: 'Home' })}else{ console.log("false"),props.navigation.navigate('HomeLog')}}}
         />
-         <Button
-           containerStyle = {{ width: '70%'}}
-           title="doc home"
-           type="solid"
-           buttonStyle={{ backgroundColor: "#8AA78B" }}
-           onPress={() => {props.navigation.navigate('agenda')}}
-        />
-        
+                
 
         
     </View>
@@ -467,4 +453,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   null,
   mapDispatchToProps
-)(HomeScreen);
+)(HomeLog);

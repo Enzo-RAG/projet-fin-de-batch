@@ -13,8 +13,6 @@ function HomeScreen(props) {
    
     const[signinEmail, setSigninEmail] = useState('')
     const [signinPassword, setSigninPassword]= useState('')
-    const [destination, setDestination]= useState('')
-    const [test, setTest]= useState(true)
     const [pseudo, setPseudo] = useState('')
     const[response, setResponse]= useState('')
    
@@ -34,7 +32,6 @@ function HomeScreen(props) {
       setUserExists(true)
     }
 
-    console.log('testdfsdfdsfdsfs$$$$$$df',response) 
    }
 
    useEffect(() => {
@@ -63,11 +60,11 @@ function HomeScreen(props) {
             centerComponent={{ text: 'Helpills', style: { color: '#F0F0F0' } }}
             
         />
-        <Text h1>Sign-in</Text>
+        <Text h1>Connexion</Text>
         <Input
             containerStyle = {{marginBottom: 25, width: '70%'}}
             inputStyle={{marginLeft: 10}}
-            placeholder='email'
+            placeholder='Email'
             leftIcon={
                 <Icon
                 name='user'
@@ -81,7 +78,7 @@ function HomeScreen(props) {
             <Input secureTextEntry={true}
             containerStyle = {{marginBottom: 25, width: '70%'}}
             inputStyle={{marginLeft: 10}}
-            placeholder='Password'
+            placeholder='Mots de passe'
             leftIcon={
                 <Icon
                 name='user'
@@ -95,12 +92,12 @@ function HomeScreen(props) {
         <Button
            
            containerStyle = {{marginBottom: 25, width: '70%'}}
-            title="CONNECTION"
+            title="CONNEXION"
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" }}
             onPress={() => {
                handleClickSignin();
-              {if(response.isok == true){ console.log("test");props.onSubmitPseudo(pseudo);props.navigation.navigate('BottomNavigator', { screen: 'Home' })}else{console.log("test2");props.navigation.navigate('HomeScreens')}} ;
+              {if(response.isok == true){ console.log("true");props.onSubmitPseudo(pseudo);props.navigation.navigate('BottomNavigator', { screen: 'Home' })}else{console.log("false");props.navigation.navigate('HomeScreens')}} ;
             }}
         />
         {/* inscription  */}

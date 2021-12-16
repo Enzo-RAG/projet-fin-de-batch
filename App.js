@@ -30,7 +30,7 @@ import PatientRdv from './screens/PatientRdv';
 
 import agenda from './screens/agendaScreen';
 
-import map from './screens/mapLivreur';
+import Map from './screens/mapLivreur';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -45,8 +45,6 @@ import commandes from './reducers/commandes.reducer'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
-var users =1
 const store = createStore(combineReducers({pseudo,basket,id,commandes}));
 
 const BottomNavigator1 = () => {
@@ -152,7 +150,7 @@ const BottomNavigator2 = () => {
         }}
       >
         <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Course" component={Home} />
+        <Tab.Screen name="Course" component={Map} />
         <Tab.Screen name="contact" component={Home} />
       </Tab.Navigator>
     );
@@ -214,24 +212,8 @@ export default function App() {
           <Stack.Screen name="agenda" component={agenda} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="MyPrescription" component={MyPrescriptions} />
-          <Stack.Screen name="map" component={map} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
   );
 }
-
-
-/*
-          
-          
-          <Stack.Screen name="PatientHome" component={PatientHome} />
-          <Stack.Screen name="PatientPresciption" component={PatientPresciption} />
-          <Stack.Screen name="Algo254" component={Searchtest} />
-          
-          <Stack.Screen name="DocHome" component={Dochome} />
-          <Stack.Screen name="DocPrescriprion" component={DocPrescriprion} />
-          
-
-*/
-
