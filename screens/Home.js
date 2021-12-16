@@ -26,15 +26,21 @@ useEffect(() => {
   let interval = setInterval(() => {console.log("now:", Date.now()); setNow(Date.now()) }, 1000);
 }, []);
 var couocou = convertSecondeIntoMinute((timeStamp - Date.now())/1000)
+const logo = "https://res.cloudinary.com/dz0ooeuqq/image/upload/v1639665258/rectangle_gris_q6cwqy.png"
     return (
     <View style={styles.container}>
         <Header
             placement="left"
             backgroundColor="#727679"
-            
-            centerComponent={{ text: 'Helpills', style: { color: '#F0F0F0' } }}
+            // centerComponent={{ text: 'Helpills', style: { color: '#F0F0F0' } }}
+            >
+            <Image
+            containerStyle = {{marginBottom: 10, marginTop: 10, }}
+            source={{ uri: logo }}
+            style={{ width: 200, height: 50}}
             
         />
+        </Header>
            
          
         <View style={styles.container} >

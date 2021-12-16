@@ -1,6 +1,6 @@
 
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View } from 'react-native';
+import {StyleSheet, View, Image} from 'react-native';
 import {Button, Input, Text, Header} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -47,19 +47,25 @@ function HomeScreen(props) {
         }
     findByName()
   },[response])
-
+  const logo = "https://res.cloudinary.com/dz0ooeuqq/image/upload/v1639665258/rectangle_gris_q6cwqy.png"
    return (
     
     <View style={styles.container}
     >
         {/* EMAIL */}
+        
         <Header
             placement="left"
             backgroundColor="#727679"
-            
-            centerComponent={{ text: 'Helpills', style: { color: '#F0F0F0' } }}
+            // centerComponent={{ text: 'Helpills', style: { color: '#F0F0F0' } }}
+            >
+            <Image
+            containerStyle = {{marginBottom: 10, marginTop: 10, }}
+            source={{ uri: logo }}
+            style={{ width: 200, height: 50}}
             
         />
+        </Header>
         <Text h1>Connexion</Text>
         <Input
             containerStyle = {{marginBottom: 25, width: '70%'}}
