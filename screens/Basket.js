@@ -25,9 +25,7 @@ const Basket = (props) => {
        numCommande= id.substr(0, 9) + X + id.substr(19, 5)
        return numCommande
     }
-
-
-
+    
     useEffect(() => { 
         socket.on("FromAPI", data => {
             setResponse(data);
@@ -47,14 +45,9 @@ const Basket = (props) => {
         }
       ) 
     }, []);
-
-   
      if(props.basket.basket.length>0){
-
         return (
-                
             <View style={{backgroundColor:"#F0F0F0"}}>
-                
                 <StatusBar hidden={false} StatusBarStyle="light-content"/>
                     <Header
                         leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
@@ -62,13 +55,7 @@ const Basket = (props) => {
                         rightComponent={{ icon: 'home', color: '#fff' }}
                     />
                     <ScrollView style={{ marginBottom: 85 }}>
-                        <View style={{ display:'flex', flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
-                        <Text style={{marginTop:10,marginBottom: 10, backgroundColor:"red", width:"90%",fontWeight:"bold"}}>
-                            {response}
-                        </Text>
-                        <Text style={{marginTop:10,marginBottom: 10, backgroundColor:"red", width:"90%",fontWeight:"bold"}}>
-                            {coucoy}
-                        </Text>      
+                        <View style={{ display:'flex', flexDirection:"column", alignItems:"center", justifyContent:"center"}}>    
                         {props.basket.basket.map((profile,i)=>
                         (   <Card key={i}>
                                 <Card.Title 
@@ -76,7 +63,7 @@ const Basket = (props) => {
                                     {profile.name}
                                 </Card.Title>
                                 <View style={{paddingTop:10, flexDirection:"row" , justifyContent: 'center', alignItems:'center'}}>
-                                    <Text>Quantity: {profile.quantity}</Text>
+                                    <Text>Quantité: {profile.quantity}</Text>
                                 </View>
                                 <View style={{flexDirection:'row', marginTop:15}}>
                                      <View style={{width:"40%",display:"flex"}}>
@@ -90,9 +77,8 @@ const Basket = (props) => {
                                         <Button
                                             icon={<Ionicons name="add-circle-sharp" size={25} color="#FFF" />}
                                             buttonStyle={{backgroundColor:"#8AA78B", borderRadius: 100, marginLeft: 0, marginRight: 0, marginBottom: 5}}
-                                            title=' Add one quantity' 
+                                            title=" Ajouter une quantité" 
                                             onPress={()=> {
-                                                console.log("**************************** add **********************")
                                                 props.addToBasket({name:profile.name,img:profile.img})
                                             }
                                             }
@@ -101,10 +87,9 @@ const Basket = (props) => {
                                             icon={<Ionicons name="remove-circle-sharp" size={25} color="rgba(250,0,0,0.4)" />}
                                             type="outline"
                                             buttonStyle={{borderRadius: 100, borderColor:"rgba(250,0,0,0.4)", marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                                            title=' Remove one quantity'
+                                            title=" Supprimer une quantité"
                                             titleStyle={{color:"rgba(250,0,0,0.6)"}} 
                                             onPress={()=> {
-                                                console.log("**************************** remove **********************")
                                                 props.deleteOne({name:profile.name,img:profile.img})
                                             }}
                                         />
@@ -153,9 +138,6 @@ const Basket = (props) => {
                 <Text style={{marginTop:10,marginBottom: 10, backgroundColor:"lightcyan", width:"90%",fontWeight:"bold"}}>
                     Votre panier est vide pour le moment.
                 </Text>
-                <Text style={{marginTop:10,marginBottom: 10, backgroundColor:"red", width:"90%",fontWeight:"bold"}}>
-                    {response}
-                </Text>
                
             </View>
         )
@@ -163,8 +145,7 @@ const Basket = (props) => {
 };
 
 function mapStateToProps(state) {
-    console.log("adresse from : ", state.pseudo.users.adress.ville)
-    console.log("id from : ", state.pseudo.users._id)
+    console.log(state)
     return { basket : state }
   }
 

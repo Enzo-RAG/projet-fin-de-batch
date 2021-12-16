@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, ImageBackground, Text, View  } from 'react-native';
 
-import {Button, Input, Header} from 'react-native-elements'
+import {Button, Input, Header, Image} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import  {Dropdown}  from 'react-native-element-dropdown';
@@ -215,17 +215,22 @@ function HomeLog(props) {
         }
 
   
-    
+        const logo = "https://res.cloudinary.com/dz0ooeuqq/image/upload/v1639665258/rectangle_gris_q6cwqy.png"
     return (
 <ScrollView>
     <View style={styles.container}>
-      <Header
+    <Header
             placement="left"
             backgroundColor="#727679"
-            
-            centerComponent={{ text: 'Helpills', style: { color: '#F0F0F0' } }}
+            // centerComponent={{ text: 'Helpills', style: { color: '#F0F0F0' } }}
+            >
+            <Image
+            containerStyle = {{marginBottom: 10, marginTop: 10, }}
+            source={{ uri: logo }}
+            style={{ width: 200, height: 50}}
             
         />
+        </Header>
          
     
         
