@@ -23,7 +23,7 @@ export default function MapScreen() {
     async function askPermissions() {
       let { status } = await Permissions.askAsync(Permissions.LOCATION);
       if (status === 'granted') {
-        Location.watchPositionAsync({ distanceInterval: 2 },
+        Location.watchPositionAsync({ distanceInterval: 0.10 },
           (location) => {
             setCurrentLatitude(location.coords.latitude)
             setCurrentLongitude(location.coords.longitude);
@@ -62,6 +62,33 @@ export default function MapScreen() {
     setTitrePOI();
   }
 
+  var muPinLocation = () =>{
+    if (props.status == 2){
+      <Marker
+            pinColor="black"
+            title="livreur"
+            description="I'am comming !"
+            icon={<i class="fas fa-biking"></i>}
+            coordinate={{latitude: 43.116669, longitude: 5.93333}}
+          />
+    }else if(props.status == 3){
+      <Marker
+            pinColor="green"
+            title="pharmasisilafamille"
+            description="j'ai un max d'opioide !"
+            icon={<i class="fas fa-biking"></i>}
+            coordinate={{latitude: 43.116669, longitude: 5.93333}}
+          />
+    }else if(props.status == 4){
+      <Marker
+            pinColor="white"
+            title="what's up doc ?"
+            description="j'ai une ordonnance pour ton rhume !"
+            icon={<i class="fas fa-biking"></i>}
+            coordinate={{latitude: 43.116669, longitude: 5.93333}}
+          />
+    }
+  }
 
   var markerPOI = listPOI.map((POI, i) => {
     return <Marker key={i} pinColor="blue" coordinate={{ latitude: POI.latitude, longitude: POI.longitude }}
@@ -73,6 +100,11 @@ export default function MapScreen() {
   if (addPOI) {
     isDisabled = true;
   }
+
+
+
+
+
 
   return (
     <View style={{ flex: 1 }} >
@@ -108,8 +140,8 @@ export default function MapScreen() {
         onPress={(e) => { selectPOI(e) }}
         style={{ flex: 1 }}
         initialRegion={{
-          latitude: 48.866667,
-          longitude: 2.333333,
+          latitude: 43.295100,
+          longitude: 5.379820,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
@@ -130,8 +162,17 @@ export default function MapScreen() {
             icon={<i class="fas fa-biking"></i>}
             coordinate={{latitude: 43.116669, longitude: 5.93333}}
           />
+
+          <Marker
+            pinColor="green"
+            title="dr Henry Thierry"
+            description="I'am here to heal you !"
+            icon={<i class="fas fa-biking"></i>}
+            coordinate={{latitude: 43.604652, longitude: 1.444209}}
+          />
+
       </MapView>
-      <Button
+      {/* <Button
         disabled={isDisabled}
         title="Add POI"
         icon={
@@ -143,7 +184,7 @@ export default function MapScreen() {
         }
         buttonStyle={{ backgroundColor: "#eb4d4b" }}
         type="solid"
-        onPress={() => setAddPOI(true)} />
+        onPress={() => setAddPOI(true)} /> */}
     </View>
   );
 }

@@ -29,7 +29,7 @@ import PatientRdv from './screens/PatientRdv';
 
 import agenda from './screens/agendaScreen';
 
-
+import map from './screens/mapLivreur';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -203,6 +203,7 @@ export default function App() {
           <Stack.Screen name="agenda" component={agenda} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="MyPrescription" component={MyPrescriptions} />
+          <Stack.Screen name="map" component={map} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

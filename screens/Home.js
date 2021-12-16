@@ -5,7 +5,7 @@ import { StyleSheet, View, ActivityIndicator  } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Button, Input, Header, Image, Text, Overlay } from 'react-native-elements'
 import {connect} from 'react-redux';
-import { FileUploader } from "react-drag-drop-files";
+
 
 function HomeScreen(props) {
     const [pseudo, setPseudo] = useState('');
@@ -93,7 +93,7 @@ function HomeScreen(props) {
 
         <Text>Hello from Overlay!</Text>
         <Input type="files" name="name" />
-        <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
+        
         </Overlay>
 
             </View>

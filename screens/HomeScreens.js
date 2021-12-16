@@ -29,7 +29,10 @@ function HomeScreen(props) {
     var response = await rawsignin.json();
     setResponse(response)
 
-    
+    if(body.result == true){
+      setUserExists(true)
+    }
+
     console.log('testdfsdfdsfdsfs$$$$$$df',response) 
    }
 
@@ -114,7 +117,7 @@ function HomeScreen(props) {
             title="Mot de passe oublié"
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-            onPress={() => {props.navigation.navigate('Forgotpass')}}
+            onPress={() => {props.navigation.navigate('map')}}
         />
     </View>
   );
