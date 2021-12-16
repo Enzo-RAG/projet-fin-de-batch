@@ -19,7 +19,7 @@ function Home(props) {
         />
            
          
-        <View  >
+        <View style={styles.container} >
         <Image
             containerStyle = {{marginBottom: 10, marginTop: 10}}
             source={{ uri: 'https://picsum.photos/200' }}
@@ -33,7 +33,7 @@ function Home(props) {
 
           <Button
            containerStyle = {{ width: '70%'}}
-           title="Mes Renz-Vous"
+           title="Mes Rendez-Vous"
            type="solid"
            buttonStyle={{ backgroundColor: "#8AA78B" }}
            onPress={() => {props.navigation.navigate('agenda')}}
