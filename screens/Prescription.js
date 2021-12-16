@@ -10,18 +10,18 @@ import {connect} from 'react-redux';
 
 
 
- function HomeScreen(props) {
-    const [pseudo, setPseudo] = useState('');
+ function Ordonnance (props) {
+    
     const [rdv, setRdv] = useState(true)
     const [email, setEmail] = useState('')
     const [info, setInfo] = useState([])
     const [test, setTest] = useState([])
-    const [info2, setinfo2] = useState([])
+    
 
 
     useEffect(() => {
       setEmail(props.pseudo.users._id)
-      console.log('suis la', props.pseudo)
+      
   
       const findArticlesWishList = async () => {
         const dataWishlist = await fetch('https://arcane-sierra-33789.herokuapp.com/recepprescription', {
@@ -30,10 +30,9 @@ import {connect} from 'react-redux';
           body: `id=${email}`
           
         })
-        console.log("justeapreslefetchdedededededededededeede", dataWishlist )
+       
         const body = await dataWishlist.json()
-        console.log('testtttttttttttttttttttttttttttttttttttttt', body)
-        // console.log(body)
+        
         setInfo(body.prescription)
         if(info != null){
           setRdv(true) 
@@ -45,15 +44,15 @@ import {connect} from 'react-redux';
     },[email])
 
 
-// console.log('testmap info', info)
+
 
 
 useEffect(() => {
 
   var test = info.map((info1 , i ) => {
   if(info1.prescription.length >= 1){
-  console.log("retour info", info1)
-  // console.log("retourinfo", info1)
+  
+  
     if(info1.prescription !== null){
     return(
     <Card containerStyle={{width: '70%'}}>
@@ -62,7 +61,7 @@ useEffect(() => {
     <Card.Divider/>
     
     {info1.prescription.map((info3, i) => {
-      console.log("testdeinforlicorne",info3)
+      
       return (
       <View>
       <Text style={{marginBottom: 10}}>
@@ -88,7 +87,7 @@ useEffect(() => {
          
   </Card>)
   }else{
-    return(<Text h3 style={{color:"#F0F0F0"}}> no presciption</Text>)
+    return(<Text h3 style={{color:"#F0F0F0"}}> Aucune Ordonnance</Text>)
   }
   }})
  
@@ -123,7 +122,7 @@ useEffect(() => {
             <Text h2 style={{color:"#727679"}}> {props.pseudo.users.nom}</Text>
             
         <View style={styles.container} backgroundColor="#727679">
-        <Text h3 style={{color:"#F0F0F0"}}> Historical Presciption</Text>
+        <Text h3 style={{color:"#F0F0F0"}}> Historique Des Ordonnances</Text>
         <ScrollView>
         {test}
         <Text></Text>
@@ -170,4 +169,4 @@ const styles = StyleSheet.create({
   export default connect(
     mapStateToProps, 
     null
-  )(HomeScreen);
+  )(Ordonnance);

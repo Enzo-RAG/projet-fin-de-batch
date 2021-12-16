@@ -14,20 +14,14 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {connect} from 'react-redux';
 
 
-function HomeScreen(props) {
-    const [pseudo, setPseudo] = useState('');
-    const [rdv, setRdv] = useState(false)
+function PatientRdv(props) {
+
     const [date, setDate] = useState("")
     const [patientId , setPatienId] = useState("") 
     const [medecinId, setMedecinId] = useState("")
     const [photo, setPhoto] = useState("")
     const [description, setDesciption] = useState("")
-    const [validite , setValidite] = useState ("")
-    const [prescriptionnumber, setPrescriptionnumber] = useState ("")
-    const [prescriptionprise, setPrescriptionprise] = useState ("")
-    const [prescriptionduree, setPrescriptionduree] = useState ("")
-    const [prescriptionautre, setPrescriptionautre] = useState ("")
-    const [info, setInfo] = useState ([])
+
     const [namdoc ,setNamDoc] = useState('.....')
 
           
@@ -37,11 +31,11 @@ function HomeScreen(props) {
       // Dropdown
        const [value, setValue] = useState(null);
        const [isFocus, setIsFocus] = useState(false);
-       const [status, setStatus]= useState("")
+       
        
 
        useEffect(() => {
-        const findArticlesWishList = async () => {
+        const findSearchoc = async () => {
           const dataWishlist = await fetch('https://arcane-sierra-33789.herokuapp.com/searchdoc')
           const body = await dataWishlist.json()
           
@@ -55,7 +49,7 @@ function HomeScreen(props) {
             }
               }
       
-        findArticlesWishList()
+              findSearchoc()
       },[isFocus])
 
 
@@ -104,7 +98,7 @@ function HomeScreen(props) {
             <Text h2 style={{color:"#727679"}}> {props.pseudo.users.nom}</Text>
             
         <View style={styles.container} backgroundColor="#727679">
-        <Text h3 style={{color:"#F0F0F0"}}> My Appointment Book patient</Text>
+        <Text h3 style={{color:"#F0F0F0"}}> Mes Rendez-Vous</Text>
 
         </View>
         
@@ -269,4 +263,4 @@ const styles = StyleSheet.create({
   export default connect(
     mapStateToProps, 
     null
-  )(HomeScreen);
+  )(PatientRdv);
