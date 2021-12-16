@@ -44,13 +44,8 @@ import commandes from './reducers/commandes.reducer'
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-<<<<<<< HEAD
-// var users =1
-const store = createStore(combineReducers({pseudo,basket,id}));
-=======
 var users =1
 const store = createStore(combineReducers({pseudo,basket,id,commandes}));
->>>>>>> 92245b4873da86d4a5005b34018b13f8a200e6f7
 
 const BottomNavigator1 = () => {
   console.log("Passé par le bottom Nav")

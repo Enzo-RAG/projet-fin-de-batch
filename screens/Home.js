@@ -48,13 +48,8 @@ function HomeScreen(props) {
             title="Book ONE"
             type="solid"
             buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-<<<<<<< HEAD
-            onPress={() => {props.navigation.navigate('PatientRdv' )}}
-        />
-=======
             onPress={() => {props.navigation.navigate('PatientRdv')}}
           />
->>>>>>> 92245b4873da86d4a5005b34018b13f8a200e6f7
         
         </View>
       
