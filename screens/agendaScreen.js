@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {View, TouchableOpacity, Text} from 'react-native';
+import {View, TouchableOpacity, Text, Image} from 'react-native';
 import {Header} from 'react-native-elements'
 import {Agenda} from 'react-native-calendars';
 import {Card} from 'react-native-paper';
 
 import {connect} from 'react-redux';
+
+import { LogBox } from 'react-native';
+
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 
 
@@ -19,16 +23,15 @@ function AgendaScreen(props){
 
   const miseEnFormeDate = ((event, i) => {
     
-    var newdate = event._doc.date.substr(0, 10)
-                                                             
+    var newdate = event._doc.date.substr(0, 10)                                                    
     var test = items.hasOwnProperty(newdate)
-    if(test){
-      var aCopy = items
-      aCopy[newdate].push({name: event.name  +" / symptomes "+event._doc.description  ,id:event._doc._id})
-      setItems(aCopy)
+      if(test){
+        var aCopy = items
+        aCopy[newdate].push({name: event.name  +" / symptomes "+event._doc.description  ,id:event._doc._id})
+        setItems(aCopy)
       
     }else{
-      Object.assign(items,{[newdate] : [{name:event.name +" / symptomes "+ event._doc.description  , id:event._doc._id}]})
+        Object.assign(items,{[newdate] : [{name:event.name +" / symptomes "+ event._doc.description  , id:event._doc._id}]})
     }
     
   
@@ -41,13 +44,12 @@ function AgendaScreen(props){
       
 
     const findRecepRdv = async () => {
-      const dataRecepRdv = await fetch('https://arcane-sierra-33789.herokuapp.com/recepRdv', {
+      const dataRecepRdv = await fetch('https://helpills1.herokuapp.com/recepRdv', {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         body: `email=${email}&status=${props.pseudo.users.status}`
         
       })
-      
       const body = await dataRecepRdv.json()   
       setInfo(body)
             var tab = body.tab.map((event, i) => (miseEnFormeDate(event, i)))
@@ -93,17 +95,22 @@ var renderItem = (item) => {if(props.pseudo.users.status == 1 ){
     );
   }}
 
+  const logo = "https://res.cloudinary.com/dz0ooeuqq/image/upload/v1639665258/rectangle_gris_q6cwqy.png"
   
-
   return (
     <View style={{flex: 1}}>
-        <Header
-            placement="left"
-            backgroundColor="#727679"
-            
-            centerComponent={{ text: 'Helpills', style: { color: '#F0F0F0' } }}
+      <Header
+      placement="left"
+      backgroundColor="#727679"
+      // centerComponent={{ text: 'Helpills', style: { color: '#F0F0F0' } }}
+      >
+        <Image
+        containerStyle = {{marginBottom: 10, marginTop: 10, }}
+        source={{ uri: logo }}
+        style={{ width: 200, height: 50}}
             
         />
+      </Header>
       <Agenda
         items={items}
         selected={new Date()}

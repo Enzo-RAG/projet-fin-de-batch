@@ -1,79 +1,84 @@
+
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import { Button, Header, Image, Text } from 'react-native-elements'
+import { connect } from 'react-redux';
 import { LogBox } from 'react-native';
-LogBox.ignoreLogs(['Warning: ...']);
-import React,{useEffect,useState} from 'react';
-import { StyleSheet, View, ActivityIndicator  } from 'react-native';
-import {Button, Header, Image, Text} from 'react-native-elements'
-import {connect} from 'react-redux';
+
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 
 function Home(props) {
-   
+
   const [pseudo, setPseudo] = useState('');
   const [rdv, setRdv] = useState(false);
   var DispoEnPharmacie = 10
   var prix = 35
-  var commandeNumero ="61b8687cc1639606425719ef201"
-  var timeStamp =  1639642986598 + ((60*7+43)*1000)
-  const [now,setNow] = useState(0)
+  var commandeNumero = "61b8687cc1639606425719ef201"
+  var timeStamp = 1639642986598 + ((60 * 7 + 43) * 1000)
+  const [now, setNow] = useState(0)
 
-const convertSecondeIntoMinute = (timeToConvert)=>{
-  var minutes = Math.floor(timeToConvert/60)
-  var secondes = Math.floor(timeToConvert - (60*minutes))
-  var timeStamp =  minutes + " min " + secondes + " sec."
-  return timeStamp
-}
-useEffect(() => {
-  let interval = setInterval(() => {console.log("now:", Date.now()); setNow(Date.now()) }, 1000);
-}, []);
-var couocou = convertSecondeIntoMinute((timeStamp - Date.now())/1000)
-const logo = "https://res.cloudinary.com/dz0ooeuqq/image/upload/v1639665258/rectangle_gris_q6cwqy.png"
-    return (
+  const convertSecondeIntoMinute = (timeToConvert) => {
+    var minutes = Math.floor(timeToConvert / 60)
+    var secondes = Math.floor(timeToConvert - (60 * minutes))
+    var timeStamp = minutes + " min " + secondes + " sec."
+    return timeStamp
+  }
+  useEffect(() => {
+    let interval = setInterval(() => { console.log("now:", Date.now()); setNow(Date.now()) }, 1000);
+  }, []);
+
+
+
+
+
+  var couocou = convertSecondeIntoMinute((timeStamp - Date.now()) / 1000)
+  const logo = "https://res.cloudinary.com/dz0ooeuqq/image/upload/v1639665258/rectangle_gris_q6cwqy.png"
+  return (
     <View style={styles.container}>
-        <Header
-            placement="left"
-            backgroundColor="#727679"
-            // centerComponent={{ text: 'Helpills', style: { color: '#F0F0F0' } }}
-            >
-            <Image
-            containerStyle = {{marginBottom: 10, marginTop: 10, }}
-            source={{ uri: logo }}
-            style={{ width: 200, height: 50}}
-            
-        />
-        </Header>
-           
-         
-        <View style={styles.container} >
+      <Header
+        placement="left"
+        backgroundColor="#727679"
+      // centerComponent={{ text: 'Helpills', style: { color: '#F0F0F0' } }}
+      >
         <Image
-            containerStyle = {{marginBottom: 10, marginTop: 10}}
-            source={{ uri: 'https://picsum.photos/200' }}
-            style={{ width: 100, height: 100, borderRadius: 100 }}
-            PlaceholderContent={<ActivityIndicator />}
+          containerStyle={{ marginBottom: 10, marginTop: 10, }}
+          source={{ uri: logo }}
+          style={{ width: 200, height: 50 }}
         />
-        {/*<Text h2 style={{color:"#727679"}}> {props.pseudo.users.nom}</Text>*/}
-            
+      </Header>
+
+
+      <View style={styles.container} >
+        <Image
+          containerStyle={{ marginBottom: 10, marginTop: 10 }}
+          source={{ uri: 'https://picsum.photos/200' }}
+          style={{ width: 100, height: 100, borderRadius: 100 }}
+          PlaceholderContent={<ActivityIndicator />}
+        />
+        <Text h2 style={{ color: "#727679" }}> {props.pseudo.users.nom}</Text>
+
         <View style={styles.container} backgroundColor="#727679">
-          <Text h3 style={{color:"#F0F0F0"}}> Mes Rendez-Vous :</Text>
+          <Text h3 style={{ color: "#F0F0F0" }}> Mes Rendez-Vous :</Text>
 
           <Button
-           containerStyle = {{ width: '70%'}}
-           title="Mes Rendez-Vous"
-           type="solid"
-           buttonStyle={{ backgroundColor: "#8AA78B" }}
-           onPress={() => {props.navigation.navigate('agenda')}}
+            containerStyle={{ width: '70%' }}
+            title="Mes Rendez-Vous"
+            type="solid"
+            buttonStyle={{ backgroundColor: "#8AA78B" }}
+            onPress={() => { props.navigation.navigate('agenda') }}
           />
-        
-          <Button          
-            containerStyle = {{marginBottom: 25, width: '70%', marginTop: 25}}
-              title="Réserver"
-              type="solid"
-              buttonStyle={{ backgroundColor: "#8AA78B" , color: "redr"}}
-              onPress={() => {props.navigation.navigate('PatientRdv')}}
+
+          <Button
+            containerStyle={{ marginBottom: 25, width: '70%', marginTop: 25 }}
+            title="Réserver"
+            type="solid"
+            buttonStyle={{ backgroundColor: "#8AA78B", color: "redr" }}
+            onPress={() => { props.navigation.navigate('PatientRdv') }}
           />
-        
         </View>
-      
-        <View style={{borderTopLeftRadius:20, borderTopRightRadius:20 ,width:350, marginTop:25, backgroundColor:"#8AA78B", height:350, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"flex-start"}}>
+
+        {/* <View style={{borderTopLeftRadius:20, borderTopRightRadius:20 ,width:350, marginTop:25, backgroundColor:"#8AA78B", height:350, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"flex-start"}}>
             <View style={{border:"solid",borderLeftWidth:1,borderTopWidth:1,borderRightWidth:1, borderTopLeftRadius:20, borderTopRightRadius:20 ,backgroundColor:"lightgrey", width:"100%",height:50, display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"flex-start"}}> 
               <Text style={{paddingLeft:20}}>
                 Commande n°: {commandeNumero}
@@ -123,31 +128,31 @@ const logo = "https://res.cloudinary.com/dz0ooeuqq/image/upload/v1639665258/rect
                 buttonStyle={{ backgroundColor: "rgba(255,0,0,0.6)" }}
                 onPress={() => {props.navigation.navigate('Home')}}
               />
-            </View>
-        </View> 
+            </View> */}
+        {/* </View>  */}
       </View>
-       
 
-        
-        
+
+
+
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-    container: {
-      width : '100%',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#F0F0F0'
-    },
-  });
+  container: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#F0F0F0'
+  },
+});
 
-  function mapStateToProps(state) {
-    return { pseudo : state.pseudo }
-  }
-  
-  export default connect(
-    mapStateToProps, 
-    null
-  )(Home);
+function mapStateToProps(state) {
+  return { pseudo: state.pseudo }
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(Home);

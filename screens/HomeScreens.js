@@ -20,7 +20,7 @@ function HomeScreen(props) {
    
    
    var handleClickSignin = async () =>{
-    var rawsignin = await fetch('https://helpills.herokuapp.com/connection', {
+    var rawsignin = await fetch('https://helpills1.herokuapp.com/connection', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `email=${signinEmail}&password=${signinPassword}`
@@ -35,7 +35,7 @@ function HomeScreen(props) {
 
    useEffect(() => {
     const findByName = async () => {
-      var rawresponse = await fetch('https://arcane-sierra-33789.herokuapp.com/searchuser', {
+      var rawresponse = await fetch('https://helpills1.herokuapp.com/searchuser', {
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         body: `email=${signinEmail}`

@@ -17,7 +17,7 @@ const Medoc = (props) => {
 
  
       const findMedoc = async(name) => {
-        var rawResponse = await fetch('https://helpillsprojectlacapsule.herokuapp.com/medocs/getDrugsByActive', {
+        var rawResponse = await fetch('https://helpills1.herokuapp.com/medocs/getDrugsByActive', {
           method: 'POST',
           headers: {'Content-Type':'application/x-www-form-urlencoded'},
           body: `name=${name}`

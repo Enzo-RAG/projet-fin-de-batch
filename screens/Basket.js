@@ -8,7 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 import socketIOClient from "socket.io-client";
 import commandesReducer from '../reducers/commandes.reducer';
 
-var socket = socketIOClient("https://helpillsprojectlacapsule.herokuapp.com/");
+var socket = socketIOClient("https://helpills1.herokuapp.com/");
 
 
 const Basket = (props) => {
